@@ -6,10 +6,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContentProviderCompat
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.recyclerview.widget.LinearLayoutManager
 import ru.gb.rc.databinding.FragmentMainBinding
+import kotlin.random.Random
 
 class MainFragment : Fragment() {
 
@@ -38,12 +37,26 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.recyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+        binding.recyclerView.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
 
         val data: List<String> = (0..100).map { it.toString() }
-        val myAdapter = MySimpleAdapter(data)
+        val myAdapter = SimpleAdapter(data)
         binding.recyclerView.adapter = myAdapter
 
+        binding.add.setOnClickListener {
+            val item = Random.nextInt(100, 200).toString()
+            myAdapter.addItem(5, item)
+        }
+
+        binding.remove.setOnClickListener {
+            myAdapter.removeItem(1)
+        }
+
+//        binding.set.setOnClickListener {
+//            val newData = List(100) { Random.nextInt(0, 100).toString() }
+//            myAdapter.setData(newData)
+//        }
     }
 
     override fun onDestroyView() {
