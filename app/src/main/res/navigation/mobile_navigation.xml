@@ -7,20 +7,26 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="ru.gb.rc.MainFragment"
+        android:name="ru.gb.rc.presentation.home.MainFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_main" />
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="ru.gb.rc.presentation.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        android:id="@+id/nav_classic"
+        android:name="ru.gb.rc.presentation.classic.ClassicFragment"
+        android:label="@string/menu_classic"
+        tools:layout="@layout/fragment_classic" />
 
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="ru.gb.rc.presentation.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        android:id="@+id/nav_ble"
+        android:name="ru.gb.rc.presentation.ble.BleFragment"
+        android:label="@string/menu_ble"
+        tools:layout="@layout/fragment_ble" />
+
+    <fragment
+        android:id="@+id/nav_wifi"
+        android:name="ru.gb.rc.presentation.wifi.WifiFragment"
+        android:label="@string/menu_wifi"
+        tools:layout="@layout/fragment_wifi" />
 
 </navigation>

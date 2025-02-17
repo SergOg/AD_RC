@@ -1,4 +1,4 @@
-package ru.gb.rc
+package ru.gb.rc.presentation.home
 
 import androidx.fragment.app.viewModels
 import android.os.Bundle
@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.snackbar.Snackbar
+import ru.gb.rc.SimpleAdapter
 import ru.gb.rc.databinding.FragmentMainBinding
 import kotlin.random.Random
 
@@ -33,7 +33,7 @@ class MainFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentMainBinding.inflate(inflater, container, false)
-        return binding.root  //inflater.inflate(R.layout.fragment_main, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -50,9 +50,6 @@ class MainFragment : Fragment() {
             val item = Random.nextInt(100, 200).toString()
             myAdapter.addItem(5, item)
             Toast.makeText(context, "Pressed add button!", Toast.LENGTH_SHORT).show()
-//            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                .setAction("Action", null)
-//                .setAnchorView(R.id.fab).show()
         }
 
         binding.remove.setOnClickListener {

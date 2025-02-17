@@ -1,4 +1,4 @@
-package ru.gb.rc.presentation.gallery
+package ru.gb.rc.presentation.classic
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,11 +7,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import ru.gb.rc.databinding.FragmentGalleryBinding
+import ru.gb.rc.databinding.FragmentClassicBinding
 
-class GalleryFragment : Fragment() {
+class ClassicFragment : Fragment() {
 
-    private var _binding: FragmentGalleryBinding? = null
+    private var _binding: FragmentClassicBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -22,14 +22,14 @@ class GalleryFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val galleryViewModel =
-            ViewModelProvider(this).get(GalleryViewModel::class.java)
+        val classicViewModel =
+            ViewModelProvider(this).get(ClassicViewModel::class.java)
 
-        _binding = FragmentGalleryBinding.inflate(inflater, container, false)
+        _binding = FragmentClassicBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textGallery
-        galleryViewModel.text.observe(viewLifecycleOwner) {
+        val textView: TextView = binding.textClassic
+        classicViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
         return root
