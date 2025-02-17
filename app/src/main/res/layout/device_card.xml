@@ -37,11 +37,11 @@
         app:layout_constraintTop_toBottomOf="@id/location" />
 
     <TextView
-        android:id="@+id/interface"
+        android:id="@+id/protocol"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:text="Interface"
+        android:text="Protocol"
         android:textColor="@color/strong_pink"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
