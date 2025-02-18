@@ -52,24 +52,24 @@
         app:srcCompat="@drawable/ic_mute_24" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/leftActionButton"
+        android:id="@+id/upActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
         app:layout_constraintBottom_toTopOf="@+id/minusActionButton"
-        app:layout_constraintEnd_toStartOf="@+id/rightActionButton"
+        app:layout_constraintEnd_toStartOf="@+id/downActionButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/plusActionButton"
         app:srcCompat="@drawable/ic_left_24" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/rightActionButton"
+        android:id="@+id/downActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
         app:layout_constraintBottom_toTopOf="@+id/minusActionButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/leftActionButton"
+        app:layout_constraintStart_toEndOf="@+id/upActionButton"
         app:layout_constraintTop_toBottomOf="@+id/plusActionButton"
         app:srcCompat="@drawable/ic_right_24" />
 

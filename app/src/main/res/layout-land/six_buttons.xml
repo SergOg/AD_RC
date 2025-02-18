@@ -52,25 +52,25 @@
         app:srcCompat="@drawable/ic_minus_24" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/leftActionButton"
+        android:id="@+id/upActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="96dp"
         android:clickable="true"
-        app:layout_constraintBottom_toTopOf="@+id/rightActionButton"
+        app:layout_constraintBottom_toTopOf="@+id/downActionButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_up_24" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/rightActionButton"
+        android:id="@+id/downActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="96dp"
         android:clickable="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/leftActionButton"
+        app:layout_constraintTop_toBottomOf="@+id/upActionButton"
         app:srcCompat="@drawable/ic_down_24" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
