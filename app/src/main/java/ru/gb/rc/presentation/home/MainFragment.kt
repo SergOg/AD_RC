@@ -43,15 +43,15 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        var countDevice = 0
         binding.fab.setOnClickListener {
             Toast.makeText(context, "Pressed add button!", Toast.LENGTH_SHORT).show()
-            val item = Device(1, "Location", Random.nextInt(100, 200).toString(), "text", Random.nextInt(100, 200).toString())
+            val item = Device(countDevice, "Location", Random.nextInt(100, 200).toString(), "text", Random.nextInt(100, 200).toString())
             myAdapter.addItem(0, item)
+            countDevice++
         }
         binding.recyclerView.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-
 //        val data: List<String> = (0..100).map { it.toString() }
 //        val myAdapter = SimpleAdapter(data)
         binding.recyclerView.adapter = myAdapter
@@ -63,7 +63,10 @@ class MainFragment : Fragment() {
 //        }
 
         binding.remove.setOnClickListener {
-            myAdapter.removeItem(1)
+            if (countDevice != 0) {
+                myAdapter.removeItem(0)
+                countDevice--
+            }
             Toast.makeText(context, "Pressed remove button!", Toast.LENGTH_SHORT).show()
         }
 

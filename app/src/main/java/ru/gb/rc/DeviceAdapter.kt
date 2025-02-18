@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import ru.gb.rc.data.Device
 import ru.gb.rc.databinding.DeviceCardBinding
-import ru.gb.rc.databinding.SimpleListItemBinding
 
 class DeviceAdapter(
     values: List<Device>
