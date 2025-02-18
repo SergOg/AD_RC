@@ -48,7 +48,7 @@ class MainFragment : Fragment() {
 
         binding.add.setOnClickListener {
             val item = Random.nextInt(100, 200).toString()
-            myAdapter.addItem(5, item)
+            myAdapter.addItem(0, item)
             Toast.makeText(context, "Pressed add button!", Toast.LENGTH_SHORT).show()
         }
 
