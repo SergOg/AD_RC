@@ -9,68 +9,68 @@
         android:id="@+id/powerActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="112dp"
+        android:layout_margin="96dp"
         android:clickable="true"
-        app:layout_constraintBottom_toTopOf="@+id/plusActionButton"
+        app:layout_constraintBottom_toTopOf="@+id/muteActionButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_power_24" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/muteActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="96dp"
+        android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/powerActionButton"
+        app:srcCompat="@drawable/ic_mute_24" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/plusActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="112dp"
+        android:layout_margin="96dp"
         android:clickable="true"
         app:layout_constraintBottom_toTopOf="@+id/minusActionButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_plus_24" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/minusActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="112dp"
-        android:clickable="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/plusActionButton"
-        app:srcCompat="@drawable/ic_minus_24" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/muteActionButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginVertical="112dp"
+        android:layout_margin="96dp"
         android:clickable="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/minusActionButton"
-        app:srcCompat="@drawable/ic_mute_24" />
+        app:layout_constraintTop_toBottomOf="@+id/plusActionButton"
+        app:srcCompat="@drawable/ic_minus_24" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/leftActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="96dp"
         android:clickable="true"
-        app:layout_constraintBottom_toTopOf="@+id/minusActionButton"
-        app:layout_constraintEnd_toStartOf="@+id/rightActionButton"
+        app:layout_constraintBottom_toTopOf="@+id/rightActionButton"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/plusActionButton"
-        app:srcCompat="@drawable/ic_left_24" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_up_24" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/rightActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="96dp"
         android:clickable="true"
-        app:layout_constraintBottom_toTopOf="@+id/minusActionButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/leftActionButton"
-        app:layout_constraintTop_toBottomOf="@+id/plusActionButton"
-        app:srcCompat="@drawable/ic_right_24" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/leftActionButton"
+        app:srcCompat="@drawable/ic_down_24" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
