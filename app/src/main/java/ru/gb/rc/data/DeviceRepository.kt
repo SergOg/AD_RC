@@ -1,7 +1,7 @@
 package ru.gb.rc.data
 
-class PhotoRepository {
-    fun getPhoto(): List<DevicePhotos>{
+class DeviceRepository {
+    fun getPhoto(): List<Device>{
         return TODO("Provide the return value")
     }
 }

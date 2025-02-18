@@ -8,7 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
-import ru.gb.rc.SimpleAdapter
+import ru.gb.rc.DeviceAdapter
+import ru.gb.rc.data.Device
 import ru.gb.rc.databinding.FragmentMainBinding
 import kotlin.random.Random
 
@@ -21,6 +22,10 @@ class MainFragment : Fragment() {
     private val viewModel: MainViewModel by viewModels()
     private var _binding: FragmentMainBinding? = null
     private val binding get() = _binding!!
+//    val data: List<String> = (0..100).map { it.toString() }
+    val myAdapter = DeviceAdapter(emptyList())
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,18 +44,23 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.fab.setOnClickListener {
+            Toast.makeText(context, "Pressed add button!", Toast.LENGTH_SHORT).show()
+            val item = Device(1, "Location", Random.nextInt(100, 200).toString(), "text", Random.nextInt(100, 200).toString())
+            myAdapter.addItem(0, item)
+        }
         binding.recyclerView.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
 
-        val data: List<String> = (0..100).map { it.toString() }
-        val myAdapter = SimpleAdapter(data)
+//        val data: List<String> = (0..100).map { it.toString() }
+//        val myAdapter = SimpleAdapter(data)
         binding.recyclerView.adapter = myAdapter
 
-        binding.add.setOnClickListener {
-            val item = Random.nextInt(100, 200).toString()
-            myAdapter.addItem(0, item)
-            Toast.makeText(context, "Pressed add button!", Toast.LENGTH_SHORT).show()
-        }
+//        binding.add.setOnClickListener {
+//            val item = Random.nextInt(100, 200).toString()
+//            myAdapter.addItem(0, item)
+//            Toast.makeText(context, "Pressed add button!", Toast.LENGTH_SHORT).show()
+//        }
 
         binding.remove.setOnClickListener {
             myAdapter.removeItem(1)
