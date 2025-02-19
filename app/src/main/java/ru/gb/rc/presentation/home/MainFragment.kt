@@ -41,6 +41,7 @@ class MainFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentMainBinding.inflate(inflater, container, false)
+
         with(binding) {
             add.setOnClickListener {
                 viewModel.onAddBtn()
