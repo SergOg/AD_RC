@@ -5,19 +5,20 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface DeviceDao {
 
     @Query("SELECT * FROM device")
-    fun getAll(): List<Device>
+    fun getAll(): Flow<List<Device>>
 
-    @Insert
-    fun insert(device: Device)
+    @Insert(entity = Device::class)
+    suspend fun insert(device: NewDevice)
 
     @Delete
-    fun delete(device: Device)
+    suspend fun delete(device: Device)
 
     @Update
-    fun update(device: Device)
+    suspend fun update(device: Device)
 }

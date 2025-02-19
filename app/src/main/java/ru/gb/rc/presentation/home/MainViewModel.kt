@@ -3,10 +3,56 @@ package ru.gb.rc.presentation.home
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
+import ru.gb.rc.data.Device
+import ru.gb.rc.data.DeviceDao
+import ru.gb.rc.data.NewDevice
 
-class MainViewModel : ViewModel() {
+class MainViewModel(private val deviceDao: DeviceDao) : ViewModel() {
+
+    val allDevices = this.deviceDao.getAll()
+        .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5000L),
+            initialValue = emptyList()
+        )
+
     private val _text = MutableLiveData<String>().apply {
         value = "This is home Fragment"
     }
     val text: LiveData<String> = _text
+
+    fun onAddBtn() {
+        val size: Int = allDevices.value.size
+        viewModelScope.launch {
+            deviceDao.insert(
+                NewDevice(
+                    location = "Location $size",
+                    imgSrc = "@drawable/gb",
+                    protocol = "Protocol $size",
+                    device = "Device $size"
+                )
+            )
+        }
+    }
+
+    fun onUpdateBtn() {
+        viewModelScope.launch {
+            allDevices.value.lastOrNull()?.let {
+                val device = it.copy(
+                    protocol = "Wi-Fi"
+                )
+                deviceDao.update(device)
+            }
+        }
+    }
+
+    fun onDeleteBtn() {
+        viewModelScope.launch {
+            allDevices.value.lastOrNull()?.let { deviceDao.delete(it) }
+        }
+    }
 }

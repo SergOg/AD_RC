@@ -7,9 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import kotlinx.coroutines.flow.collect
+import ru.gb.rc.App
 import ru.gb.rc.DeviceAdapter
 import ru.gb.rc.data.Device
+import ru.gb.rc.data.DeviceDao
 import ru.gb.rc.databinding.FragmentMainBinding
 import kotlin.random.Random
 
@@ -22,15 +26,35 @@ class MainFragment : Fragment() {
     private val viewModel: MainViewModel by viewModels()
     private var _binding: FragmentMainBinding? = null
     private val binding get() = _binding!!
-//    val data: List<String> = (0..100).map { it.toString() }
+
+    //    val data: List<String> = (0..100).map { it.toString() }
     val myAdapter = DeviceAdapter(emptyList())
 
-
+//    val deviceDao: DeviceDao = (application as App).db.deviceDao()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // TODO: Use the ViewModel
+//        with(binding) {
+//            add.setOnClickListener {
+//                viewModel.onAddBtn()
+//            }
+//
+//            set.setOnClickListener {
+//                viewModel.onUpdateBtn()
+//            }
+//
+//            remove.setOnClickListener {
+//                viewModel.onDeleteBtn()
+//            }
+//        }
+
+//        lifecycleScope.launchWhenCreated {
+//            viewModel.allDevices
+//                .collect { devices ->
+//                    myAdapter.setData(devices)
+//                }
+//        }
     }
 
     override fun onCreateView(
@@ -46,7 +70,13 @@ class MainFragment : Fragment() {
         var countDevice = 0
         binding.fab.setOnClickListener {
             Toast.makeText(context, "Pressed add button!", Toast.LENGTH_SHORT).show()
-            val item = Device(countDevice, "Location", Random.nextInt(100, 200).toString(), "text", Random.nextInt(100, 200).toString())
+            val item = Device(
+                countDevice,
+                "Location",
+                Random.nextInt(100, 200).toString(),
+                "text",
+                Random.nextInt(100, 200).toString()
+            )
             myAdapter.addItem(0, item)
             countDevice++
         }
