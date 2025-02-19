@@ -34,21 +34,6 @@ class MainFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-//        with(binding) {
-//            add.setOnClickListener {
-//                viewModel.onAddBtn()
-//            }
-//
-//            set.setOnClickListener {
-//                viewModel.onUpdateBtn()
-//            }
-//
-//            remove.setOnClickListener {
-//                viewModel.onDeleteBtn()
-//            }
-//        }
-
-
     }
 
     override fun onCreateView(
