@@ -1,4 +1,4 @@
-package ru.gb.rc.presentation.classic
+package ru.gb.rc.presentation.support
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,11 +7,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import ru.gb.rc.databinding.FragmentClassicBinding
+import ru.gb.rc.databinding.FragmentSupportBinding
 
-class ClassicFragment : Fragment() {
+class SupportFragment : Fragment() {
 
-    private var _binding: FragmentClassicBinding? = null
+    private var _binding: FragmentSupportBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -22,14 +22,14 @@ class ClassicFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val classicViewModel =
-            ViewModelProvider(this).get(ClassicViewModel::class.java)
+        val supportViewModel =
+            ViewModelProvider(this).get(SupportViewModel::class.java)
 
-        _binding = FragmentClassicBinding.inflate(inflater, container, false)
+        _binding = FragmentSupportBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textClassic
-        classicViewModel.text.observe(viewLifecycleOwner) {
+        val textView: TextView = binding.textSupport
+        supportViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
         return root

@@ -12,21 +12,21 @@
         tools:layout="@layout/fragment_main" />
 
     <fragment
-        android:id="@+id/nav_classic"
-        android:name="ru.gb.rc.presentation.classic.ClassicFragment"
-        android:label="@string/menu_classic"
-        tools:layout="@layout/fragment_classic" />
+        android:id="@+id/nav_settings"
+        android:name="ru.gb.rc.presentation.settings.SettingsFragment"
+        android:label="@string/menu_settings"
+        tools:layout="@layout/fragment_settings" />
 
     <fragment
-        android:id="@+id/nav_ble"
-        android:name="ru.gb.rc.presentation.ble.BleFragment"
-        android:label="@string/menu_ble"
-        tools:layout="@layout/fragment_ble" />
+        android:id="@+id/nav_support"
+        android:name="ru.gb.rc.presentation.support.SupportFragment"
+        android:label="@string/menu_support"
+        tools:layout="@layout/fragment_support" />
 
     <fragment
-        android:id="@+id/nav_wifi"
-        android:name="ru.gb.rc.presentation.wifi.WifiFragment"
-        android:label="@string/menu_wifi"
-        tools:layout="@layout/fragment_wifi" />
+        android:id="@+id/nav_mode"
+        android:name="ru.gb.rc.presentation.mode.ModeFragment"
+        android:label="@string/menu_mode"
+        tools:layout="@layout/fragment_mode" />
 
 </navigation>

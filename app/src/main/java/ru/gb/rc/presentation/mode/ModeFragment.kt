@@ -1,20 +1,17 @@
-package ru.gb.rc.presentation.ble
+package ru.gb.rc.presentation.mode
 
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import ru.gb.rc.databinding.FragmentBleBinding
+import ru.gb.rc.databinding.FragmentModeBinding
 
-class BleFragment : Fragment() {
+class ModeFragment : Fragment() {
 
-    private var _binding: FragmentBleBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
+    private var _binding: FragmentModeBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -22,14 +19,14 @@ class BleFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val bleViewModel =
-            ViewModelProvider(this).get(BleViewModel::class.java)
+        val modeViewModel =
+            ViewModelProvider(this).get(ModeViewModel::class.java)
 
-        _binding = FragmentBleBinding.inflate(inflater, container, false)
+        _binding = FragmentModeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textBle
-        bleViewModel.text.observe(viewLifecycleOwner) {
+        val textView: TextView = binding.textWifi
+        modeViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
         return root

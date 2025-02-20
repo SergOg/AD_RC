@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.wifi.WifiFragment">
+    tools:context=".presentation.support.SupportFragment">
 
     <TextView
-        android:id="@+id/text_wifi"
+        android:id="@+id/text_support"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"

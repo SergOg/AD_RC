@@ -1,13 +1,13 @@
-package ru.gb.rc.presentation.wifi
+package ru.gb.rc.presentation.mode
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class WifiViewModel : ViewModel() {
+class ModeViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is Wi-Fi Fragment"
+        value = "This is Mode Fragment"
     }
     val text: LiveData<String> = _text
 }

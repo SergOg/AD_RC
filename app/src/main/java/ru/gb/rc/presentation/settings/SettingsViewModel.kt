@@ -1,13 +1,13 @@
-package ru.gb.rc.presentation.classic
+package ru.gb.rc.presentation.settings
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class ClassicViewModel : ViewModel() {
+class SettingsViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is Classic Fragment"
+        value = "This is Settings Fragment"
     }
     val text: LiveData<String> = _text
 }

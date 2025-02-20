@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.ble.BleFragment">
+    tools:context=".presentation.mode.ModeFragment">
 
     <TextView
-        android:id="@+id/text_ble"
+        android:id="@+id/text_wifi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
