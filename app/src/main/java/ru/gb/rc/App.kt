@@ -8,15 +8,11 @@ import ru.gb.rc.data.AppDatabase
 @HiltAndroidApp
 class App: Application() {
 
-    lateinit var db: AppDatabase
+//    lateinit var db: AppDatabase
 
     override fun onCreate() {
         super.onCreate()
 
-        db = Room.databaseBuilder(
-            applicationContext,
-            AppDatabase::class.java,
-            "db"
-        ).build()
+
     }
 }

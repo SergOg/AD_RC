@@ -1,0 +1,33 @@
+package ru.gb.rc.di
+
+import android.content.Context
+import androidx.room.Room
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ActivityComponent
+import dagger.hilt.android.qualifiers.ApplicationContext
+import ru.gb.rc.data.AppDatabase
+import ru.gb.rc.data.DeviceDao
+
+@Module
+@InstallIn(ActivityComponent::class)
+object DataBaseModule {
+    @Provides
+    fun provideDataBase(
+        @ApplicationContext applicationContext: Context
+    ): AppDatabase {
+        return Room.databaseBuilder(
+            applicationContext,
+            AppDatabase::class.java,
+            "db"
+        ).build()
+    }
+
+    @Provides
+    fun provideDeviceDao(
+        appDatabase: AppDatabase
+    ): DeviceDao {
+        return appDatabase.deviceDao()
+    }
+}
