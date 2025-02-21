@@ -20,11 +20,6 @@ import ru.gb.rc.databinding.ActivityMainBinding
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-    private val launcher = registerForActivityResult(ActivityResultContracts.RequestPermission()){isGranted ->
-        Toast.makeText(this, "permission is $isGranted", Toast.LENGTH_SHORT).show()
-
-    }
-
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
 
@@ -47,8 +42,6 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-
-        val deviceDao: DeviceDao = (application as App).db.deviceDao()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
