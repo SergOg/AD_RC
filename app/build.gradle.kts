@@ -41,17 +41,29 @@ android {
 }
 
 dependencies {
+    //Камера
+    implementation ("androidx.camera:camera-core:1.4.1")
+    implementation ("androidx.camera:camera-camera2:1.4.1")
+    implementation ("androidx.camera:camera-lifecycle:1.4.1")
+    implementation ("androidx.camera:camera-view:1.4.1")
+    implementation ("androidx.camera:camera-extensions:1.4.1")
+    //Recycler
+    implementation ("androidx.recyclerview:recyclerview:1.4.0")
     //Room
-    implementation("androidx.room:room-runtime:2.6.1")
-    implementation("androidx.room:room-ktx:2.6.1")
-    kapt("androidx.room:room-compiler:2.6.1")
-    //RxJava2
-    implementation("androidx.room:room-rxjava2:2.6.1")
+    implementation ("androidx.room:room-runtime:2.6.1")
+    implementation ("androidx.room:room-ktx:2.6.1")
+    implementation ("androidx.room:room-rxjava3:2.6.1")
+    implementation(libs.androidx.legacy.support.v4)
+    kapt ("androidx.room:room-compiler:2.6.1")
+    implementation ("androidx.fragment:fragment-ktx:1.8.5")
+    //Изображение
+    implementation ("io.coil-kt:coil:2.4.0")
+
+    implementation("com.github.bumptech.glide:glide:4.16.0")
+    annotationProcessor("com.github.bumptech.glide:compiler:4.13.0")
     //Hilt
     implementation("com.google.dagger:hilt-android:2.51.1")
     kapt("com.google.dagger:hilt-compiler:2.51.1")
-
-    implementation("androidx.recyclerview:recyclerview:1.4.0")
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

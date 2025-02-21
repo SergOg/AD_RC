@@ -25,7 +25,7 @@ class ModeFragment : Fragment() {
         _binding = FragmentModeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textWifi
+        val textView: TextView = binding.textMode
         modeViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }

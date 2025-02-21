@@ -7,14 +7,9 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "device")
 data class Device(
     @PrimaryKey
-    @ColumnInfo(name = "id")
-    val id: Int,
-    @ColumnInfo(name = "location")
-    val location: String,
-    @ColumnInfo(name = "imgSrc")
-    val imgSrc: String,
-    @ColumnInfo(name = "protocol")
-    val protocol: String,
-    @ColumnInfo(name = "device")
-    val device: String,
+    @ColumnInfo(name = "id") val id: Int,
+    @ColumnInfo(name = "location") val location: String,
+    @ColumnInfo(name = "imgSrc") val imgSrc: String,
+    @ColumnInfo(name = "protocol") val protocol: String,
+    @ColumnInfo(name = "device") val device: String,
 )
