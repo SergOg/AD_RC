@@ -39,6 +39,7 @@ class MainViewModel(private val deviceDao: DeviceDao) : ViewModel() {
         }
     }
 
+
     fun onUpdateBtn() {
         viewModelScope.launch {
             allDevices.value.lastOrNull()?.let {
