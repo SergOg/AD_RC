@@ -1,5 +1,6 @@
 package ru.gb.rc.presentation.home
 
+import android.app.Dialog
 import android.content.Context
 import androidx.fragment.app.viewModels
 import android.os.Bundle
@@ -10,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
@@ -30,17 +32,33 @@ class MainFragment : Fragment() {
     private var _binding: FragmentMainBinding? = null
     private val binding get() = _binding!!
 
-//    private val recyclerView : RecyclerView = binding.recyclerView
-
-    //    val data: List<String> = (0..100).map { it.toString() }
-    val myAdapter = DeviceAdapter(emptyList())
+    val myAdapter = DeviceAdapter(emptyList()) {device->
+        val builder = AlertDialog.Builder(requireActivity())
+        builder.setTitle("Компонент будет удален!")
+            .setMessage("Согласны удалить?")
+            .setIcon(R.drawable.gb)
+            .setCancelable(true)
+            .setPositiveButton("Да") { _, _ ->
+                Toast.makeText(
+                    activity, "Компонент удален!", Toast.LENGTH_LONG
+                ).show()
+                //вызваем метод во вью модели на удалении записи и обновить адаптер
+                viewModel.onDeleteBtn(device)
+            }
+            .setNegativeButton("Нет") { d, _ ->
+                d.dismiss()
+                Toast.makeText(
+                    activity, "Отмена!", Toast.LENGTH_LONG
+                ).show()
+            }
+        val dialog = builder.create()
+        dialog.show()
+    }
 
 //    val deviceDao: DeviceDao = (application as App).db.deviceDao()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-//        recyclerView.addItemDecoration(CardSpacingDecoration(resources.getDimensionPixelSize(R.dimen.card_spacing)))
     }
 
     override fun onCreateView(
@@ -59,21 +77,19 @@ class MainFragment : Fragment() {
             }
 
             remove.setOnClickListener {
-                viewModel.onDeleteBtn()
+//                viewModel.onDeleteBtn()
             }
         }
-//        lifecycleScope.launchWhenCreated {
-//            viewModel.allDevices
-//                .collect { devices ->
-//                    myAdapter.setData(devices)
-//                }
-//        }
+        lifecycleScope.launchWhenCreated {
+            viewModel.allDevices
+                .collect { devices ->
+                    myAdapter.setData(devices)
+                }
+        }
 
 // Кнопка для вызова диалога
         binding.set.setOnClickListener {
-            val myDialogFragment = MyDialogFragment()
-            val manager = supportFragmentManager
-            myDialogFragment.show(manager, "myDialog")
+            //TEST
         }
         return binding.root
     }
@@ -95,6 +111,13 @@ class MainFragment : Fragment() {
         }
         binding.recyclerView.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+        binding.recyclerView.addItemDecoration(
+            CardSpacingDecoration(
+                resources.getDimensionPixelSize(
+                    R.dimen.card_spacing
+                )
+            )
+        )
 //        val data: List<String> = (0..100).map { it.toString() }
 //        val myAdapter = SimpleAdapter(data)
         binding.recyclerView.adapter = myAdapter
@@ -123,5 +146,26 @@ class MainFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        return activity?.let {
+            val builder = AlertDialog.Builder(it)
+            builder.setTitle("Компонент будет удален!")
+                .setMessage("Согласны удалить?")
+                .setIcon(R.drawable.gb)
+                .setCancelable(true)
+                .setPositiveButton("Да") { _, _ ->
+                    Toast.makeText(
+                        activity, "Компонент удален!", Toast.LENGTH_LONG
+                    ).show()
+                }
+                .setNegativeButton("Нет") { _, _ ->
+                    Toast.makeText(
+                        activity, "Отмена!", Toast.LENGTH_LONG
+                    ).show()
+                }
+            builder.create()
+        } ?: throw IllegalStateException("Activity cannot be null")
     }
 }

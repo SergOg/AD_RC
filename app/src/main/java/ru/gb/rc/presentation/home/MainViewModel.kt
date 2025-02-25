@@ -54,9 +54,9 @@ class MainViewModel @Inject constructor(private val deviceDao: DeviceDao) : View
         }
     }
 
-    fun onDeleteBtn() {
+    fun onDeleteBtn(device: Device) {
         viewModelScope.launch {
-            allDevices.value.lastOrNull()?.let { deviceDao.delete(it) }
+            deviceDao.delete(device)
         }
     }
 }

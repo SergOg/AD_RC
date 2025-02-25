@@ -7,7 +7,8 @@ import ru.gb.rc.data.Device
 import ru.gb.rc.databinding.DeviceCardViewBinding
 
 class DeviceAdapter(
-    values: List<Device>
+    values: List<Device>,
+    private val onDeliteClicked: (Device)->Unit
 ) : RecyclerView.Adapter<DeviceViewHolder>() {
     private var values = values.toMutableList()
 
@@ -23,6 +24,9 @@ class DeviceAdapter(
         holder.binding.location.text = item.location
         holder.binding.device.text = item.device
         holder.binding.protocol.text = item.protocol
+        holder.binding.delButton.setOnClickListener {
+            onDeliteClicked(item)
+        }
     }
 
     fun setData(values: List<Device>) {
