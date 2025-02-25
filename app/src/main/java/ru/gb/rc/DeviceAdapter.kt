@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import ru.gb.rc.data.Device
-import ru.gb.rc.databinding.DeviceCardBinding
+import ru.gb.rc.databinding.DeviceCardViewBinding
 
 class DeviceAdapter(
     values: List<Device>
@@ -12,7 +12,7 @@ class DeviceAdapter(
     private var values = values.toMutableList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DeviceViewHolder {
-        val binding = DeviceCardBinding.inflate(LayoutInflater.from(parent.context))
+        val binding = DeviceCardViewBinding.inflate(LayoutInflater.from(parent.context))
         return DeviceViewHolder(binding)
     }
 
@@ -41,5 +41,5 @@ class DeviceAdapter(
     }
 }
 
-class DeviceViewHolder(val binding: DeviceCardBinding) :
+class DeviceViewHolder(val binding: DeviceCardViewBinding) :
     RecyclerView.ViewHolder(binding.root)

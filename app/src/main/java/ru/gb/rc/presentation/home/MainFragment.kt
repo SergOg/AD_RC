@@ -1,16 +1,20 @@
 package ru.gb.rc.presentation.home
 
+import android.content.Context
 import androidx.fragment.app.viewModels
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.Toast
-import androidx.lifecycle.lifecycleScope
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
 import ru.gb.rc.DeviceAdapter
+import ru.gb.rc.R
 import ru.gb.rc.data.Device
 import ru.gb.rc.databinding.FragmentMainBinding
 import kotlin.random.Random
@@ -26,6 +30,8 @@ class MainFragment : Fragment() {
     private var _binding: FragmentMainBinding? = null
     private val binding get() = _binding!!
 
+//    private val recyclerView : RecyclerView = binding.recyclerView
+
     //    val data: List<String> = (0..100).map { it.toString() }
     val myAdapter = DeviceAdapter(emptyList())
 
@@ -34,6 +40,7 @@ class MainFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+//        recyclerView.addItemDecoration(CardSpacingDecoration(resources.getDimensionPixelSize(R.dimen.card_spacing)))
     }
 
     override fun onCreateView(
@@ -62,29 +69,35 @@ class MainFragment : Fragment() {
 //                }
 //        }
 
-            return binding.root
+// Кнопка для вызова диалога
+        binding.set.setOnClickListener {
+            val myDialogFragment = MyDialogFragment()
+            val manager = supportFragmentManager
+            myDialogFragment.show(manager, "myDialog")
         }
+        return binding.root
+    }
 
-        override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-            super.onViewCreated(view, savedInstanceState)
-            var countDevice = 0
-            binding.fab.setOnClickListener {
-                Toast.makeText(context, "Pressed add button!", Toast.LENGTH_SHORT).show()
-                val item = Device(
-                    countDevice,
-                    "Location",
-                    Random.nextInt(100, 200).toString(),
-                    "text",
-                    Random.nextInt(100, 200).toString()
-                )
-                myAdapter.addItem(0, item)
-                countDevice++
-            }
-            binding.recyclerView.layoutManager =
-                LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        var countDevice = 0
+        binding.fab.setOnClickListener {
+            Toast.makeText(context, "Pressed add button!", Toast.LENGTH_SHORT).show()
+            val item = Device(
+                countDevice,
+                "Location",
+                Random.nextInt(100, 200).toString(),
+                "text",
+                Random.nextInt(100, 200).toString()
+            )
+            myAdapter.addItem(0, item)
+            countDevice++
+        }
+        binding.recyclerView.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
 //        val data: List<String> = (0..100).map { it.toString() }
 //        val myAdapter = SimpleAdapter(data)
-            binding.recyclerView.adapter = myAdapter
+        binding.recyclerView.adapter = myAdapter
 
 //        binding.add.setOnClickListener {
 //            val item = Random.nextInt(100, 200).toString()
@@ -92,22 +105,23 @@ class MainFragment : Fragment() {
 //            Toast.makeText(context, "Pressed add button!", Toast.LENGTH_SHORT).show()
 //        }
 
-            binding.remove.setOnClickListener {
-                if (countDevice != 0) {
-                    myAdapter.removeItem(0)
-                    countDevice--
-                }
-                Toast.makeText(context, "Pressed remove button!", Toast.LENGTH_SHORT).show()
+        binding.remove.setOnClickListener {
+            if (countDevice != 0) {
+                myAdapter.removeItem(0)
+                countDevice--
             }
-
-//        binding.set.setOnClickListener {
-//            val newData = List(100) { Random.nextInt(0, 100).toString() }
-//            myAdapter.setData(newData)
-//        }
+            Toast.makeText(context, "Pressed remove button!", Toast.LENGTH_SHORT).show()
         }
 
-        override fun onDestroyView() {
-            super.onDestroyView()
-            _binding = null
-        }
+//            binding.del_button.setOnClickListener {
+//                val myDialogFragment = MyDialogFragment()
+//                val manager = supportFragmentManager
+//                myDialogFragment.show(manager, "myDialog")
+//            }
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+}

@@ -14,15 +14,18 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
 import ru.gb.rc.data.DeviceDao
 import ru.gb.rc.databinding.ActivityMainBinding
+import ru.gb.rc.presentation.home.CardSpacingDecoration
+
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
-
+//    val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -42,6 +45,7 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+//        recyclerView.addItemDecoration(CardSpacingDecoration(resources.getDimensionPixelSize(R.dimen.card_spacing)))
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
