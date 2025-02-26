@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import ru.gb.rc.DeviceAdapter
+import ru.gb.rc.EditDeviceFragment
 import ru.gb.rc.R
 import ru.gb.rc.databinding.FragmentMainBinding
 
@@ -39,7 +40,7 @@ class MainFragment : Fragment() {
                 Toast.makeText(
                     activity, "Компонент удален!", Toast.LENGTH_LONG
                 ).show()
-                //вызваем метод во вью модели на удалениие записи
+                //Вызваем метод во ViewModel на удалениие записи
                 viewModel.onDeleteBtn(device)
             }
             .setNegativeButton("Нет") { d, _ ->
@@ -62,12 +63,6 @@ class MainFragment : Fragment() {
     ): View {
         _binding = FragmentMainBinding.inflate(inflater, container, false)
 
-//        lifecycleScope.launchWhenCreated {
-//            viewModel.allDevices
-//                .collect { devices ->
-//                    myAdapter.setData(devices)
-//                }
-//        }
         // Определяем жизненный цикл, когда должна происходить сборка данных
         viewLifecycleOwner.lifecycleScope
             .launch {
@@ -85,7 +80,30 @@ class MainFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         with(binding) {
             fab.setOnClickListener {
-                viewModel.onAddBtn()
+                // Создаем экземпляр нового фрагмента
+                val editDevice = EditDeviceFragment()
+
+                // Получаем поддержку транзакций фрагментов
+                val transaction = supportFragmentManager.beginTransaction()
+//
+//
+//                FragmentTransaction ft = getFragmentManager().beginTransaction();
+//                ft.replace(R.id.main, editDevice);
+//                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+//                ft.addToBackStack(null);
+//                ft.commit();
+
+//                val intent = Intent(context, EditDeviceFragment::class.java)
+//                startActivity(intent)
+
+                // Заменяем текущий фрагмент на новый
+//                transaction.replace(R.id.main, editDevice)
+//                    .addToBackStack(null) // Добавляем в стек назад, чтобы можно было вернуться обратно
+//                    .commit()
+
+
+
+//                viewModel.onAddBtn()
             }
             recyclerView.layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)

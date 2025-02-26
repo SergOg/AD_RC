@@ -15,6 +15,29 @@
         <item name="colorAccent">@color/strong_pink</item>
     </style>
 
+    <style name="ButtonStyle" parent="Widget.Material3.Button">
+        <item name="android:backgroundTint">@color/strong_pink</item>
+        <item name="android:textAppearance">@style/ButtonTextAppearance</item>
+    </style>
+
+    <style name="ButtonTextAppearance">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="MyCustomText" parent="TextAppearance.Material3.LabelMedium">
+        <item name="android:fontFamily">serif</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="MyCustomDigit" parent="MyCustomText">
+        <item name="android:textColor">@color/gray</item>
+    </style>
+
+    <style name="CheckboxStyle" parent="Widget.Material3.CompoundButton.CheckBox">
+        <item name="android:textSize">16sp</item>
+    </style>
+
     <style name="Theme.RC.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>

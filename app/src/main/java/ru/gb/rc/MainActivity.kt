@@ -1,10 +1,7 @@
 package ru.gb.rc
 
-import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.Menu
-import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContracts
 import com.google.android.material.navigation.NavigationView
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -13,12 +10,8 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
-import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
-import ru.gb.rc.data.DeviceDao
 import ru.gb.rc.databinding.ActivityMainBinding
-import ru.gb.rc.presentation.home.CardSpacingDecoration
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
