@@ -42,18 +42,6 @@ class MainViewModel @Inject constructor(private val deviceDao: DeviceDao) : View
         }
     }
 
-
-    fun onUpdateBtn() {
-        viewModelScope.launch {
-            allDevices.value.lastOrNull()?.let {
-                val device = it.copy(
-                    protocol = "Wi-Fi"
-                )
-                deviceDao.update(device)
-            }
-        }
-    }
-
     fun onDeleteBtn(device: Device) {
         viewModelScope.launch {
             deviceDao.delete(device)

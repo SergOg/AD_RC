@@ -1,6 +1,5 @@
 package ru.gb.rc.presentation.home
 
-import android.app.Dialog
 import androidx.fragment.app.viewModels
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,14 +8,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import ru.gb.rc.DeviceAdapter
 import ru.gb.rc.R
-import ru.gb.rc.data.Device
 import ru.gb.rc.databinding.FragmentMainBinding
-import kotlin.random.Random
 
 @AndroidEntryPoint
 class MainFragment : Fragment() {
@@ -39,7 +39,7 @@ class MainFragment : Fragment() {
                 Toast.makeText(
                     activity, "Компонент удален!", Toast.LENGTH_LONG
                 ).show()
-                //вызваем метод во вью модели на удалении записи и обновить адаптер
+                //вызваем метод во вью модели на удалениие записи
                 viewModel.onDeleteBtn(device)
             }
             .setNegativeButton("Нет") { d, _ ->
@@ -62,60 +62,41 @@ class MainFragment : Fragment() {
     ): View {
         _binding = FragmentMainBinding.inflate(inflater, container, false)
 
-        with(binding) {
-            add.setOnClickListener {
-                viewModel.onAddBtn()
-            }
-
-            set.setOnClickListener {
-                viewModel.onUpdateBtn()
-            }
-
-            remove.setOnClickListener {
-//                viewModel.onDeleteBtn()
-            }
-        }
-        lifecycleScope.launchWhenCreated {
-            viewModel.allDevices
-                .collect { devices ->
-                    myAdapter.setData(devices)
+//        lifecycleScope.launchWhenCreated {
+//            viewModel.allDevices
+//                .collect { devices ->
+//                    myAdapter.setData(devices)
+//                }
+//        }
+        // Определяем жизненный цикл, когда должна происходить сборка данных
+        viewLifecycleOwner.lifecycleScope
+            .launch {
+                repeatOnLifecycle(Lifecycle.State.STARTED) {
+                    // Собираем данные в соответствующем состоянии жизненного цикла
+                    viewModel.allDevices.collect { devices ->
+                        myAdapter.setData(devices)
+                    }
                 }
-        }
+            }
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        var countDevice = 0
-        binding.fab.setOnClickListener {
-            Toast.makeText(context, "Pressed add button!", Toast.LENGTH_SHORT).show()
-            val item = Device(
-                countDevice,
-                "Location",
-                Random.nextInt(100, 200).toString(),
-                "text",
-                Random.nextInt(100, 200).toString()
-            )
-            myAdapter.addItem(0, item)
-            countDevice++
-        }
-        binding.recyclerView.layoutManager =
-            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-        binding.recyclerView.addItemDecoration(
-            CardSpacingDecoration(
-                resources.getDimensionPixelSize(
-                    R.dimen.card_spacing
+        with(binding) {
+            fab.setOnClickListener {
+                viewModel.onAddBtn()
+            }
+            recyclerView.layoutManager =
+                LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+            recyclerView.addItemDecoration(
+                CardSpacingDecoration(
+                    resources.getDimensionPixelSize(
+                        R.dimen.card_spacing
+                    )
                 )
             )
-        )
-        binding.recyclerView.adapter = myAdapter
-
-        binding.remove.setOnClickListener {
-            if (countDevice != 0) {
-                myAdapter.removeItem(0)
-                countDevice--
-            }
-            Toast.makeText(context, "Pressed remove button!", Toast.LENGTH_SHORT).show()
+            recyclerView.adapter = myAdapter
         }
     }
 
