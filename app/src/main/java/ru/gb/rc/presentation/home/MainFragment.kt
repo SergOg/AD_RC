@@ -1,19 +1,16 @@
 package ru.gb.rc.presentation.home
 
 import android.app.Dialog
-import android.content.Context
 import androidx.fragment.app.viewModels
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
 import ru.gb.rc.DeviceAdapter
 import ru.gb.rc.R
@@ -32,7 +29,7 @@ class MainFragment : Fragment() {
     private var _binding: FragmentMainBinding? = null
     private val binding get() = _binding!!
 
-    val myAdapter = DeviceAdapter(emptyList()) {device->
+    val myAdapter = DeviceAdapter(emptyList()) { device ->
         val builder = AlertDialog.Builder(requireActivity())
         builder.setTitle("Компонент будет удален!")
             .setMessage("Согласны удалить?")
@@ -48,14 +45,12 @@ class MainFragment : Fragment() {
             .setNegativeButton("Нет") { d, _ ->
                 d.dismiss()
                 Toast.makeText(
-                    activity, "Отмена!", Toast.LENGTH_LONG
+                    activity, "Отмена удаления!", Toast.LENGTH_LONG
                 ).show()
             }
         val dialog = builder.create()
         dialog.show()
     }
-
-//    val deviceDao: DeviceDao = (application as App).db.deviceDao()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -86,11 +81,6 @@ class MainFragment : Fragment() {
                     myAdapter.setData(devices)
                 }
         }
-
-// Кнопка для вызова диалога
-        binding.set.setOnClickListener {
-            //TEST
-        }
         return binding.root
     }
 
@@ -118,15 +108,7 @@ class MainFragment : Fragment() {
                 )
             )
         )
-//        val data: List<String> = (0..100).map { it.toString() }
-//        val myAdapter = SimpleAdapter(data)
         binding.recyclerView.adapter = myAdapter
-
-//        binding.add.setOnClickListener {
-//            val item = Random.nextInt(100, 200).toString()
-//            myAdapter.addItem(0, item)
-//            Toast.makeText(context, "Pressed add button!", Toast.LENGTH_SHORT).show()
-//        }
 
         binding.remove.setOnClickListener {
             if (countDevice != 0) {
@@ -135,37 +117,10 @@ class MainFragment : Fragment() {
             }
             Toast.makeText(context, "Pressed remove button!", Toast.LENGTH_SHORT).show()
         }
-
-//            binding.del_button.setOnClickListener {
-//                val myDialogFragment = MyDialogFragment()
-//                val manager = supportFragmentManager
-//                myDialogFragment.show(manager, "myDialog")
-//            }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        return activity?.let {
-            val builder = AlertDialog.Builder(it)
-            builder.setTitle("Компонент будет удален!")
-                .setMessage("Согласны удалить?")
-                .setIcon(R.drawable.gb)
-                .setCancelable(true)
-                .setPositiveButton("Да") { _, _ ->
-                    Toast.makeText(
-                        activity, "Компонент удален!", Toast.LENGTH_LONG
-                    ).show()
-                }
-                .setNegativeButton("Нет") { _, _ ->
-                    Toast.makeText(
-                        activity, "Отмена!", Toast.LENGTH_LONG
-                    ).show()
-                }
-            builder.create()
-        } ?: throw IllegalStateException("Activity cannot be null")
     }
 }
