@@ -28,7 +28,6 @@
             android:layout_margin="@dimen/_8dp"
             android:textSize="@dimen/_18sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/pic"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -38,7 +37,6 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/_8dp"
             android:textSize="@dimen/_14sp"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/pic"
             app:layout_constraintTop_toBottomOf="@id/location" />
 
@@ -48,7 +46,6 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/_8dp"
             android:textSize="@dimen/_14sp"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/pic"
             app:layout_constraintTop_toBottomOf="@id/device" />
 
