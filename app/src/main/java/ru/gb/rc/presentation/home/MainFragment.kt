@@ -84,7 +84,7 @@ class MainFragment : Fragment() {
                 val editDevice = EditDeviceFragment()
 
                 // Получаем поддержку транзакций фрагментов
-                val transaction = supportFragmentManager.beginTransaction()
+//                val transaction = supportFragmentManager.beginTransaction()
 //
 //
 //                FragmentTransaction ft = getFragmentManager().beginTransaction();
