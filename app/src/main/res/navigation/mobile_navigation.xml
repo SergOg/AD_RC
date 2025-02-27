@@ -30,14 +30,14 @@
         tools:layout="@layout/fragment_mode" />
 
     <fragment
-        android:id="@+id/mainFragment"
+        android:id="@+id/nav_home"
         android:name="ru.gb.rc.presentation.home.MainFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_main">
         <action
             android:id="@+id/action_mainFragment_to_editDeviceFragment"
             app:destination="@id/editDeviceFragment"
-            app:popUpTo="@id/mainFragment" />
+            app:popUpTo="@id/nav_home" />
     </fragment>
 
     <fragment
@@ -56,8 +56,8 @@
             app:argType="string" />
         <action
             android:id="@+id/action_editDeviceFragment_to_mainFragment"
-            app:destination="@id/mainFragment"
-            app:popUpTo="@id/mainFragment" />
+            app:destination="@id/nav_home"
+            app:popUpTo="@id/nav_home" />
     </fragment>
 
 

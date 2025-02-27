@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import ru.gb.rc.DeviceAdapter
-import ru.gb.rc.EditDeviceFragment
 import ru.gb.rc.R
 import ru.gb.rc.databinding.FragmentMainBinding
 
