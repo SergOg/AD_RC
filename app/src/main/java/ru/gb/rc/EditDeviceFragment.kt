@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import ru.gb.rc.databinding.FragmentEditDeviceBinding
 
 class EditDeviceFragment : Fragment() {
@@ -29,6 +30,19 @@ class EditDeviceFragment : Fragment() {
     ): View {
         _binding = FragmentEditDeviceBinding.inflate(inflater)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.buttonSave.setOnClickListener{
+
+            findNavController().navigate(R.id.action_editDeviceFragment_to_mainFragment)
+        }
+        binding.buttonCancel.setOnClickListener{
+
+            findNavController().navigate(R.id.action_editDeviceFragment_to_mainFragment)
+        }
     }
 
     override fun onDestroyView() {

@@ -29,4 +29,36 @@
         android:label="@string/menu_mode"
         tools:layout="@layout/fragment_mode" />
 
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="ru.gb.rc.presentation.home.MainFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_main">
+        <action
+            android:id="@+id/action_mainFragment_to_editDeviceFragment"
+            app:destination="@id/editDeviceFragment"
+            app:popUpTo="@id/mainFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/editDeviceFragment"
+        android:name="ru.gb.rc.EditDeviceFragment"
+        android:label="@string/edit_device"
+        tools:layout="@layout/fragment_edit_device">
+        <argument
+            android:name="location"
+            app:argType="string" />
+        <argument
+            android:name="protocol"
+            app:argType="string" />
+        <argument
+            android:name="device"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_editDeviceFragment_to_mainFragment"
+            app:destination="@id/mainFragment"
+            app:popUpTo="@id/mainFragment" />
+    </fragment>
+
+
 </navigation>

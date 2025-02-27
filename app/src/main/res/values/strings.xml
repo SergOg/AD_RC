@@ -18,4 +18,6 @@
     <string name="text_location">Расположение</string>
     <string name="text_protocol">Протокол</string>
     <string name="text_device">Устройство</string>
+    <string name="edit_device">Редактирование устройства</string>
+
 </resources>

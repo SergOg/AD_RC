@@ -11,6 +11,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -79,32 +80,6 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         with(binding) {
-            fab.setOnClickListener {
-                // Создаем экземпляр нового фрагмента
-                val editDevice = EditDeviceFragment()
-
-                // Получаем поддержку транзакций фрагментов
-//                val transaction = supportFragmentManager.beginTransaction()
-//
-//
-//                FragmentTransaction ft = getFragmentManager().beginTransaction();
-//                ft.replace(R.id.main, editDevice);
-//                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-//                ft.addToBackStack(null);
-//                ft.commit();
-
-//                val intent = Intent(context, EditDeviceFragment::class.java)
-//                startActivity(intent)
-
-                // Заменяем текущий фрагмент на новый
-//                transaction.replace(R.id.main, editDevice)
-//                    .addToBackStack(null) // Добавляем в стек назад, чтобы можно было вернуться обратно
-//                    .commit()
-
-
-
-//                viewModel.onAddBtn()
-            }
             recyclerView.layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
             recyclerView.addItemDecoration(
@@ -115,6 +90,13 @@ class MainFragment : Fragment() {
                 )
             )
             recyclerView.adapter = myAdapter
+
+            fab.setOnClickListener {
+                findNavController().navigate(R.id.action_mainFragment_to_editDeviceFragment)
+
+
+//                viewModel.onAddBtn()
+            }
         }
     }
 
