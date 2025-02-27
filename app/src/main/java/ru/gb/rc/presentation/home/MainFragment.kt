@@ -12,15 +12,19 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import ru.gb.rc.DeviceAdapter
+import ru.gb.rc.EditDeviceFragment
 import ru.gb.rc.R
 import ru.gb.rc.databinding.FragmentMainBinding
 
 @AndroidEntryPoint
 class MainFragment : Fragment() {
+    private val args: MainFragmentArgs by navArgs()
+
 
     companion object {
         fun newInstance() = MainFragment()
@@ -55,6 +59,12 @@ class MainFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+//        // Получение аргументов
+//        val args = arguments?.let { EditDeviceFragment.fromBundle(it) }
+//        val location = args?.location ?: ""
+//        val protocol = args?.protocol ?: "0"
+//        val device = args?.device ?: ""
     }
 
     override fun onCreateView(
@@ -92,9 +102,11 @@ class MainFragment : Fragment() {
 
             fab.setOnClickListener {
                 findNavController().navigate(R.id.action_mainFragment_to_editDeviceFragment)
+                var location = args.location
+                var protocol = args.protocol
+                var device = args.device
 
-
-//                viewModel.onAddBtn()
+                viewModel.onAddBtn(location, protocol, device)
             }
         }
     }

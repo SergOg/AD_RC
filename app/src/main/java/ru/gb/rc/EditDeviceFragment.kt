@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import ru.gb.rc.databinding.FragmentEditDeviceBinding
+import ru.gb.rc.presentation.home.MainFragment
 
 class EditDeviceFragment : Fragment() {
 
@@ -35,12 +36,17 @@ class EditDeviceFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.buttonSave.setOnClickListener{
+        binding.buttonSave.setOnClickListener {
+            var location = binding.editLocation.text
+            var protocol = binding.editProtocol.text
+            var device = binding.editDevice.text
 
+// Навигация с передачей аргументов
+//            val action = EditDeviceFragment.actionEditFragmentToMainFragment(location, protocol, device)
+//            findNavController().navigate(action)
             findNavController().navigate(R.id.action_editDeviceFragment_to_mainFragment)
         }
-        binding.buttonCancel.setOnClickListener{
-
+        binding.buttonCancel.setOnClickListener {
             findNavController().navigate(R.id.action_editDeviceFragment_to_mainFragment)
         }
     }
