@@ -102,9 +102,9 @@ class MainFragment : Fragment() {
 
             fab.setOnClickListener {
                 findNavController().navigate(R.id.action_mainFragment_to_editDeviceFragment)
-                var location = args.location
-                var protocol = args.protocol
-                var device = args.device
+                val location = args.location
+                val protocol = args.protocol
+                val device = args.device
 
                 viewModel.onAddBtn(location, protocol, device)
             }
