@@ -42,9 +42,9 @@ class EditDeviceFragment : Fragment() {
             var device = binding.editDevice.text
 
 // Навигация с передачей аргументов
-//            val action = EditDeviceFragment.actionEditFragmentToMainFragment(location, protocol, device)
-//            findNavController().navigate(action)
-            findNavController().navigate(R.id.action_editDeviceFragment_to_mainFragment)
+            val action = EditDeviceFragmentDirections.actionEditFragmentToMainFragment(location, protocol, device)
+            findNavController().navigate(action)
+//            findNavController().navigate(R.id.action_editDeviceFragment_to_mainFragment)
         }
         binding.buttonCancel.setOnClickListener {
             findNavController().navigate(R.id.action_editDeviceFragment_to_mainFragment)
