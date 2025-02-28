@@ -9,9 +9,11 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import ru.gb.rc.databinding.FragmentEditDeviceBinding
 import ru.gb.rc.presentation.home.MainFragment
+import ru.gb.rc.presentation.home.MainViewModel
 
 class EditDeviceFragment : Fragment() {
 
+    private val editDeviceViewModel: EditDeviceViewModel by viewModels()
     private var _binding: FragmentEditDeviceBinding? = null
     private val binding get() = _binding!!
 
