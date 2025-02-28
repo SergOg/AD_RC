@@ -106,7 +106,7 @@ class MainFragment : Fragment() {
 //                val protocol = args.protocol
 //                val device = args.device
 
-                viewModel.onAddBtn("location-511651651651651651651651651", "protocol", "device")
+                viewModel.onAddBtn("location-51165165", "protocol", "device")
             }
         }
     }
