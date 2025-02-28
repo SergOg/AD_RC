@@ -1,4 +1,4 @@
-package ru.gb.rc
+package ru.gb.rc.presentation.home
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

@@ -1,4 +1,4 @@
-package ru.gb.rc
+package ru.gb.rc.presentation.edit_device
 
 import androidx.fragment.app.viewModels
 import android.os.Bundle
@@ -7,9 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import dagger.hilt.android.lifecycle.withCreationCallback
+import ru.gb.rc.R
 import ru.gb.rc.databinding.FragmentEditDeviceBinding
-import ru.gb.rc.presentation.home.MainFragment
-import ru.gb.rc.presentation.home.MainViewModel
 
 class EditDeviceFragment : Fragment() {
 
@@ -21,7 +21,14 @@ class EditDeviceFragment : Fragment() {
         fun newInstance() = EditDeviceFragment()
     }
 
-    private val viewModel: EditDeviceViewModel by viewModels()
+//    private val viewModel: EditDeviceViewModel by viewModels()
+    private val viewModel by viewModels<EditDeviceViewModel>(
+        extrasProducer = {
+            defaultViewModelCreationExtras.withCreationCallback<EditDeviceViewModel.Factory> { factory ->
+                factory.create(id = null)
+            }
+        }
+    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -12,14 +12,9 @@
         tools:layout="@layout/fragment_main">
 
         <argument
-            android:name="location"
-            app:argType="string" />
-        <argument
-            android:name="protocol"
-            app:argType="string" />
-        <argument
-            android:name="device"
-            app:argType="string" />
+            android:name="id"
+            app:argType="Int" />
+
         <action
             android:id="@+id/action_mainFragment_to_editDeviceFragment"
             app:destination="@id/editDeviceFragment"
@@ -46,7 +41,7 @@
 
     <fragment
         android:id="@+id/editDeviceFragment"
-        android:name="ru.gb.rc.EditDeviceFragment"
+        android:name="ru.gb.rc.presentation.edit_device.EditDeviceFragment"
         android:label="@string/edit_device"
         tools:layout="@layout/fragment_edit_device">
         <action
