@@ -1,5 +1,6 @@
 package ru.gb.rc.presentation.edit_device
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -20,21 +21,26 @@ class EditDeviceViewModel @AssistedInject constructor(private val deviceDao: Dev
     interface Factory {
         fun create(id: Int): EditDeviceViewModel
     }
-
+//    init {
+//        Log.d("EditDeviceViewModel", id.toString())
+//    }
     private val _state = MutableLiveData<EditDeviceViewState>(EditDeviceViewState())
-
     private val state: LiveData<EditDeviceViewState> = _state
 
-    fun onAddBtn() {
-        viewModelScope.launch {
-            deviceDao.insert(
-                NewDevice(
-                    location = state.value.location,
-                    imgSrc = "",
-                    protocol = state.value.protocol,
-                    device = state.value.device
-                )
-            )
-        }
+    fun onAddBtn() {//
+//        viewModelScope.launch {
+//            deviceDao.insert(
+//                NewDevice(
+//                    location = state.value.location,
+//                    imgSrc = "",
+//                    protocol = state.value.protocol,
+//                    device = state.value.device
+//                )
+//            )
+//        }
+    }
+
+    fun init() {
+        Log.d("EditDeviceViewModel", id.toString())
     }
 }

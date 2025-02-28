@@ -8,7 +8,8 @@ import ru.gb.rc.databinding.DeviceCardViewBinding
 
 class DeviceAdapter(
     values: List<Device>,
-    private val onDeleteClicked: (Device) -> Unit
+    private val onDeleteClicked: (Device) -> Unit,
+    private val onItemClicked: (Device) -> Unit
 ) : RecyclerView.Adapter<DeviceViewHolder>() {
     private var values = values.toMutableList()
 
@@ -24,8 +25,12 @@ class DeviceAdapter(
         holder.binding.location.text = item.location
         holder.binding.device.text = item.device
         holder.binding.protocol.text = item.protocol
-        holder.binding.pic.setOnClickListener {     //Удаление по нажатию на картинку
+        holder.binding.pic.setOnLongClickListener {     //Удаление по нажатию на картинку
             onDeleteClicked(item)
+            true
+        }
+        holder.binding.deviceCardView.setOnClickListener{
+            onItemClicked(item)
         }
     }
 

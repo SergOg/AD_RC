@@ -11,14 +11,15 @@
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_main">
 
-        <argument
-            android:name="id"
-            app:argType="Int" />
-
         <action
             android:id="@+id/action_mainFragment_to_editDeviceFragment"
             app:destination="@id/editDeviceFragment"
-            app:popUpTo="@id/nav_home" />
+            app:popUpTo="@id/nav_home">
+            <argument
+                android:name="id"
+                app:argType="integer" />
+
+        </action>
     </fragment>
 
     <fragment

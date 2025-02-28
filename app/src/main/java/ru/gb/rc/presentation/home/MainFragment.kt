@@ -29,7 +29,10 @@ class MainFragment : Fragment() {
     private var _binding: FragmentMainBinding? = null
     private val binding get() = _binding!!
 
-    val myAdapter = DeviceAdapter(emptyList()) { device ->
+    val myAdapter = DeviceAdapter(emptyList(), {device->
+        val action = MainFragmentDirections.actionMainFragmentToEditDeviceFragment(device.id)
+        findNavController().navigate(action)
+    }, { device ->
         val builder = AlertDialog.Builder(requireActivity())
         builder.setTitle("Компонент будет удален!")
             .setMessage("Согласны удалить?")
@@ -51,6 +54,7 @@ class MainFragment : Fragment() {
         val dialog = builder.create()
         dialog.show()
     }
+    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -90,12 +94,8 @@ class MainFragment : Fragment() {
             recyclerView.adapter = myAdapter
 
             fab.setOnClickListener {
-                val action = Action
-                findNavController().navigate(R.id.action_mainFragment_to_editDeviceFragment)
-//                val location = args.location
-
-
-                viewModel.onAddBtn("location-51165165", "protocol", "device")
+                val action = MainFragmentDirections.actionMainFragmentToEditDeviceFragment(-1)
+                findNavController().navigate(action)
             }
         }
     }
