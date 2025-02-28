@@ -1,7 +1,12 @@
 package ru.gb.rc
 
 import androidx.lifecycle.ViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class EditDeviceViewModel : ViewModel() {
+@HiltViewModel
+class EditDeviceViewModel @Inject constructor() : ViewModel() {
+
+
     // TODO: Implement the ViewModel
 }

@@ -29,7 +29,7 @@ class MainViewModel @Inject constructor(private val deviceDao: DeviceDao) : View
     val text: LiveData<String> = _text
 
     fun onAddBtn(location: String, protocol: String, device: String) {
-        val size: Int = allDevices.value.size
+//        val size: Int = allDevices.value.size
         viewModelScope.launch {
             deviceDao.insert(
                 NewDevice(

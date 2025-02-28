@@ -39,15 +39,16 @@ class EditDeviceFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.buttonSave.setOnClickListener {
-            var location = binding.editLocation.text
-            var protocol = binding.editProtocol.text
-            var device = binding.editDevice.text
+//            var location = binding.editLocation.text
+//            var protocol = binding.editProtocol.text
+//            var device = binding.editDevice.text
 
 // Навигация с передачей аргументов
-            val action = EditDeviceFragmentDirections.actionEditFragmentToMainFragment(location, protocol, device)
-            findNavController().navigate(action)
-//            findNavController().navigate(R.id.action_editDeviceFragment_to_mainFragment)
+//            val action = EditDeviceFragmentDirections.actionEditFragmentToMainFragment(location, protocol, device)
+//            findNavController().navigate(action)
+            findNavController().navigate(R.id.action_editDeviceFragment_to_mainFragment)
         }
+
         binding.buttonCancel.setOnClickListener {
             findNavController().navigate(R.id.action_editDeviceFragment_to_mainFragment)
         }

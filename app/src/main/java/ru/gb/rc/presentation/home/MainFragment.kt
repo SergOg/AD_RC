@@ -23,7 +23,7 @@ import ru.gb.rc.databinding.FragmentMainBinding
 
 @AndroidEntryPoint
 class MainFragment : Fragment() {
-    private val args: MainFragmentArgs by navArgs()
+//    private val args: MainFragmentArgs by navArgs()
 
 
     companion object {
@@ -102,11 +102,11 @@ class MainFragment : Fragment() {
 
             fab.setOnClickListener {
                 findNavController().navigate(R.id.action_mainFragment_to_editDeviceFragment)
-                val location = args.location
-                val protocol = args.protocol
-                val device = args.device
+//                val location = args.location
+//                val protocol = args.protocol
+//                val device = args.device
 
-                viewModel.onAddBtn(location, protocol, device)
+                viewModel.onAddBtn("location-511651651651651651651651651", "protocol", "device")
             }
         }
     }

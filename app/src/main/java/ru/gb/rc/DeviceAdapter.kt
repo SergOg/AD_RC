@@ -24,7 +24,7 @@ class DeviceAdapter(
         holder.binding.location.text = item.location
         holder.binding.device.text = item.device
         holder.binding.protocol.text = item.protocol
-        holder.binding.delButton.setOnClickListener {
+        holder.binding.pic.setOnClickListener {     //Удаление по нажатию на картинку
             onDeleteClicked(item)
         }
     }
