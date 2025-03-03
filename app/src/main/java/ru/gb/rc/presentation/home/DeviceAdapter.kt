@@ -29,7 +29,7 @@ class DeviceAdapter(
             onDeleteClicked(item)
             true
         }
-        holder.binding.pic.setOnClickListener{
+        holder.binding.pic.setOnClickListener{          //Редактирование по нажатию
             onItemClicked(item)
         }
     }
