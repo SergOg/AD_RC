@@ -23,13 +23,13 @@ class DeviceAdapter(
     override fun onBindViewHolder(holder: DeviceViewHolder, position: Int) {
         val item = values[position]
         holder.binding.location.text = item.location
-        holder.binding.device.text = item.device
+        holder.binding.equipment.text = item.equipment
         holder.binding.protocol.text = item.protocol
         holder.binding.pic.setOnLongClickListener {     //Удаление по долгому нажатию на картинку
             onDeleteClicked(item)
             true
         }
-        holder.binding.pic.setOnClickListener{          //Редактирование по нажатию
+        holder.binding.pic.setOnClickListener{          //Редактирование по нажатию на картинку
             onItemClicked(item)
         }
     }

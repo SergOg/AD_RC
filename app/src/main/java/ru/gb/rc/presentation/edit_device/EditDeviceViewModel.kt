@@ -10,9 +10,8 @@ import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import ru.gb.rc.data.Device
 import ru.gb.rc.data.DeviceDao
-import ru.gb.rc.data.NewDevice
-import javax.inject.Inject
 
 @HiltViewModel(assistedFactory = EditDeviceViewModel.Factory::class)
 class EditDeviceViewModel @AssistedInject constructor(private val deviceDao: DeviceDao, @Assisted val id: Int) : ViewModel() {
@@ -40,7 +39,24 @@ class EditDeviceViewModel @AssistedInject constructor(private val deviceDao: Dev
 //        }
     }
 
-    fun init() {
+    fun init(id: Int) {
         Log.d("EditDeviceViewModel", id.toString())
+        viewModelScope.launch {
+            val device = deviceDao.getOne(id)
+            if (device != null) {
+                if (device.id == -1){   //если id==-1, либо обновить текущий по его id
+                    deviceDao.update(device.copy(id = device.id))
+                    // Обработка полученного устройства
+                    _state.value = _state.value?.copy(device = device.toString())
+                }else{
+                    //отобразить в полях ввода его значения
+                    location.text = device.location
+                    equipment.text = device.equipment
+                    protocol.text = device.protocol
+                }
+            }else{
+                deviceDao.insert(Device(id, "location", "", "protocol", "device"))
+            }
+        }
     }
 }

@@ -46,7 +46,7 @@ class EditDeviceFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentEditDeviceBinding.inflate(inflater)
-        viewModel.init()
+        viewModel.init(-1)
         return binding.root
     }
 

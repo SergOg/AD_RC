@@ -17,4 +17,7 @@ interface DeviceDao {
 
     @Update
     suspend fun update(device: Device)
+
+    @Query("SELECT * FROM device WHERE id = :id")
+    suspend fun getOne(id: Int) : Device?
 }
