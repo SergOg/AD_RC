@@ -19,18 +19,18 @@ import ru.gb.rc.R
 import ru.gb.rc.databinding.FragmentMainBinding
 
 @AndroidEntryPoint
-class MainFragment : Fragment() {
+class HomeFragment : Fragment() {
 
     companion object {
-        fun newInstance() = MainFragment()
+        fun newInstance() = HomeFragment()
     }
 
-    private val viewModel: MainViewModel by viewModels()
+    private val viewModel: HomeViewModel by viewModels()
     private var _binding: FragmentMainBinding? = null
     private val binding get() = _binding!!
 
     val myAdapter = DeviceAdapter(emptyList(), { device ->
-        val action = MainFragmentDirections.actionMainFragmentToEditDeviceFragment(device.id)
+        val action = HomeFragmentDirections.actionMainFragmentToEditDeviceFragment(device.id)
         findNavController().navigate(action)
     }, { device ->
         val builder = AlertDialog.Builder(requireActivity())
@@ -94,7 +94,7 @@ class MainFragment : Fragment() {
             recyclerView.adapter = myAdapter
 
             fab.setOnClickListener {
-                val action = MainFragmentDirections.actionMainFragmentToEditDeviceFragment(-1)
+                val action = HomeFragmentDirections.actionMainFragmentToEditDeviceFragment(0)
                 findNavController().navigate(action)
             }
         }
