@@ -5,5 +5,5 @@ data class EditDeviceViewState(
     val location: String = "",
     val imgSrc: String = "",
     val protocol: String = "",
-    val device: String = "",
+    val equipment: String = "",
 )

@@ -45,7 +45,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/text_device"
+        android:id="@+id/text_equipment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/fab_margin"
@@ -58,7 +58,7 @@
         app:layout_constraintTop_toBottomOf="@id/text_protocol">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edit_device"
+            android:id="@+id/edit_equipment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>

@@ -1,7 +1,6 @@
 package ru.gb.rc.data
 
 import androidx.room.ColumnInfo
-import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 data class NewDevice(
@@ -10,5 +9,5 @@ data class NewDevice(
     @ColumnInfo(name = "location") val location: String,
     @ColumnInfo(name = "imgSrc") val imgSrc: String,
     @ColumnInfo(name = "protocol") val protocol: String,
-    @ColumnInfo(name = "device") val device: String,
+    @ColumnInfo(name = "equipment") val equipment: String,
 )
