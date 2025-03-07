@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import ru.gb.rc.R
-import ru.gb.rc.databinding.FragmentMainBinding
+import ru.gb.rc.databinding.FragmentHomeBinding
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
@@ -26,7 +26,7 @@ class HomeFragment : Fragment() {
     }
 
     private val viewModel: HomeViewModel by viewModels()
-    private var _binding: FragmentMainBinding? = null
+    private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
     private val myAdapter = DeviceAdapter(emptyList(), { device ->
@@ -64,7 +64,7 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentMainBinding.inflate(inflater, container, false)
+        _binding = FragmentHomeBinding.inflate(inflater, container, false)
 
         // Определяем жизненный цикл, когда должна происходить сборка данных
         viewLifecycleOwner.lifecycleScope
