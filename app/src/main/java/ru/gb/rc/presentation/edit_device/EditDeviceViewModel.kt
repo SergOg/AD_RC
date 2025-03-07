@@ -28,7 +28,7 @@ class EditDeviceViewModel @AssistedInject constructor(
     private val _state = MutableLiveData<EditDeviceViewState>(EditDeviceViewState())
     val state: LiveData<EditDeviceViewState> = _state
 
-    fun onAddBtn(
+    fun onSaveBtn(
         location : String,
         protocol : String,
         equipment : String

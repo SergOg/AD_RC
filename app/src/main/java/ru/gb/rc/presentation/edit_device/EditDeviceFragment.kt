@@ -6,16 +6,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.lifecycle.withCreationCallback
-import kotlinx.coroutines.launch
 import ru.gb.rc.R
 import ru.gb.rc.databinding.FragmentEditDeviceBinding
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class EditDeviceFragment : Fragment() {
@@ -27,9 +22,6 @@ class EditDeviceFragment : Fragment() {
         fun newInstance() = EditDeviceFragment()
     }
 
-//    @Inject
-//    lateinit var viewModelFactory: EditDeviceViewModel.Factory
-
     private val viewModel by viewModels<EditDeviceViewModel>(
         extrasProducer = {
             defaultViewModelCreationExtras.withCreationCallback<EditDeviceViewModel.Factory> { factory ->
@@ -37,9 +29,6 @@ class EditDeviceFragment : Fragment() {
             }
         }
     )
-//    private val viewModel by lazy {
-//        viewModelFactory.create(id = arguments?.getInt("id") ?: -1)
-//    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,7 +46,7 @@ class EditDeviceFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.buttonSave.setOnClickListener {
-            viewModel.onAddBtn(
+            viewModel.onSaveBtn(
                 location = binding.editLocation.text.toString(),
                 protocol = binding.editProtocol.text.toString(),
                 equipment = binding.editEquipment.text.toString(),

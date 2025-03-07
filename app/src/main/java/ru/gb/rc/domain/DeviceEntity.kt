@@ -1,4 +1,4 @@
 package ru.gb.rc.domain
 
-class Test {
+class DeviceEntity {
 }
