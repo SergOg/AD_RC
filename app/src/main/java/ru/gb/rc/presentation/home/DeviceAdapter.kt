@@ -30,6 +30,7 @@ class DeviceAdapter(
             true
         }
         holder.binding.pic.setOnClickListener{          //Редактирование по нажатию на картинку
+
             onItemClicked(item)
         }
     }

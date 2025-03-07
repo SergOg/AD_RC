@@ -29,7 +29,7 @@ class HomeFragment : Fragment() {
     private var _binding: FragmentMainBinding? = null
     private val binding get() = _binding!!
 
-    val myAdapter = DeviceAdapter(emptyList(), { device ->
+    private val myAdapter = DeviceAdapter(emptyList(), { device ->
         val action = HomeFragmentDirections.actionMainFragmentToEditDeviceFragment(device.id)
         findNavController().navigate(action)
     }, { device ->

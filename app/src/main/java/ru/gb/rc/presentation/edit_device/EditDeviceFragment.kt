@@ -11,12 +11,14 @@ import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.lifecycle.withCreationCallback
 import ru.gb.rc.R
 import ru.gb.rc.databinding.FragmentEditDeviceBinding
+import ru.gb.rc.presentation.home.HomeViewModel
 
 @AndroidEntryPoint
 class EditDeviceFragment : Fragment() {
 
     private var _binding: FragmentEditDeviceBinding? = null
     private val binding get() = _binding!!
+    private val editDeviceViewModel: EditDeviceViewModel by viewModels()
 
     companion object {
         fun newInstance() = EditDeviceFragment()
@@ -39,7 +41,7 @@ class EditDeviceFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentEditDeviceBinding.inflate(inflater)
-        viewModel.init(-1)
+        viewModel.init(0)
         return binding.root
     }
 
@@ -51,6 +53,7 @@ class EditDeviceFragment : Fragment() {
                 protocol = binding.editProtocol.text.toString(),
                 equipment = binding.editEquipment.text.toString(),
             )
+            findNavController().navigate(R.id.action_editDeviceFragment_to_mainFragment)
         }
         viewModel.state.observe(viewLifecycleOwner) { state ->
             binding.editLocation.setText(state.location)

@@ -62,10 +62,9 @@ class EditDeviceViewModel @AssistedInject constructor(
     fun init(id: Int) {
         Log.d("EditDeviceViewModel", id.toString())
         viewModelScope.launch {
-            if (id == 0) {   //если id==0, либо обновить текущий по его id
-                // Обработка полученного устройства
+            if (id == 0) {   // если id==0, обработка полученного устройства
                 _state.value = EditDeviceViewState()
-            } else {
+            } else {        // либо обновить текущий по его id
                 val device = deviceDao.getOne(id)
                 device?.let {
                     _state.value = EditDeviceViewState(
