@@ -14,7 +14,7 @@ class DeviceAdapter(
     private var values = values.toMutableList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DeviceViewHolder {
-        val binding = DeviceCardViewBinding.inflate(LayoutInflater.from(parent.context))
+        val binding = DeviceCardViewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return DeviceViewHolder(binding)
     }
 
@@ -30,7 +30,6 @@ class DeviceAdapter(
             true
         }
         holder.binding.pic.setOnClickListener{          //Редактирование по нажатию на картинку
-
             onItemClicked(item)
         }
         holder.binding.deviceCardView.setOnClickListener {  //Переход в управление устройством

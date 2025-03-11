@@ -31,14 +31,13 @@ class EditDeviceFragment : Fragment() {
     private val viewModel by viewModels<EditDeviceViewModel>(
         extrasProducer = {
             defaultViewModelCreationExtras.withCreationCallback<EditDeviceViewModel.Factory> { factory ->
-                factory.create(id = arguments?.getInt("id") ?: -1)
+                factory.create(id = arguments?.getInt("id") ?: 0)
             }
         }
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
     }
 
     override fun onCreateView(
@@ -46,7 +45,7 @@ class EditDeviceFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentEditDeviceBinding.inflate(inflater)
-        viewModel.init(0)
+//        viewModel.init(0)
         return binding.root
     }
 

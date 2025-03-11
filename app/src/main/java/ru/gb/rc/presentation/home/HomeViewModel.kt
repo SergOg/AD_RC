@@ -10,6 +10,7 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import ru.gb.rc.data.Device
 import ru.gb.rc.data.DeviceDao
+import ru.gb.rc.data.NewDevice
 import javax.inject.Inject
 
 @HiltViewModel
@@ -27,7 +28,7 @@ class HomeViewModel @Inject constructor(private val deviceDao: DeviceDao) : View
     }
     val text: LiveData<String> = _text
 
-//    fun onAddBtn(location: String, protocol: String, device: String) {
+//    fun onAddBtn(location: String, protocol: String, equipment: String) {
 ////        val size: Int = allDevices.value.size
 //        viewModelScope.launch {
 //            deviceDao.insert(
@@ -39,7 +40,7 @@ class HomeViewModel @Inject constructor(private val deviceDao: DeviceDao) : View
 //                    location = location,
 //                    imgSrc = "",
 //                    protocol = protocol,
-//                    device = device
+//                    equipment = equipment,
 //                )
 //            )
 //        }

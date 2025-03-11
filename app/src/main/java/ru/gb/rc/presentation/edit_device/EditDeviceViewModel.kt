@@ -33,6 +33,10 @@ class EditDeviceViewModel @AssistedInject constructor(
     private val _closeScreenEvent = Channel<Unit>(capacity = Channel.UNLIMITED)
     val closeScreenEvent = _closeScreenEvent.receiveAsFlow()
 
+    init {
+        init(id)
+    }
+
     fun onSaveBtn(
         location : String,
         protocol : String,
