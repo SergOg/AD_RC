@@ -9,6 +9,8 @@ import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import ru.gb.rc.data.Device
 import ru.gb.rc.data.DeviceDao
@@ -28,11 +30,14 @@ class EditDeviceViewModel @AssistedInject constructor(
     private val _state = MutableLiveData<EditDeviceViewState>(EditDeviceViewState())
     val state: LiveData<EditDeviceViewState> = _state
 
+    private val _closeScreenEvent = Channel<Unit>(capacity = Channel.UNLIMITED)
+    val closeScreenEvent = _closeScreenEvent.receiveAsFlow()
+
     fun onSaveBtn(
         location : String,
         protocol : String,
         equipment : String
-    ) {//
+    ) {
         viewModelScope.launch {
             state.value?.let { device ->
                 if (device.id == null) {
@@ -56,6 +61,7 @@ class EditDeviceViewModel @AssistedInject constructor(
                     )
                 }
             }
+            _closeScreenEvent.send(Unit)
         }
     }
 

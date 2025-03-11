@@ -6,9 +6,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.lifecycle.withCreationCallback
+import kotlinx.coroutines.launch
 import ru.gb.rc.R
 import ru.gb.rc.databinding.FragmentEditDeviceBinding
 import ru.gb.rc.presentation.home.HomeViewModel
@@ -34,6 +38,7 @@ class EditDeviceFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
     }
 
     override fun onCreateView(
@@ -53,7 +58,6 @@ class EditDeviceFragment : Fragment() {
                 protocol = binding.editProtocol.text.toString(),
                 equipment = binding.editEquipment.text.toString(),
             )
-            findNavController().navigate(R.id.action_editDeviceFragment_to_mainFragment)
         }
         viewModel.state.observe(viewLifecycleOwner) { state ->
             binding.editLocation.setText(state.location)
@@ -63,6 +67,12 @@ class EditDeviceFragment : Fragment() {
 
         binding.buttonCancel.setOnClickListener {
             findNavController().navigate(R.id.action_editDeviceFragment_to_mainFragment)
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            editDeviceViewModel.closeScreenEvent.collect {
+                findNavController().popBackStack()
+            }
         }
     }
 

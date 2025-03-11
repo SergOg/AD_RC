@@ -33,6 +33,9 @@ class DeviceAdapter(
 
             onItemClicked(item)
         }
+        holder.binding.deviceCardView.setOnClickListener {  //Переход в управление устройством
+            onItemClicked(item)
+        }
     }
 
     fun setData(values: List<Device>) {
