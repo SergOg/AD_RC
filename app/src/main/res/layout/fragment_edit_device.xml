@@ -26,25 +26,6 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/text_protocol"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/fab_margin"
-        android:hint="@string/text_protocol"
-        app:boxStrokeColor="@color/strong_pink"
-        app:boxStrokeWidth="@dimen/_3dp"
-        app:endIconMode="clear_text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_location">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edit_protocol"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/text_equipment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -55,10 +36,29 @@
         app:endIconMode="clear_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_protocol">
+        app:layout_constraintTop_toBottomOf="@id/text_location">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edit_equipment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/text_protocol"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/fab_margin"
+        android:hint="@string/text_protocol"
+        app:boxStrokeColor="@color/strong_pink"
+        app:boxStrokeWidth="@dimen/_3dp"
+        app:endIconMode="clear_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_equipment">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_protocol"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>
