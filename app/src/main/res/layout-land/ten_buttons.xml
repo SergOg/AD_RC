@@ -13,6 +13,8 @@
         android:clickable="true"
         app:layout_constraintBottom_toTopOf="@+id/minus_button"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.96"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_plus_24" />
 
@@ -24,6 +26,8 @@
         android:clickable="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.96"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/plus_button"
         app:srcCompat="@drawable/ic_minus_24" />
 
@@ -34,6 +38,8 @@
         android:layout_margin="96dp"
         android:clickable="true"
         app:layout_constraintBottom_toTopOf="@+id/down_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.04"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_up_24" />
@@ -45,8 +51,83 @@
         android:layout_margin="96dp"
         android:clickable="true"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.04"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/up_button"
         app:srcCompat="@drawable/ic_down_24" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/power_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/pult_margin"
+        android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/mute_button"
+        app:layout_constraintStart_toStartOf="@+id/one_button"
+        app:layout_constraintTop_toBottomOf="@id/two_button"
+        app:srcCompat="@drawable/ic_power_24" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/mute_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/pult_margin"
+        android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/four_button"
+        app:layout_constraintStart_toEndOf="@+id/power_button"
+        app:layout_constraintTop_toBottomOf="@id/three_button"
+        app:srcCompat="@drawable/ic_mute_24" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/one_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/pult_margin"
+        android:clickable="true"
+        app:layout_constraintBottom_toTopOf="@+id/down_button"
+        app:layout_constraintEnd_toStartOf="@id/two_button"
+        app:layout_constraintStart_toEndOf="@+id/up_button"
+        app:layout_constraintTop_toBottomOf="@+id/up_button"
+        app:layout_constraintTop_toEndOf="@id/up_button"
+        app:srcCompat="@drawable/ic_one_24" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/two_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/pult_margin"
+        android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/three_button"
+        app:layout_constraintStart_toEndOf="@+id/one_button"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_two_24" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/three_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/pult_margin"
+        android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/four_button"
+        app:layout_constraintStart_toEndOf="@+id/two_button"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_three_24" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/four_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/pult_margin"
+        android:clickable="true"
+        app:layout_constraintBottom_toTopOf="@+id/minus_button"
+        app:layout_constraintEnd_toStartOf="@+id/plus_button"
+        app:layout_constraintStart_toEndOf="@+id/three_button"
+        app:layout_constraintTop_toBottomOf="@+id/plus_button"
+        app:srcCompat="@drawable/ic_four_24" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
