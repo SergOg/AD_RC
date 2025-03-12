@@ -19,7 +19,7 @@
             android:layout_width="164dp"
             android:layout_height="128dp"
             android:background="@drawable/rounded_corners"
-            android:clipToOutline="true"
+
             android:scaleType="centerCrop"
             android:src="@drawable/neon_robot"
             app:layout_constraintBottom_toBottomOf="parent"
