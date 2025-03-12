@@ -19,5 +19,15 @@
     <string name="text_protocol">Протокол</string>
     <string name="text_device">Устройство</string>
     <string name="edit_device">Редактирование устройства</string>
+    <string name="button_power">Вкл/Выкл</string>
+    <string name="button_mute">Приглушение</string>
+    <string name="button_one">Один</string>
+    <string name="button_tow">Два</string>
+    <string name="button_three">Три</string>
+    <string name="button_four">Четыре</string>
+    <string name="button_up">Вверх</string>
+    <string name="button_down">Вниз</string>
+    <string name="button_minus">Минус</string>
+    <string name="button_plus">Плюс</string>
 
 </resources>
