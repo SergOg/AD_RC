@@ -36,7 +36,7 @@ class HomeFragment : Fragment() {
         val builder = AlertDialog.Builder(requireActivity())
         builder.setTitle("Компонент будет удален!")
             .setMessage("Согласны удалить?")
-            .setIcon(R.drawable.gb)
+            .setIcon(R.drawable.neon_robot)
             .setCancelable(true)
             .setPositiveButton("Да") { _, _ ->
                 Toast.makeText(
