@@ -4,9 +4,9 @@
     android:id="@+id/deviceCardView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardCornerRadius="24dp"
-    app:cardElevation="8dp"
-    app:cardMaxElevation="16dp">
+    app:cardCornerRadius="@dimen/CornerRadiusCard"
+    app:cardElevation="@dimen/_8dp"
+    app:cardMaxElevation="@dimen/fab_margin">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -15,9 +15,14 @@
 
         <ImageView
             android:id="@+id/pic"
-            android:layout_width="128dp"
+            android:layout_width="164dp"
             android:layout_height="128dp"
-            android:src="@drawable/gb"
+            android:background="@drawable/rounded_corners"
+            android:clipToOutline="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/neon_robot"
+
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -25,8 +30,8 @@
             android:id="@+id/location"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/_18sp"
             android:layout_margin="@dimen/_8dp"
+            android:textSize="@dimen/_18sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@id/equipment"
             app:layout_constraintEnd_toEndOf="parent"
@@ -37,8 +42,8 @@
             android:id="@+id/equipment"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/_14sp"
             android:layout_margin="@dimen/_8dp"
+            android:textSize="@dimen/_14sp"
             app:layout_constraintBottom_toTopOf="@id/protocol"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/pic"
@@ -48,8 +53,8 @@
             android:id="@+id/protocol"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/_14sp"
             android:layout_margin="@dimen/_8dp"
+            android:textSize="@dimen/_14sp"
             app:layout_constraintBottom_toBottomOf="@id/pic"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/pic"
