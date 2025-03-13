@@ -55,6 +55,8 @@ dependencies {
     implementation("androidx.room:room-ktx:2.6.1")
     implementation("androidx.room:room-rxjava3:2.6.1")
     implementation(libs.androidx.legacy.support.v4)
+    implementation(libs.androidx.runtime.android)
+    implementation(libs.androidx.material3.android)
     kapt("androidx.room:room-compiler:2.6.1")
     implementation("androidx.fragment:fragment-ktx:1.8.5")
     //Изображение
