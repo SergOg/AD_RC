@@ -29,5 +29,6 @@
     <string name="button_down">Вниз</string>
     <string name="button_minus">Минус</string>
     <string name="button_plus">Плюс</string>
+    <string name="from_file">Загрузить из файла</string>
 
 </resources>

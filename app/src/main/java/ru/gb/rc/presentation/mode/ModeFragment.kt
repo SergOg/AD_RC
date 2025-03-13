@@ -3,10 +3,13 @@ package ru.gb.rc.presentation.mode
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
+import ru.gb.rc.R
 import ru.gb.rc.databinding.FragmentModeBinding
 
 class ModeFragment : Fragment() {
@@ -35,5 +38,12 @@ class ModeFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, menuInflater: MenuInflater) {
+        setHasOptionsMenu(true)
+        // Inflate the menu; this adds items to the action bar if it is present.
+        menuInflater.inflate(R.menu.pult_menu, menu)
+//        return true
     }
 }
