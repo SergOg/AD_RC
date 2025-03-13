@@ -65,7 +65,7 @@ class ModeFragment : Fragment() {
                 true
             }
             R.id.action_photo -> {
-                // Действие при выборе помощи
+                // Действие при выборе фото
                 Toast.makeText(
                     activity, "action_photo", Toast.LENGTH_LONG
                 ).show()
