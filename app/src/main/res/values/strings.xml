@@ -31,4 +31,11 @@
     <string name="button_plus">Плюс</string>
     <string name="from_file">Загрузить из файла</string>
 
+    <string-array name="options">
+        <item>Первый вариант</item>
+        <item>Второй вариант</item>
+        <item>Третий вариант</item>
+    </string-array>
+
 </resources>
+
