@@ -27,10 +27,6 @@ class DevicePultFragment : Fragment(), MenuProvider {
         super.onCreate(savedInstanceState)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        requireActivity().addMenuProvider(this, viewLifecycleOwner)
-    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -38,6 +34,25 @@ class DevicePultFragment : Fragment(), MenuProvider {
         _binding = FragmentDevicePultBinding.inflate(inflater, container, false)
         return binding.root
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        requireActivity().addMenuProvider(this, viewLifecycleOwner)
+
+        with(binding) {
+            powerButton.setOnClickListener {
+                Toast.makeText(
+                    activity, "Power button!", Toast.LENGTH_LONG
+                ).show()
+            }
+            muteButton.setOnClickListener{
+                Toast.makeText(
+                    activity, "Mute button!", Toast.LENGTH_LONG
+                ).show()
+            }
+        }
+    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
