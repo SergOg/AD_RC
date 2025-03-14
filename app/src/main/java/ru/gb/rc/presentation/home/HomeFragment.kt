@@ -6,10 +6,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.core.view.MenuProvider
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -21,7 +23,7 @@ import ru.gb.rc.R
 import ru.gb.rc.databinding.FragmentHomeBinding
 
 @AndroidEntryPoint
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), MenuProvider {
 
     companion object {
         fun newInstance() = HomeFragment()
@@ -100,10 +102,35 @@ class HomeFragment : Fragment() {
                 findNavController().navigate(action)
             }
         }
+        requireActivity().addMenuProvider(this, viewLifecycleOwner)
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+        menuInflater.inflate(R.menu.home_menu, menu)
+    }
+
+    override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+        return when (menuItem.itemId) {
+            R.id.home_photo -> {
+                // Действие при выборе
+                Toast.makeText(
+                    activity, "Photo home!", Toast.LENGTH_LONG
+                ).show()
+                true
+            }
+            R.id.home_file -> {
+                // Действие при выборе
+                Toast.makeText(
+                    activity, "File home!", Toast.LENGTH_LONG
+                ).show()
+                true
+            }
+            else -> false
+        }
     }
 }

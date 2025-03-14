@@ -11,6 +11,7 @@ import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
 import androidx.core.view.MenuProvider
 import android.view.MenuItem
+import android.widget.Toast
 import ru.gb.rc.R
 import ru.gb.rc.databinding.FragmentModeBinding
 
@@ -52,6 +53,29 @@ class ModeFragment : Fragment(), MenuProvider {
     }
 
     override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-        return false
+        return when (menuItem.itemId) {
+            R.id.pult_settings -> {
+                // Действие при выборе настроек
+                Toast.makeText(
+                    activity, "Settings mode!", Toast.LENGTH_LONG
+                ).show()
+                true
+            }
+            R.id.pult_photo -> {
+                // Действие при выборе
+                Toast.makeText(
+                    activity, "Photo mode!", Toast.LENGTH_LONG
+                ).show()
+                true
+            }
+            R.id.pult_file -> {
+                // Действие при выборе
+                Toast.makeText(
+                    activity, "File mode!", Toast.LENGTH_LONG
+                ).show()
+                true
+            }
+            else -> false
+        }
     }
 }
