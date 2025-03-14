@@ -35,10 +35,10 @@ class DeviceAdapter(
             true
         }
         holder.binding.pic.setOnClickListener {          //Редактирование по нажатию на картинку
-            onItemClicked(item.device)
+            onPictureClicked(item.device)
         }
         holder.binding.deviceCardView.setOnClickListener {  //Переход в управление устройством
-            onPictureClicked(item.device)
+            onItemClicked(item.device)
         }
     }
 
