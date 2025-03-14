@@ -6,8 +6,9 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface DeviceDao {
 
+    @Transaction
     @Query("SELECT * FROM device")
-    fun getAll(): Flow<List<Device>>
+    fun getAll(): Flow<List<DeviceWithSettings>>
 
     @Insert(entity = Device::class)
     suspend fun insert(device: NewDevice)

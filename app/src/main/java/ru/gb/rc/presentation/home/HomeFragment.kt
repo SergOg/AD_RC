@@ -33,10 +33,10 @@ class HomeFragment : Fragment(), MenuProvider {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
-    private val myAdapter = DeviceAdapter(emptyList(), { device ->
+    private val myAdapter = DeviceAdapter(emptyList(), onPictureClicked = { device ->
         val action = HomeFragmentDirections.actionMainFragmentToEditDeviceFragment(device.id)
         findNavController().navigate(action)
-    }, { device ->
+    }, onDeleteClicked = { device ->
         val builder = AlertDialog.Builder(requireActivity())
         builder.setTitle("Компонент будет удален!")
             .setMessage("Согласны удалить?")
@@ -57,6 +57,9 @@ class HomeFragment : Fragment(), MenuProvider {
             }
         val dialog = builder.create()
         dialog.show()
+    }, onItemClicked = { device ->
+        val action = HomeFragmentDirections.actionMainFragmentToSettingsDeviceFragment(device.id)
+        findNavController().navigate(action)
     }
     )
 
@@ -123,6 +126,7 @@ class HomeFragment : Fragment(), MenuProvider {
                 ).show()
                 true
             }
+
             R.id.home_file -> {
                 // Действие при выборе
                 Toast.makeText(
@@ -130,6 +134,7 @@ class HomeFragment : Fragment(), MenuProvider {
                 ).show()
                 true
             }
+
             else -> false
         }
     }
