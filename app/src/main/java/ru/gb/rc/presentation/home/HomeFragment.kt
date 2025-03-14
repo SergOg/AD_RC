@@ -58,7 +58,7 @@ class HomeFragment : Fragment(), MenuProvider {
         val dialog = builder.create()
         dialog.show()
     }, onItemClicked = { device ->
-        val action = HomeFragmentDirections.actionMainFragmentToSettingsDeviceFragment(device.id)
+        val action = HomeFragmentDirections.actionMainFragmentToPultDeviceFragment(device.id)
         findNavController().navigate(action)
     }
     )

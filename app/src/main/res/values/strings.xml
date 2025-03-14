@@ -19,7 +19,8 @@
     <string name="text_protocol">Протокол</string>
     <string name="text_device">Устройство</string>
     <string name="edit_device">Редактирование устройства</string>
-    <string name="edit_settings">Редактирование настроек</string>
+    <string name="edit_settings">Редактирование команд</string>
+    <string name="pult_device">Пульт управления</string>
     <string name="button_power">Вкл/Выкл</string>
     <string name="button_mute">Приглушение</string>
     <string name="button_one">Один</string>
