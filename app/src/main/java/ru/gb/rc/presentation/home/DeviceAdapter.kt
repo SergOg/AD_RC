@@ -2,8 +2,6 @@ package ru.gb.rc.presentation.home
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import ru.gb.rc.data.Device
 import ru.gb.rc.data.DeviceWithSettings
