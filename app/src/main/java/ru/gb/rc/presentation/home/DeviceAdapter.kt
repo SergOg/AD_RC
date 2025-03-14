@@ -2,6 +2,8 @@ package ru.gb.rc.presentation.home
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import ru.gb.rc.data.Device
 import ru.gb.rc.databinding.DeviceCardViewBinding
@@ -14,7 +16,8 @@ class DeviceAdapter(
     private var values = values.toMutableList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DeviceViewHolder {
-        val binding = DeviceCardViewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            DeviceCardViewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return DeviceViewHolder(binding)
     }
 
@@ -29,11 +32,15 @@ class DeviceAdapter(
             onDeleteClicked(item)
             true
         }
-        holder.binding.pic.setOnClickListener{          //Редактирование по нажатию на картинку
+        holder.binding.pic.setOnClickListener {          //Редактирование по нажатию на картинку
             onItemClicked(item)
         }
         holder.binding.deviceCardView.setOnClickListener {  //Переход в управление устройством
-            onItemClicked(item)
+//            onItemClicked(item)
+
+            val action = HomeFragmentDirections.actionMainFragmentToSettingsDeviceFragment(0)
+//            findNavController().navigate(action)
+
         }
     }
 

@@ -6,16 +6,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.lifecycle.withCreationCallback
 import kotlinx.coroutines.launch
 import ru.gb.rc.R
 import ru.gb.rc.databinding.FragmentEditDeviceBinding
-import ru.gb.rc.presentation.home.HomeViewModel
 
 @AndroidEntryPoint
 class EditDeviceFragment : Fragment() {

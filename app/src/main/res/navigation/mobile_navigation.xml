@@ -10,7 +10,6 @@
         android:name="ru.gb.rc.presentation.home.HomeFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home">
-
         <action
             android:id="@+id/action_mainFragment_to_editDeviceFragment"
             app:destination="@id/editDeviceFragment"
@@ -18,8 +17,37 @@
             <argument
                 android:name="id"
                 app:argType="integer" />
-
         </action>
+        <action
+            android:id="@+id/action_mainFragment_to_settingsDeviceFragment"
+            app:destination="@id/settingsDeviceFragment"
+            app:popUpTo="@id/nav_home">
+            <argument
+                android:name="id"
+                app:argType="integer" />
+        </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/editDeviceFragment"
+        android:name="ru.gb.rc.presentation.edit_device.EditDeviceFragment"
+        android:label="@string/edit_device"
+        tools:layout="@layout/fragment_edit_device">
+        <action
+            android:id="@+id/action_editDeviceFragment_to_mainFragment"
+            app:destination="@id/nav_home"
+            app:popUpTo="@id/nav_home" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/settingsDeviceFragment"
+        android:name="ru.gb.rc.domain.DeviceSettingsFragment"
+        android:label="@string/edit_settings"
+        tools:layout="@layout/fragment_device_pult">
+        <action
+            android:id="@+id/action_settingsDeviceFragment_to_mainFragment"
+            app:destination="@id/nav_home"
+            app:popUpTo="@id/nav_home" />
     </fragment>
 
     <fragment
@@ -40,14 +68,4 @@
         android:label="@string/menu_mode"
         tools:layout="@layout/fragment_mode" />
 
-    <fragment
-        android:id="@+id/editDeviceFragment"
-        android:name="ru.gb.rc.presentation.edit_device.EditDeviceFragment"
-        android:label="@string/edit_device"
-        tools:layout="@layout/fragment_edit_device">
-        <action
-            android:id="@+id/action_editDeviceFragment_to_mainFragment"
-            app:destination="@id/nav_home"
-            app:popUpTo="@id/nav_home" />
-    </fragment>
 </navigation>

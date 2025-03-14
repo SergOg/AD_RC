@@ -38,9 +38,9 @@ class EditDeviceViewModel @AssistedInject constructor(
     }
 
     fun onSaveBtn(
-        location : String,
-        protocol : String,
-        equipment : String
+        location: String,
+        protocol: String,
+        equipment: String
     ) {
         viewModelScope.launch {
             state.value?.let { device ->
