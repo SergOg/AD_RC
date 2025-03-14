@@ -32,9 +32,10 @@
     <string name="from_file">Загрузить из файла</string>
 
     <string-array name="options">
-        <item>Первый вариант</item>
-        <item>Второй вариант</item>
-        <item>Третий вариант</item>
+        <item>Classic Bluetooth</item>
+        <item>Bluetooth Low Energy</item>
+        <item>Wi-fi</item>
+        <item>Third-party Software</item>
     </string-array>
 
 </resources>

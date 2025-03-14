@@ -61,6 +61,7 @@ class ModeFragment : Fragment(), MenuProvider {
                 ).show()
                 true
             }
+
             R.id.pult_photo -> {
                 // Действие при выборе
                 Toast.makeText(
@@ -68,6 +69,7 @@ class ModeFragment : Fragment(), MenuProvider {
                 ).show()
                 true
             }
+
             R.id.pult_file -> {
                 // Действие при выборе
                 Toast.makeText(
@@ -75,6 +77,7 @@ class ModeFragment : Fragment(), MenuProvider {
                 ).show()
                 true
             }
+
             else -> false
         }
     }
