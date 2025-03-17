@@ -48,7 +48,28 @@
             android:id="@+id/action_pultDeviceFragment_to_mainFragment"
             app:destination="@id/nav_home"
             app:popUpTo="@id/nav_home" />
+        <action
+            android:id="@+id/action_pultDeviceFragment_to_settingsDeviceFragment"
+            app:destination="@id/settingsDeviceFragment"
+            app:popUpTo="@id/pultDeviceFragment">
+            <argument
+                android:name="id"
+                app:argType="integer" />
+        </action>
     </fragment>
+
+    <fragment
+        android:id="@+id/settingsDeviceFragment"
+        android:name="ru.gb.rc.domain.DeviceSettingsFragment"
+        android:label="@string/edit_settings"
+        tools:layout="@layout/fragment_device_settings">
+        <action
+            android:id="@+id/action_settingsDeviceFragment_to_pultDeviceFragment"
+            app:destination="@id/pultDeviceFragment"
+            app:popUpTo="@id/pultDeviceFragment" />
+    </fragment>
+
+
 
     <fragment
         android:id="@+id/nav_settings"

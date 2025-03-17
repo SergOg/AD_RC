@@ -11,7 +11,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.MenuProvider
+import androidx.navigation.fragment.findNavController
+import dagger.hilt.android.lifecycle.withCreationCallback
 import ru.gb.rc.databinding.FragmentDevicePultBinding
+import ru.gb.rc.presentation.edit_device.EditDeviceViewModel
+import ru.gb.rc.presentation.home.HomeFragmentDirections
 
 class DevicePultFragment : Fragment(), MenuProvider {
 
@@ -19,14 +23,21 @@ class DevicePultFragment : Fragment(), MenuProvider {
         fun newInstance() = DevicePultFragment()
     }
 
-    private val viewModel: DevicePultViewModel by viewModels()
+    private val viewModel by viewModels<DevicePultViewModel>(
+        extrasProducer = {
+            defaultViewModelCreationExtras.withCreationCallback<DevicePultViewModel.Factory> { factory ->
+                factory.create(id = arguments?.getInt("id") ?: 0)
+            }
+        }
+    )
+
+    //    private val viewModel: DevicePultViewModel by viewModels()
     private var _binding: FragmentDevicePultBinding? = null
     private val binding get() = _binding!!
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        viewModel.pultView(device = )
     }
 
     override fun onCreateView(
@@ -47,12 +58,17 @@ class DevicePultFragment : Fragment(), MenuProvider {
                     activity, "Power button!", Toast.LENGTH_LONG
                 ).show()
             }
-            muteButton.setOnClickListener{
+            muteButton.setOnClickListener {
                 Toast.makeText(
                     activity, "Mute button!", Toast.LENGTH_LONG
                 ).show()
             }
         }
+//        viewModel.state.observe(viewLifecycleOwner) { state ->
+////            binding.
+////            binding.editProtocol.setText(state.protocol)
+////            binding.editEquipment.setText(state.equipment)
+//        }
     }
 
 
@@ -72,6 +88,9 @@ class DevicePultFragment : Fragment(), MenuProvider {
                 Toast.makeText(
                     activity, "Settings mode!", Toast.LENGTH_LONG
                 ).show()
+
+                val action = DevicePultFragmentDirections.actionPultDeviceFragmentToSettingsDeviceFragment(id)
+                findNavController().navigate(action)
                 true
             }
 
