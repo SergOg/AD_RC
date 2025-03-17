@@ -44,7 +44,7 @@ class DevicePultFragment : Fragment(), MenuProvider {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentDevicePultBinding.inflate(inflater, container, false)
+        _binding = FragmentDevicePultBinding.inflate(inflater)
         return binding.root
     }
 
