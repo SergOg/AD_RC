@@ -11,5 +11,8 @@ class DevicePultViewModel(
 ) : ViewModel() {
     suspend fun pultView(device: Device){
         val device = deviceDao.getOne(id)
+        android:id="@+id/pultDeviceFragment"
+
+        android:label="@string/pult_device" = device.equipment
     }
 }

@@ -25,6 +25,8 @@ class DevicePultFragment : Fragment(), MenuProvider {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        viewModel.pultView(device = )
     }
 
     override fun onCreateView(
