@@ -54,15 +54,20 @@ class DeviceSettingsViewModel @AssistedInject constructor(
         viewModelScope.launch {
             state.value?.let { viewState ->
                 val powerButtonSettings = settingsDeviceList.find { it.commandId == CommandId.powerButton.name }
-                if(powerButtonSettings != null && powerButton.isNotEmpty()){
-                    settingsDeviceDao.update(powerButtonSettings.copy(content = powerButton))
-                }
-                if(powerButtonSettings != null && powerButton.isEmpty()){
-                    settingsDeviceDao.delete(powerButtonSettings.copy(deviceId = ))
-                }
-                if(powerButtonSettings == null && powerButton.isNotEmpty()){
-                    settingsDeviceDao.insert(SettingsDevice(null, deviceId = , commandId = , content = ))
-                }
+//                if(powerButtonSettings != null && powerButton.isNotEmpty()){
+//                    settingsDeviceDao.update(powerButtonSettings.copy(content = powerButton))
+//                }
+//                if(powerButtonSettings != null && powerButton.isEmpty()){
+//                    settingsDeviceDao.delete(id)
+//                }
+//                if(powerButtonSettings == null && powerButton.isNotEmpty()){
+//                    settingsDeviceDao.insert(SettingsDevice(
+//                        deviceId = id,
+//                        commandId = CommandId.powerButton.toString(),
+//                        content = powerButton,
+//                        id = 1
+//                    ))
+//                }
             }
             _closeScreenEvent.send(Unit)
         }
