@@ -19,6 +19,6 @@ interface SettingsDeviceDao {
     @Update
     suspend fun update(settingsDevice: SettingsDevice)
 
-    @Query("SELECT * FROM device WHERE devoiceId = :deviceId")
+    @Query("SELECT * FROM device WHERE device_id = :deviceId")
     suspend fun getOne(deviceId: Int) : SettingsDevice?
 }

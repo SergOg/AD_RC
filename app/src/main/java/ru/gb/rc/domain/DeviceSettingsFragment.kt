@@ -16,7 +16,6 @@ import dagger.hilt.android.lifecycle.withCreationCallback
 import kotlinx.coroutines.launch
 import ru.gb.rc.R
 import ru.gb.rc.databinding.FragmentDeviceSettingsBinding
-import ru.gb.rc.presentation.edit_device.EditDeviceViewModel
 
 @AndroidEntryPoint
 class DeviceSettingsFragment : Fragment() {

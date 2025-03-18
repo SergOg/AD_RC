@@ -48,25 +48,25 @@ class DeviceSettingsViewModel @AssistedInject constructor(
         plusButton: String,
     ) {
         viewModelScope.launch {
-            state.value?.let { device ->
-                if (device.id == null) {
-                    deviceDao.insert(
-                        SettingsDevice(
-                            deviceId = device.id,
-                            commandId = "powerButton",
-                            content = powerButton,
-                        )
-                    )
-                } else {
-                    deviceDao.update(
-                        SettingsDevice(
-                            deviceId = device.id,
-                            commandId = "powerButton",
-                            content = powerButton,
-                        )
-                    )
-                }
-            }
+//            state.value?.let { device ->
+//                if (device.id == null) {
+//                    deviceDao.insert(
+//                        SettingsDevice(
+//                            deviceId = device.id,
+//                            commandId = "powerButton",
+//                            content = powerButton,
+//                        )
+//                    )
+//                } else {
+//                    deviceDao.update(
+//                        SettingsDevice(
+//                            deviceId = device.id,
+//                            commandId = "powerButton",
+//                            content = powerButton,
+//                        )
+//                    )
+//                }
+//            }
             _closeScreenEvent.send(Unit)
         }
     }

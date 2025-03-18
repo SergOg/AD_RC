@@ -18,4 +18,10 @@
         android:orderInCategory="3"
         android:title="@string/from_file"
         app:showAsAction="never" />
+
+    <item
+        android:id="@+id/pult_delete"
+        android:orderInCategory="3"
+        android:title="@string/delete_photo"
+        app:showAsAction="never" />
 </menu>
