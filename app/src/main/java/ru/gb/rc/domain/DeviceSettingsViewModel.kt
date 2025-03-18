@@ -14,6 +14,7 @@ import kotlinx.coroutines.launch
 import ru.gb.rc.data.Device
 import ru.gb.rc.data.DeviceDao
 import ru.gb.rc.data.NewDevice
+import ru.gb.rc.data.SettingsDevice
 import ru.gb.rc.presentation.edit_device.EditDeviceViewModel
 import ru.gb.rc.presentation.edit_device.EditDeviceViewState
 
@@ -21,7 +22,7 @@ import ru.gb.rc.presentation.edit_device.EditDeviceViewState
 class DeviceSettingsViewModel @AssistedInject constructor(
     private val deviceDao: DeviceDao,
     @Assisted val id: Int
-): ViewModel() {
+) : ViewModel() {
 
     @AssistedFactory
     interface Factory {
@@ -35,32 +36,36 @@ class DeviceSettingsViewModel @AssistedInject constructor(
     val closeScreenEvent = _closeScreenEvent.receiveAsFlow()
 
     fun onSaveBtn(
-        location: String,
-        protocol: String,
-        equipment: String
+        powerButton: String,
+        muteButton: String,
+        oneButton: String,
+        twoButton: String,
+        threeButton: String,
+        fourButton: String,
+        upButton: String,
+        downButton: String,
+        minusButton: String,
+        plusButton: String,
     ) {
         viewModelScope.launch {
             state.value?.let { device ->
-//                if (device.id == null) {
-//                    deviceDao.insert(
-//                        NewDevice(
-//                            location = location,
-//                            imgSrc = "",
-//                            protocol = protocol,
-//                            equipment = equipment
-//                        )
-//                    )
-//                } else {
-//                    deviceDao.update(
-//                        Device(
-//                            id = device.id,
-//                            location = location,
-//                            imgSrc = "",
-//                            protocol = protocol,
-//                            equipment = equipment
-//                        )
-//                    )
-//                }
+                if (device.id == null) {
+                    deviceDao.insert(
+                        SettingsDevice(
+                            deviceId = device.id,
+                            commandId = "powerButton",
+                            content = powerButton,
+                        )
+                    )
+                } else {
+                    deviceDao.update(
+                        SettingsDevice(
+                            deviceId = device.id,
+                            commandId = "powerButton",
+                            content = powerButton,
+                        )
+                    )
+                }
             }
             _closeScreenEvent.send(Unit)
         }

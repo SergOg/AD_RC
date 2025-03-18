@@ -88,15 +88,29 @@ class DeviceSettingsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.buttonSaveSettings.setOnClickListener {
             viewModel.onSaveBtn(
-                location = binding.editPowerButton.text.toString(),
-                protocol = binding.editMuteButton.text.toString(),
-                equipment = binding.editOneButton.text.toString(),
+                powerButton = binding.editPowerButton.text.toString(),
+                muteButton = binding.editMuteButton.text.toString(),
+                oneButton = binding.editOneButton.text.toString(),
+                twoButton = binding.editTwoButton.text.toString(),
+                threeButton = binding.editThreeButton.text.toString(),
+                fourButton = binding.editFourButton.text.toString(),
+                upButton = binding.editUpButton.text.toString(),
+                downButton = binding.editDownButton.text.toString(),
+                minusButton = binding.editMinusButton.text.toString(),
+                plusButton = binding.editPlusButton.text.toString(),
             )
         }
         viewModel.state.observe(viewLifecycleOwner) { state ->
-            binding.editPowerButton.setText(state.location)
-            binding.editMuteButton.setText(state.protocol)
-            binding.editOneButton.setText(state.equipment)
+            binding.editPowerButton.setText(state.powerButton)
+            binding.editMuteButton.setText(state.muteButton)
+            binding.editOneButton.setText(state.oneButton)
+            binding.editTwoButton.setText(state.twoButton)
+            binding.editThreeButton.setText(state.threeButton)
+            binding.editFourButton.setText(state.fourButton)
+            binding.editUpButton.setText(state.upButton)
+            binding.editDownButton.setText(state.downButton)
+            binding.editMinusButton.setText(state.minusButton)
+            binding.editPlusButton.setText(state.plusButton)
         }
 
         binding.buttonCancelSettings.setOnClickListener {
