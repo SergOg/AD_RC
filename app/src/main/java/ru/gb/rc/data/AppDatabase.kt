@@ -9,4 +9,5 @@ import androidx.room.RoomDatabase
 )
 abstract class AppDatabase : RoomDatabase() {
     abstract fun deviceDao(): DeviceDao
+    abstract fun settingsDao(): SettingsDeviceDao
 }

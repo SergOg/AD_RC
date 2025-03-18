@@ -1,7 +1,6 @@
 package ru.gb.rc.domain
 
 data class DeviceSettingsViewState(
-    val id: Int? = null,
     val powerButton: String = "",
     val muteButton: String = "",
     val oneButton: String = "",

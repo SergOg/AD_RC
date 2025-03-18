@@ -1,24 +1,19 @@
 package ru.gb.rc.data
 
 import androidx.room.*
-import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface SettingsDeviceDao {
-
-    @Transaction
-    @Query("SELECT * FROM device")
-    fun getAll(): Flow<List<SettingsDevice>>
 
     @Insert(entity = SettingsDevice::class)
     suspend fun insert(settingsDevice: SettingsDevice)
 
     @Delete
-    suspend fun delete(settingsDevice: SettingsDevice)
+    suspend fun delete(deviceId: Int)
 
     @Update
     suspend fun update(settingsDevice: SettingsDevice)
 
-    @Query("SELECT * FROM device WHERE device_id = :deviceId")
-    suspend fun getOne(deviceId: Int) : SettingsDevice?
+    @Query("SELECT * FROM settings WHERE device_id = :deviceId")
+    suspend fun getAllCommands(deviceId: Int) : List<SettingsDevice>
 }
