@@ -60,11 +60,11 @@ class DevicePultFragment : Fragment(), MenuProvider {
                 ).show()
             }
         }
-//        viewModel.state.observe(viewLifecycleOwner) { state ->
-////            binding.
-////            binding.editProtocol.setText(state.protocol)
-////            binding.editEquipment.setText(state.equipment)
-//        }
+        viewModel.state.observe(viewLifecycleOwner) { state ->
+            binding.
+//            binding.editProtocol.setText(state.protocol)
+//            binding.editEquipment.setText(state.equipment)
+        }
     }
 
 

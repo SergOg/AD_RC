@@ -50,29 +50,19 @@ class DeviceSettingsViewModel @AssistedInject constructor(
         downButton: String,
         minusButton: String,
         plusButton: String,
-
         ) {
         viewModelScope.launch {
-            state.value?.let { viewState ->
-//                val anyEnumButton = CommandId.powerButton
+            state.value?.let {
                 actionButtonSave(powerButton, CommandId.powerButton)
-//                val anyEnumButton = CommandId.muteButton
                 actionButtonSave(muteButton, CommandId.muteButton)
                 actionButtonSave(oneButton, CommandId.oneButton)
-//                val powerButtonSettings = settingsDeviceList.find { it.commandId == CommandId.powerButton.name }
-//                if(powerButtonSettings != null && powerButton.isNotEmpty()){
-//                    settingsDeviceDao.update(powerButtonSettings.copy(content = powerButton))
-//                }
-//                if(powerButtonSettings != null && powerButton.isEmpty()){
-//                    settingsDeviceDao.deleteById(id)
-//                }
-//                if(powerButtonSettings == null && powerButton.isNotEmpty()){
-//                    settingsDeviceDao.insert(InsertSettingsDevice(
-//                        deviceId = id,
-//                        commandId = CommandId.powerButton.toString(),
-//                        content = powerButton,
-//                    ))
-//                }
+                actionButtonSave(twoButton, CommandId.twoButton)
+                actionButtonSave(threeButton, CommandId.threeButton)
+                actionButtonSave(fourButton, CommandId.fourButton)
+                actionButtonSave(upButton, CommandId.upButton)
+                actionButtonSave(downButton, CommandId.downButton)
+                actionButtonSave(minusButton, CommandId.minusButton)
+                actionButtonSave(plusButton, CommandId.plusButton)
             }
             _closeScreenEvent.send(Unit)
         }
@@ -80,18 +70,19 @@ class DeviceSettingsViewModel @AssistedInject constructor(
 
     private suspend fun actionButtonSave(anyButton: String, anyCommandButton: CommandId) {
         val anyButtonSettings = settingsDeviceList.find { it.commandId == anyCommandButton.name }
-        if(anyButtonSettings != null && anyButton.isNotEmpty()){
+        if (anyButtonSettings != null && anyButton.isNotEmpty()) {
             settingsDeviceDao.update(anyButtonSettings.copy(content = anyButton))
         }
-        if(anyButtonSettings != null && anyButton.isEmpty()){
+        if (anyButtonSettings != null && anyButton.isEmpty()) {
             settingsDeviceDao.deleteById(id)
         }
-        if(anyButtonSettings == null && anyButton.isNotEmpty()){
-            settingsDeviceDao.insert(NewSettingsDevice(
-                deviceId = id,
-                commandId = anyCommandButton.toString(),
-                content = anyButton,
-            )
+        if (anyButtonSettings == null && anyButton.isNotEmpty()) {
+            settingsDeviceDao.insert(
+                NewSettingsDevice(
+                    deviceId = id,
+                    commandId = anyCommandButton.toString(),
+                    content = anyButton,
+                )
             )
         }
     }
