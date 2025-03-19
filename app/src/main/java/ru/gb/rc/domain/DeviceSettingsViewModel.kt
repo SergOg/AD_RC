@@ -89,7 +89,7 @@ class DeviceSettingsViewModel @AssistedInject constructor(
         if(anyButtonSettings == null && anyButton.isNotEmpty()){
             settingsDeviceDao.insert(NewSettingsDevice(
                 deviceId = id,
-                commandId = CommandId.powerButton.toString(),
+                commandId = anyCommandButton.toString(),
                 content = anyButton,
             )
             )
