@@ -54,22 +54,41 @@ class DeviceSettingsViewModel @AssistedInject constructor(
         viewModelScope.launch {
             state.value?.let { viewState ->
                 val powerButtonSettings = settingsDeviceList.find { it.commandId == CommandId.powerButton.name }
-//                if(powerButtonSettings != null && powerButton.isNotEmpty()){
-//                    settingsDeviceDao.update(powerButtonSettings.copy(content = powerButton))
-//                }
-//                if(powerButtonSettings != null && powerButton.isEmpty()){
-//                    settingsDeviceDao.delete(id)
-//                }
-//                if(powerButtonSettings == null && powerButton.isNotEmpty()){
-//                    settingsDeviceDao.insert(SettingsDevice(
-//                        deviceId = id,
-//                        commandId = CommandId.powerButton.toString(),
-//                        content = powerButton,
-//                        id = 1
-//                    ))
-//                }
+//                actionButtonSave(powerButton, powerButtonSettings)
+
+                if(powerButtonSettings != null && powerButton.isNotEmpty()){
+                    settingsDeviceDao.update(powerButtonSettings.copy(content = powerButton))
+                }
+                if(powerButtonSettings != null && powerButton.isEmpty()){
+                    settingsDeviceDao.delete(id)
+                }
+                if(powerButtonSettings == null && powerButton.isNotEmpty()){
+                    settingsDeviceDao.insert(SettingsDevice(
+                        deviceId = id,
+                        commandId = CommandId.powerButton.toString(),
+                        content = powerButton,
+                        id = 1
+                    ))
+                }
             }
             _closeScreenEvent.send(Unit)
+        }
+    }
+
+    private suspend fun actionButtonSave(anyButton: String, anyButtonSettings: SettingsDevice?) {
+        if(anyButtonSettings != null && anyButton.isNotEmpty()){
+            settingsDeviceDao.update(anyButtonSettings.copy(content = anyButton))
+        }
+        if(anyButtonSettings != null && anyButton.isEmpty()){
+            settingsDeviceDao.delete(id)
+        }
+        if(anyButtonSettings == null && anyButton.isNotEmpty()){
+            settingsDeviceDao.insert(SettingsDevice(
+                deviceId = id,
+                commandId = CommandId.powerButton.toString(),
+                content = anyButton,
+                id = 1
+            ))
         }
     }
 
