@@ -34,8 +34,8 @@ class DevicePultViewModel @AssistedInject constructor(
     private val _state = MutableLiveData<DevicePultViewState>(DevicePultViewState())
     val state: LiveData<DevicePultViewState> = _state
 
-    private val _closeScreenEvent = Channel<Unit>(capacity = Channel.UNLIMITED)
-    val closeScreenEvent = _closeScreenEvent.receiveAsFlow()
+//    private val _closeScreenEvent = Channel<Unit>(capacity = Channel.UNLIMITED)
+//    val closeScreenEvent = _closeScreenEvent.receiveAsFlow()
 
     init {
         init(id)

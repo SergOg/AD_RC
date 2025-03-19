@@ -64,9 +64,12 @@ class DevicePultFragment : Fragment(), MenuProvider {
                 ).show()
             }
         }
-//        viewModel.state.observe(viewLifecycleOwner) { state ->
-//            if (state.powerButton == "") binding.powerButton.visibility = View.INVISIBLE
-//        }
+
+        viewModel.state.observe(viewLifecycleOwner) { state ->
+            if (state.powerButton.isEmpty()) {
+                binding.powerButton.visibility = View.INVISIBLE
+            }
+        }
 
 //        viewLifecycleOwner.lifecycleScope.launch {
 //            devicePultViewModel.closeScreenEvent.collect {
