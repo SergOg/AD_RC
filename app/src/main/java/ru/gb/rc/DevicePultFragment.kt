@@ -14,8 +14,6 @@ import androidx.core.view.MenuProvider
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.lifecycle.withCreationCallback
 import ru.gb.rc.databinding.FragmentDevicePultBinding
-import ru.gb.rc.presentation.edit_device.EditDeviceViewModel
-import ru.gb.rc.presentation.home.HomeFragmentDirections
 
 class DevicePultFragment : Fragment(), MenuProvider {
 
@@ -30,8 +28,6 @@ class DevicePultFragment : Fragment(), MenuProvider {
             }
         }
     )
-
-    //    private val viewModel: DevicePultViewModel by viewModels()
     private var _binding: FragmentDevicePultBinding? = null
     private val binding get() = _binding!!
 
