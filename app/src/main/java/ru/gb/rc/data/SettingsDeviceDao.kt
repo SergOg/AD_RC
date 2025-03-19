@@ -8,8 +8,8 @@ interface SettingsDeviceDao {
     @Insert(entity = SettingsDevice::class)
     suspend fun insert(newSettingsDevice: NewSettingsDevice)
 
-    @Query("DELETE FROM settings WHERE device_id = :deviceId")//@Delete
-    suspend fun deleteById(deviceId: Int): Int //suspend fun delete(deviceId: Int)
+    @Query("DELETE FROM settings WHERE device_id = :deviceId")
+    suspend fun deleteById(deviceId: Int): Int
 
     @Update
     suspend fun update(settingsDevice: SettingsDevice)

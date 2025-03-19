@@ -1,9 +1,14 @@
 package ru.gb.rc
 
 data class DevicePultViewState(
-    val id: Int? = null,
-    val location: String = "",
-    val imgSrc: String = "",
-    val protocol: String = "",
-    val equipment: String = "",
+    val powerButton: String = "",
+    val muteButton: String = "",
+    val oneButton: String = "",
+    val twoButton: String = "",
+    val threeButton: String = "",
+    val fourButton: String = "",
+    val upButton: String = "",
+    val downButton: String = "",
+    val minusButton: String = "",
+    val plusButton: String = "",
 )

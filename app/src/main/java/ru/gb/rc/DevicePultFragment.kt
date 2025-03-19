@@ -11,11 +11,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.MenuProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.lifecycle.withCreationCallback
+import kotlinx.coroutines.launch
 import ru.gb.rc.databinding.FragmentDevicePultBinding
+import ru.gb.rc.domain.DeviceSettingsViewModel
 
 class DevicePultFragment : Fragment(), MenuProvider {
+
+    private var _binding: FragmentDevicePultBinding? = null
+    private val binding get() = _binding!!
+//    private val devicePultViewModel: DevicePultViewModel by viewModels()
 
     companion object {
         fun newInstance() = DevicePultFragment()
@@ -28,9 +35,6 @@ class DevicePultFragment : Fragment(), MenuProvider {
             }
         }
     )
-    private var _binding: FragmentDevicePultBinding? = null
-    private val binding get() = _binding!!
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,13 +64,16 @@ class DevicePultFragment : Fragment(), MenuProvider {
                 ).show()
             }
         }
-        viewModel.state.observe(viewLifecycleOwner) { state ->
-            binding.
-//            binding.editProtocol.setText(state.protocol)
-//            binding.editEquipment.setText(state.equipment)
-        }
-    }
+//        viewModel.state.observe(viewLifecycleOwner) { state ->
+//            if (state.powerButton == "") binding.powerButton.visibility = View.INVISIBLE
+//        }
 
+//        viewLifecycleOwner.lifecycleScope.launch {
+//            devicePultViewModel.closeScreenEvent.collect {
+//                findNavController().popBackStack()
+//            }
+//        }
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()
