@@ -9,6 +9,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import ru.gb.rc.data.AppDatabase
 import ru.gb.rc.data.DeviceDao
+import ru.gb.rc.data.SettingsDeviceDao
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -29,5 +30,12 @@ object DataBaseModule {
         appDatabase: AppDatabase
     ): DeviceDao {
         return appDatabase.deviceDao()
+    }
+
+    @Provides
+    fun provideSettingsDeviceDao(
+        appDatabase: AppDatabase
+    ): SettingsDeviceDao {
+        return appDatabase.settingsDeviceDao()
     }
 }

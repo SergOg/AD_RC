@@ -6,10 +6,10 @@ import androidx.room.*
 interface SettingsDeviceDao {
 
     @Insert(entity = SettingsDevice::class)
-    suspend fun insert(settingsDevice: SettingsDevice)
+    suspend fun insert(newSettingsDevice: NewSettingsDevice)
 
-    @Delete
-    suspend fun delete(deviceId: Int)
+    @Query("DELETE FROM settings WHERE device_id = :deviceId")//@Delete
+    suspend fun deleteById(deviceId: Int): Int //suspend fun delete(deviceId: Int)
 
     @Update
     suspend fun update(settingsDevice: SettingsDevice)

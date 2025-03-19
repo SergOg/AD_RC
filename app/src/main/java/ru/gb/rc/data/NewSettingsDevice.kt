@@ -3,7 +3,7 @@ package ru.gb.rc.data
 import androidx.room.ColumnInfo
 import androidx.room.PrimaryKey
 
-data class InsertSettingsDevice(
+data class NewSettingsDevice(
     @PrimaryKey
     @ColumnInfo(name = "id") val id: Int? = null,
     @ColumnInfo(name = "device_id") val deviceId: Int,

@@ -13,6 +13,7 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import ru.gb.rc.data.CommandId
+import ru.gb.rc.data.NewSettingsDevice
 import ru.gb.rc.data.SettingsDevice
 import ru.gb.rc.data.SettingsDeviceDao
 
@@ -53,42 +54,45 @@ class DeviceSettingsViewModel @AssistedInject constructor(
         ) {
         viewModelScope.launch {
             state.value?.let { viewState ->
-                val powerButtonSettings = settingsDeviceList.find { it.commandId == CommandId.powerButton.name }
-//                actionButtonSave(powerButton, powerButtonSettings)
-
-                if(powerButtonSettings != null && powerButton.isNotEmpty()){
-                    settingsDeviceDao.update(powerButtonSettings.copy(content = powerButton))
-                }
-                if(powerButtonSettings != null && powerButton.isEmpty()){
-                    settingsDeviceDao.delete(id)
-                }
-                if(powerButtonSettings == null && powerButton.isNotEmpty()){
-                    settingsDeviceDao.insert(SettingsDevice(
-                        deviceId = id,
-                        commandId = CommandId.powerButton.toString(),
-                        content = powerButton,
-                        id = 1
-                    ))
-                }
+//                val anyEnumButton = CommandId.powerButton
+                actionButtonSave(powerButton, CommandId.powerButton)
+//                val anyEnumButton = CommandId.muteButton
+                actionButtonSave(muteButton, CommandId.muteButton)
+                actionButtonSave(oneButton, CommandId.oneButton)
+//                val powerButtonSettings = settingsDeviceList.find { it.commandId == CommandId.powerButton.name }
+//                if(powerButtonSettings != null && powerButton.isNotEmpty()){
+//                    settingsDeviceDao.update(powerButtonSettings.copy(content = powerButton))
+//                }
+//                if(powerButtonSettings != null && powerButton.isEmpty()){
+//                    settingsDeviceDao.deleteById(id)
+//                }
+//                if(powerButtonSettings == null && powerButton.isNotEmpty()){
+//                    settingsDeviceDao.insert(InsertSettingsDevice(
+//                        deviceId = id,
+//                        commandId = CommandId.powerButton.toString(),
+//                        content = powerButton,
+//                    ))
+//                }
             }
             _closeScreenEvent.send(Unit)
         }
     }
 
-    private suspend fun actionButtonSave(anyButton: String, anyButtonSettings: SettingsDevice?) {
+    private suspend fun actionButtonSave(anyButton: String, anyCommandButton: CommandId) {
+        val anyButtonSettings = settingsDeviceList.find { it.commandId == anyCommandButton.name }
         if(anyButtonSettings != null && anyButton.isNotEmpty()){
             settingsDeviceDao.update(anyButtonSettings.copy(content = anyButton))
         }
         if(anyButtonSettings != null && anyButton.isEmpty()){
-            settingsDeviceDao.delete(id)
+            settingsDeviceDao.deleteById(id)
         }
         if(anyButtonSettings == null && anyButton.isNotEmpty()){
-            settingsDeviceDao.insert(SettingsDevice(
+            settingsDeviceDao.insert(NewSettingsDevice(
                 deviceId = id,
                 commandId = CommandId.powerButton.toString(),
                 content = anyButton,
-                id = 1
-            ))
+            )
+            )
         }
     }
 
