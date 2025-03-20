@@ -13,16 +13,17 @@ import android.widget.Toast
 import androidx.core.view.MenuProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.lifecycle.withCreationCallback
 import kotlinx.coroutines.launch
 import ru.gb.rc.databinding.FragmentDevicePultBinding
-import ru.gb.rc.domain.DeviceSettingsViewModel
 
+@AndroidEntryPoint
 class DevicePultFragment : Fragment(), MenuProvider {
 
     private var _binding: FragmentDevicePultBinding? = null
     private val binding get() = _binding!!
-//    private val devicePultViewModel: DevicePultViewModel by viewModels()
+    private val devicePultViewModel: DevicePultViewModel by viewModels()
 
     companion object {
         fun newInstance() = DevicePultFragment()
@@ -71,11 +72,11 @@ class DevicePultFragment : Fragment(), MenuProvider {
             }
         }
 
-//        viewLifecycleOwner.lifecycleScope.launch {
-//            devicePultViewModel.closeScreenEvent.collect {
-//                findNavController().popBackStack()
-//            }
-//        }
+        viewLifecycleOwner.lifecycleScope.launch {
+            devicePultViewModel.closeScreenEvent.collect {
+                findNavController().popBackStack()
+            }
+        }
     }
 
     override fun onDestroyView() {
