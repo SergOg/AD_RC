@@ -96,7 +96,7 @@ class DevicePultFragment : Fragment(), MenuProvider {
                     activity, "Settings mode!", Toast.LENGTH_LONG
                 ).show()
 
-                val action = DevicePultFragmentDirections.actionPultDeviceFragmentToSettingsDeviceFragment(id)
+                val action = DevicePultFragmentDirections.actionPultDeviceFragmentToSettingsDeviceFragment(viewModel.id)
                 findNavController().navigate(action)
                 true
             }

@@ -20,7 +20,6 @@ import ru.gb.rc.domain.DeviceSettingsViewState
 
 @HiltViewModel(assistedFactory = DevicePultViewModel.Factory::class)
 class DevicePultViewModel @AssistedInject constructor(
-//    private val deviceDao: DeviceDao,
     private val settingsDeviceDao: SettingsDeviceDao,
     @Assisted val id: Int
 ) : ViewModel() {
@@ -46,6 +45,7 @@ class DevicePultViewModel @AssistedInject constructor(
         viewModelScope.launch {
             val list = settingsDeviceDao.getAllCommands(id)
             settingsDeviceList.addAll(list)
+            Log.d("DevicePultViewModel", list.size.toString())
             _state.value = DevicePultViewState(
                 powerButton = list.find { it.commandId == CommandId.powerButton.name }?.content
                     ?: "",
@@ -61,16 +61,9 @@ class DevicePultViewModel @AssistedInject constructor(
                     ?: "",
                 plusButton = list.find { it.commandId == CommandId.plusButton.name }?.content ?: "",
             )
-//            val device = deviceDao.getOne(id)
-//            device?.let {
-//                _state.value = DevicePultViewState(
-//                    it.id,
-//                    it.location,
-//                    it.imgSrc,
-//                    it.protocol,
-//                    it.equipment
-//                )
-//            }
+            val aaa = list.find { it.commandId == CommandId.powerButton.name }?.content
+                ?: "11"
+            Log.d("DevicePultViewModel", aaa)
         }
     }
 }

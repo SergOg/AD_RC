@@ -40,7 +40,7 @@ class DeviceSettingsViewModel @AssistedInject constructor(
     }
 
     fun init(id: Int) {
-        Log.d("EditDeviceViewModel", id.toString())
+        Log.d("DeviceSettingsViewModel", id.toString())
         viewModelScope.launch {
             val list = settingsDeviceDao.getAllCommands(id)
             settingsDeviceList.addAll(list)
@@ -59,6 +59,9 @@ class DeviceSettingsViewModel @AssistedInject constructor(
                     ?: "",
                 plusButton = list.find { it.commandId == CommandId.plusButton.name }?.content ?: "",
             )
+            val aaa = list.find { it.commandId == CommandId.powerButton.name }?.content
+                ?: "111"
+            Log.d("DeviceSettingsViewModel", aaa)
         }
     }
 
