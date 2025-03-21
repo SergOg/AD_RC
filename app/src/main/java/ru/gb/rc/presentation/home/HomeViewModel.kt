@@ -11,10 +11,11 @@ import kotlinx.coroutines.launch
 import ru.gb.rc.data.Device
 import ru.gb.rc.data.DeviceDao
 import ru.gb.rc.data.NewDevice
+import ru.gb.rc.data.SettingsDeviceDao
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(private val deviceDao: DeviceDao) : ViewModel() {
+class HomeViewModel @Inject constructor(private val deviceDao: DeviceDao, private val settingsDeviceDao: SettingsDeviceDao) : ViewModel() {
 
     val allDevices = this.deviceDao.getAll()
         .stateIn(
@@ -33,10 +34,6 @@ class HomeViewModel @Inject constructor(private val deviceDao: DeviceDao) : View
 //        viewModelScope.launch {
 //            deviceDao.insert(
 //                NewDevice(
-////                    location = "Location $size",
-////                    imgSrc = "@drawable/gb",
-////                    protocol = "Protocol $size",
-////                    device = "Device $size"
 //                    location = location,
 //                    imgSrc = "",
 //                    protocol = protocol,
@@ -49,6 +46,7 @@ class HomeViewModel @Inject constructor(private val deviceDao: DeviceDao) : View
     fun onDeleteBtn(device: Device) {
         viewModelScope.launch {
             deviceDao.delete(device)
+            settingsDeviceDao.deleteById(device.id)
         }
     }
 }

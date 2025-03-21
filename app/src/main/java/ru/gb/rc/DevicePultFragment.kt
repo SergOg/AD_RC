@@ -70,14 +70,16 @@ class DevicePultFragment : Fragment(), MenuProvider {
         viewModel.state.observe(viewLifecycleOwner) { state ->
             if (state.powerButton.isEmpty()) {
                 binding.powerButton.visibility = View.INVISIBLE
-            }else{
+            } else {
                 binding.powerButton.visibility = View.VISIBLE
             }
+
             Log.d("DevicePultFragmentId", viewModel.id.toString())
             Log.d("DevicePultFragmentState", state.powerButton.toString())
+
             if (state.muteButton.isEmpty()) {
                 binding.muteButton.visibility = View.INVISIBLE
-            }else{
+            } else {
                 binding.muteButton.visibility = View.VISIBLE
             }
         }
@@ -106,7 +108,10 @@ class DevicePultFragment : Fragment(), MenuProvider {
                     activity, "Settings mode!", Toast.LENGTH_LONG
                 ).show()
 
-                val action = DevicePultFragmentDirections.actionPultDeviceFragmentToSettingsDeviceFragment(viewModel.id)
+                val action =
+                    DevicePultFragmentDirections.actionPultDeviceFragmentToSettingsDeviceFragment(
+                        viewModel.id
+                    )
                 findNavController().navigate(action)
                 true
             }
