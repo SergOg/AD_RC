@@ -41,11 +41,11 @@ class DevicePultViewModel @AssistedInject constructor(
     }
 
     fun init(id: Int) {
-        Log.d("DevicePultViewModel", id.toString())
+        Log.d("DevicePultViewModelId", id.toString())
         viewModelScope.launch {
             val list = settingsDeviceDao.getAllCommands(id)
             settingsDeviceList.addAll(list)
-            Log.d("DevicePultViewModel", list.size.toString())
+            Log.d("DevicePultViewModelSize", list.size.toString())
             _state.value = DevicePultViewState(
                 powerButton = list.find { it.commandId == CommandId.powerButton.name }?.content
                     ?: "",
@@ -63,7 +63,7 @@ class DevicePultViewModel @AssistedInject constructor(
             )
             val aaa = list.find { it.commandId == CommandId.powerButton.name }?.content
                 ?: "11"
-            Log.d("DevicePultViewModel", aaa)
+            Log.d("DevicePultViewModelContent", aaa)
         }
     }
 }

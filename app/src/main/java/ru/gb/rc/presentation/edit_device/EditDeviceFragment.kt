@@ -61,7 +61,10 @@ class EditDeviceFragment : Fragment() {
         }
 
         binding.buttonCancel.setOnClickListener {
-            findNavController().navigate(R.id.action_editDeviceFragment_to_mainFragment)
+//            findNavController().navigate(R.id.action_editDeviceFragment_to_mainFragment)
+            editDeviceViewModel.closeScreenEvent.run {
+                findNavController().popBackStack()
+            }
         }
 
         viewLifecycleOwner.lifecycleScope.launch {

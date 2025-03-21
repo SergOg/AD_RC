@@ -113,7 +113,10 @@ class DeviceSettingsFragment : Fragment() {
         }
 
         binding.buttonCancelSettings.setOnClickListener {
-            findNavController().navigate(R.id.action_settingsDeviceFragment_to_pultDeviceFragment)
+//            findNavController().navigate(R.id.action_settingsDeviceFragment_to_pultDeviceFragment)
+            deviceSettingsViewModel.closeScreenEvent.run {
+                findNavController().popBackStack()
+            }
         }
 
         viewLifecycleOwner.lifecycleScope.launch {

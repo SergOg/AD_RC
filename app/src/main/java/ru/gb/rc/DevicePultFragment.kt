@@ -2,6 +2,7 @@ package ru.gb.rc
 
 import androidx.fragment.app.viewModels
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.Menu
@@ -69,6 +70,15 @@ class DevicePultFragment : Fragment(), MenuProvider {
         viewModel.state.observe(viewLifecycleOwner) { state ->
             if (state.powerButton.isEmpty()) {
                 binding.powerButton.visibility = View.INVISIBLE
+            }else{
+                binding.powerButton.visibility = View.VISIBLE
+            }
+            Log.d("DevicePultFragmentId", viewModel.id.toString())
+            Log.d("DevicePultFragmentState", state.powerButton.toString())
+            if (state.muteButton.isEmpty()) {
+                binding.muteButton.visibility = View.INVISIBLE
+            }else{
+                binding.muteButton.visibility = View.VISIBLE
             }
         }
 
