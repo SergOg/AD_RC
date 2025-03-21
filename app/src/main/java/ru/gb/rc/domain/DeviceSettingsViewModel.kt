@@ -100,7 +100,7 @@ class DeviceSettingsViewModel @AssistedInject constructor(
             settingsDeviceDao.update(anyButtonSettings.copy(content = anyButton))
         }
         if (anyButtonSettings != null && anyButton.isEmpty()) {
-            settingsDeviceDao.deleteById(id)
+            settingsDeviceDao.deleteByCommandId(id, anyCommandButton)
         }
         if (anyButtonSettings == null && anyButton.isNotEmpty()) {
             settingsDeviceDao.insert(
