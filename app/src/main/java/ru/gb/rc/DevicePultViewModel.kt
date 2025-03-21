@@ -36,11 +36,21 @@ class DevicePultViewModel @AssistedInject constructor(
     private val _closeScreenEvent = Channel<Unit>(capacity = Channel.UNLIMITED)
     val closeScreenEvent = _closeScreenEvent.receiveAsFlow()
 
-    init {
-        init(id)
+    private val _toastScreenEvent = Channel<String>(capacity = Channel.UNLIMITED)
+    val toastScreenEvent = _toastScreenEvent.receiveAsFlow()
+
+//    init {
+//        init(id)
+//    }
+
+    fun powerButtonClicked() {
+        if (state.value?.powerButton?.isNotEmpty() == true) {
+            viewModelScope.launch { _toastScreenEvent.send("powerButton") }
+        }
+        viewModelScope.launch { _toastScreenEvent.send("powerButton") }
     }
 
-    fun init(id: Int) {
+    fun init() {
         Log.d("DevicePultViewModelId", id.toString())
         viewModelScope.launch {
             val list = settingsDeviceDao.getAllCommands(id)
@@ -61,9 +71,6 @@ class DevicePultViewModel @AssistedInject constructor(
                     ?: "",
                 plusButton = list.find { it.commandId == CommandId.plusButton.name }?.content ?: "",
             )
-            val aaa = list.find { it.commandId == CommandId.powerButton.name }?.content
-                ?: "11"
-            Log.d("DevicePultViewModelContent", aaa)
         }
     }
 }

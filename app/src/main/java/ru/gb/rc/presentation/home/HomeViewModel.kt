@@ -29,20 +29,6 @@ class HomeViewModel @Inject constructor(private val deviceDao: DeviceDao, privat
     }
     val text: LiveData<String> = _text
 
-//    fun onAddBtn(location: String, protocol: String, equipment: String) {
-////        val size: Int = allDevices.value.size
-//        viewModelScope.launch {
-//            deviceDao.insert(
-//                NewDevice(
-//                    location = location,
-//                    imgSrc = "",
-//                    protocol = protocol,
-//                    equipment = equipment,
-//                )
-//            )
-//        }
-//    }
-
     fun onDeleteBtn(device: Device) {
         viewModelScope.launch {
             deviceDao.delete(device)

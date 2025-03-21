@@ -59,9 +59,6 @@ class DeviceSettingsViewModel @AssistedInject constructor(
                     ?: "",
                 plusButton = list.find { it.commandId == CommandId.plusButton.name }?.content ?: "",
             )
-            val aaa = list.find { it.commandId == CommandId.powerButton.name }?.content
-                ?: "111"
-            Log.d("DeviceSettingsViewModel", aaa)
         }
     }
 

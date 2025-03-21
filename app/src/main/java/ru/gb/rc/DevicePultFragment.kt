@@ -56,9 +56,10 @@ class DevicePultFragment : Fragment(), MenuProvider {
 
         with(binding) {
             powerButton.setOnClickListener {
-                Toast.makeText(
-                    activity, "Power button!", Toast.LENGTH_LONG
-                ).show()
+//                Toast.makeText(
+//                    activity, "Power button!", Toast.LENGTH_LONG
+//                ).show()
+                viewModel.powerButtonClicked()
             }
             muteButton.setOnClickListener {
                 Toast.makeText(
@@ -88,7 +89,17 @@ class DevicePultFragment : Fragment(), MenuProvider {
             devicePultViewModel.closeScreenEvent.collect {
                 findNavController().popBackStack()
             }
+            devicePultViewModel.toastScreenEvent.collect {
+                Toast.makeText(
+                    activity, it, Toast.LENGTH_LONG
+                ).show()
+            }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.init()
     }
 
     override fun onDestroyView() {
