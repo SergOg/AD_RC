@@ -19,7 +19,9 @@ import androidx.camera.core.ImageCaptureException
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
+import dagger.hilt.android.lifecycle.withCreationCallback
 import ru.gb.rc.databinding.FragmentPhotoBinding
+import ru.gb.rc.presentation.edit_device.EditDeviceViewModel
 import java.text.SimpleDateFormat
 import java.util.Locale
 import java.util.concurrent.Executor
@@ -45,7 +47,15 @@ class PhotoFragment : Fragment() {
     private val name = SimpleDateFormat(FILENAME_FORMAT, Locale.US)
         .format(System.currentTimeMillis())
 
-    private val viewModel: PhotoViewModel by viewModels()
+//    private val viewModel: PhotoViewModel by viewModels()
+
+    private val viewModel by viewModels<PhotoViewModel>(
+        extrasProducer = {
+            defaultViewModelCreationExtras.withCreationCallback<PhotoViewModel.Factory> { factory ->
+                factory.create(id = arguments?.getInt("id") ?: 0)
+            }
+        }
+    )
 
     private val launcher =
         registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { map ->
