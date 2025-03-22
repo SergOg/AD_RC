@@ -57,6 +57,8 @@ dependencies {
     implementation(libs.androidx.legacy.support.v4)
     implementation(libs.androidx.runtime.android)
     implementation(libs.androidx.material3.android)
+    implementation(libs.androidx.monitor)
+    implementation(libs.androidx.monitor)
     kapt("androidx.room:room-compiler:2.6.1")
     implementation("androidx.fragment:fragment-ktx:1.8.5")
     //Изображение

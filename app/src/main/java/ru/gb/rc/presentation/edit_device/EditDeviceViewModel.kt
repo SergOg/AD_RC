@@ -69,7 +69,7 @@ class EditDeviceViewModel @AssistedInject constructor(
         }
     }
 
-    fun init(id: Int) {
+    private fun init(id: Int) {
         Log.d("EditDeviceViewModel", id.toString())
         viewModelScope.launch {
             if (id == 0) {   // если id==0, обработка полученного устройства

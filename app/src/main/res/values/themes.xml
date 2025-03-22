@@ -43,7 +43,9 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="Theme.RC.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="Theme.RC.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="android:textColor">@color/teal_200</item>
+    </style>
 
     <style name="Theme.RC.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

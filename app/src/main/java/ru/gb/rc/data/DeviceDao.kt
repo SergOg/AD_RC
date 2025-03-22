@@ -19,6 +19,9 @@ interface DeviceDao {
     @Update
     suspend fun update(device: Device)
 
+    @Query("UPDATE device SET imgSrc = :imgSrc WHERE id = :id")
+    suspend fun updateColumn(id: Int, imgSrc: String)
+
     @Query("SELECT * FROM device WHERE id = :id")
     suspend fun getOne(id: Int) : Device?
 }
