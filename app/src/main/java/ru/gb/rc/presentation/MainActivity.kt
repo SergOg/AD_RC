@@ -31,6 +31,14 @@ class MainActivity : AppCompatActivity() {
         val navView: NavigationView = binding.navView
         val navController = findNavController(R.id.nav_host_fragment_content_main)
 
+
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when(destination.id) {
+                R.id.pultDeviceFragment -> supportActionBar?.title = getString(R.string.text_device)
+                else -> supportActionBar?.title = getString(R.string.take_photo)
+            }
+        }
+
         appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.nav_home, R.id.nav_settings, R.id.nav_support, R.id.nav_mode
