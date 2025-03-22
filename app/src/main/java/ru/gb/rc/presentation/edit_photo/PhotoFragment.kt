@@ -19,8 +19,6 @@ import androidx.camera.core.ImageCaptureException
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
-import ru.gb.rc.R
-import ru.gb.rc.databinding.FragmentHomeBinding
 import ru.gb.rc.databinding.FragmentPhotoBinding
 import java.text.SimpleDateFormat
 import java.util.Locale
@@ -111,7 +109,7 @@ class PhotoFragment : Fragment() {
                         ).show()
 
                         val uri = (outputFileResults.savedUri).toString()
-                        viewModel.onAddBtn(name, uri)
+                        viewModel.onAddSrc(name, uri)
                         activity?.finish()
                     }
 

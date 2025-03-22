@@ -10,7 +10,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
-import ru.gb.rc.data.Device
 import ru.gb.rc.data.DeviceDao
 import ru.gb.rc.presentation.edit_device.EditDeviceViewState
 
@@ -26,7 +25,7 @@ class PhotoViewModel @AssistedInject constructor(
     private val _closeScreenEvent = Channel<Unit>(capacity = Channel.UNLIMITED)
     val closeScreenEvent = _closeScreenEvent.receiveAsFlow()
 
-    fun onAddBtn(
+    fun onAddSrc(
         date: String,
         uri: String,
     ) {
