@@ -39,4 +39,15 @@ class PhotoViewModel @AssistedInject constructor(
             }
         }
     }
+
+    fun onDelSrc() {
+        viewModelScope.launch {
+            state.value?.let {
+                deviceDao.updateColumn(
+                    id = id,
+                    imgSrc = "",
+                )
+            }
+        }
+    }
 }
