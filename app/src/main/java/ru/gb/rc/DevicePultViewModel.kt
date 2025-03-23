@@ -44,18 +44,26 @@ class DevicePultViewModel @AssistedInject constructor(
 //    }
 
     fun powerButtonClicked() {
-        if (state.value?.powerButton?.isNotEmpty() == true) {
-            Log.d("DevicePultViewModelCommand", state.value?.powerButton!!)
-            viewModelScope.launch { _toastScreenEvent.send("powerButton") }
+        val a = state.value?.powerButton
+        if (a?.isNotEmpty() == true) {
+//            Log.d("DevicePultViewModelCommand", state.value?.powerButton!!)
+            viewModelScope.launch { _toastScreenEvent.send("Sending command for powerButton: $a") }
+        }
+    }
+    fun muteButtonClicked() {
+        val a = state.value?.muteButton
+        if (a?.isNotEmpty() == true) {
+//            Log.d("DevicePultViewModelCommand", state.value?.muteButton!!)
+            viewModelScope.launch { _toastScreenEvent.send("Sending command for muteButton: $a") }
         }
     }
 
     fun init() {
-        Log.d("DevicePultViewModelId", id.toString())
+//        Log.d("DevicePultViewModelId", id.toString())
         viewModelScope.launch {
             val list = settingsDeviceDao.getAllCommands(id)
             settingsDeviceList.addAll(list)
-            Log.d("DevicePultViewModelSize", list.size.toString())
+//            Log.d("DevicePultViewModelSize", list.size.toString())
             _state.value = DevicePultViewState(
                 powerButton = list.find { it.commandId == CommandId.powerButton.name }?.content
                     ?: "",

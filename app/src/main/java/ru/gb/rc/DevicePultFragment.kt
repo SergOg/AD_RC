@@ -55,21 +55,15 @@ class DevicePultFragment : Fragment(), MenuProvider {
         requireActivity().addMenuProvider(this, viewLifecycleOwner)
 
         with(binding) {
-            powerButton.setOnClickListener {
-                viewModel.powerButtonClicked()
-            }
-            muteButton.setOnClickListener {
-                Toast.makeText(
-                    activity, "Mute button!", Toast.LENGTH_LONG
-                ).show()
-            }
+            powerButton.setOnClickListener {viewModel.powerButtonClicked()}
+            muteButton.setOnClickListener {viewModel.muteButtonClicked()}
         }
 
         viewModel.state.observe(viewLifecycleOwner) { state ->
             if (state.powerButton.isEmpty()) {binding.powerButton.visibility = View.INVISIBLE
             } else {binding.powerButton.visibility = View.VISIBLE}
-            Log.d("DevicePultFragmentId", viewModel.id.toString())
-            Log.d("DevicePultFragmentState", state.powerButton)
+//            Log.d("DevicePultFragmentId", viewModel.id.toString())
+//            Log.d("DevicePultFragmentState", state.powerButton)
 
             if (state.muteButton.isEmpty()) {binding.muteButton.visibility = View.INVISIBLE
             } else { binding.muteButton.visibility = View.VISIBLE}
@@ -98,10 +92,8 @@ class DevicePultFragment : Fragment(), MenuProvider {
         }
         viewLifecycleOwner.lifecycleScope.launch {
             devicePultViewModel.toastScreenEvent.collect {
-                Toast.makeText(
-                    activity, it, Toast.LENGTH_LONG
-                ).show()
-                Log.d("DevicePultFragmentCommand", it)
+                Toast.makeText(activity, it, Toast.LENGTH_LONG).show()
+//                Log.d("DevicePultFragmentCommand", it)
             }
         }
     }
