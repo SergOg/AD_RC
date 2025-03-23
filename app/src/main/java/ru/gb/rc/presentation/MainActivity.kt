@@ -43,7 +43,6 @@ class MainActivity : AppCompatActivity() {
 //                R.id.nav_settings -> supportActionBar?.title = getString(R.string.menu_settings)
 
 
-
                 else -> supportActionBar?.title = getString(R.string.cancel)
             }
         }
