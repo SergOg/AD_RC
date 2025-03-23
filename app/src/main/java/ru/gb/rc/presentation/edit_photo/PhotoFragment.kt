@@ -19,16 +19,34 @@ import androidx.camera.core.ImageCaptureException
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
+import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.lifecycle.withCreationCallback
-import ru.gb.rc.databinding.FragmentPhotoBinding
-import ru.gb.rc.presentation.edit_device.EditDeviceViewModel
+import kotlinx.coroutines.launch
+import ru.gb.rc.databinding.FragmentDevicePhotoBinding
 import java.text.SimpleDateFormat
 import java.util.Locale
 import java.util.concurrent.Executor
+import javax.inject.Inject
 
 private const val FILENAME_FORMAT = "yyy-MM-dd-HH-mm-ss"
-
+@AndroidEntryPoint
 class PhotoFragment : Fragment() {
+
+    private var _binding: FragmentDevicePhotoBinding? = null
+    private val binding get() = _binding!!
+    private val photoViewModel: PhotoViewModel by viewModels()
+
+    private val viewModel by viewModels<PhotoViewModel>(
+        extrasProducer = {
+            defaultViewModelCreationExtras.withCreationCallback<PhotoViewModel.Factory> { factory ->
+                factory.create(id = arguments?.getInt("id") ?: 0)
+            }
+        }
+    )
 
     companion object {
         fun newInstance() = PhotoFragment()
@@ -42,20 +60,9 @@ class PhotoFragment : Fragment() {
 
     private var imageCapture: ImageCapture? = null
     private lateinit var executor: Executor
-    private var _binding: FragmentPhotoBinding? = null
-    private val binding get() = _binding!!
+
     private val name = SimpleDateFormat(FILENAME_FORMAT, Locale.US)
         .format(System.currentTimeMillis())
-
-//    private val viewModel: PhotoViewModel by viewModels()
-
-    private val viewModel by viewModels<PhotoViewModel>(
-        extrasProducer = {
-            defaultViewModelCreationExtras.withCreationCallback<PhotoViewModel.Factory> { factory ->
-                factory.create(id = arguments?.getInt("id") ?: 0)
-            }
-        }
-    )
 
     private val launcher =
         registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { map ->
@@ -67,24 +74,34 @@ class PhotoFragment : Fragment() {
             }
         }
 
+    @Inject
+    lateinit var photoViewModelFactory: PhotoViewModel.Factory
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        checkPermissions()
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentPhotoBinding.inflate(inflater, container, false)
+        _binding = FragmentDevicePhotoBinding.inflate(inflater)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        executor = ContextCompat.getMainExecutor(requireContext())
+        checkPermissions()
         with(binding) {
             takePhotoButton.setOnClickListener {
                 takePhoto()
+            }
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            photoViewModel.closeScreenEvent.collect {
+                findNavController().popBackStack()
             }
         }
     }
@@ -119,7 +136,7 @@ class PhotoFragment : Fragment() {
                         ).show()
 
                         val uri = (outputFileResults.savedUri).toString()
-                        viewModel.onAddSrc(name, uri)
+                        photoViewModel.onAddSrc(name, uri)
                         activity?.finish()
                     }
 
@@ -165,5 +182,10 @@ class PhotoFragment : Fragment() {
         } else {
             launcher.launch(REQUEST_PERMISSIONS)
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

@@ -8,7 +8,6 @@
     <fragment
         android:id="@+id/nav_home"
         android:name="ru.gb.rc.presentation.home.HomeFragment"
-
         tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_mainFragment_to_editDeviceFragment"
@@ -31,7 +30,6 @@
     <fragment
         android:id="@+id/editDeviceFragment"
         android:name="ru.gb.rc.presentation.edit_device.EditDeviceFragment"
-
         tools:layout="@layout/fragment_edit_device">
         <action
             android:id="@+id/action_editDeviceFragment_to_mainFragment"
@@ -42,7 +40,6 @@
     <fragment
         android:id="@+id/pultDeviceFragment"
         android:name="ru.gb.rc.DevicePultFragment"
-
         tools:layout="@layout/fragment_device_pult">
         <action
             android:id="@+id/action_pultDeviceFragment_to_mainFragment"
@@ -56,12 +53,29 @@
                 android:name="id"
                 app:argType="integer" />
         </action>
+        <action
+            android:id="@+id/action_pultDeviceFragment_to_photoDeviceFragment"
+            app:destination="@id/photoDeviceFragment"
+            app:popUpTo="@id/pultDeviceFragment">
+            <argument
+                android:name="id"
+                app:argType="integer" />
+        </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/photoDeviceFragment"
+        android:name="ru.gb.rc.presentation.edit_photo.PhotoFragment"
+        tools:layout="@layout/fragment_device_photo">
+        <action
+            android:id="@+id/action_photoDeviceFragment_to_pultDeviceFragment"
+            app:destination="@id/pultDeviceFragment"
+            app:popUpTo="@id/pultDeviceFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/settingsDeviceFragment"
         android:name="ru.gb.rc.domain.DeviceSettingsFragment"
-
         tools:layout="@layout/fragment_device_settings">
         <action
             android:id="@+id/action_settingsDeviceFragment_to_pultDeviceFragment"
@@ -74,19 +88,16 @@
     <fragment
         android:id="@+id/nav_settings"
         android:name="ru.gb.rc.presentation.settings.SettingsFragment"
-
         tools:layout="@layout/fragment_settings" />
 
     <fragment
         android:id="@+id/nav_support"
         android:name="ru.gb.rc.presentation.support.SupportFragment"
-
         tools:layout="@layout/fragment_support" />
 
     <fragment
         android:id="@+id/nav_mode"
         android:name="ru.gb.rc.presentation.mode.ModeFragment"
-
         tools:layout="@layout/fragment_mode" />
 
 </navigation>

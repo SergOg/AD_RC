@@ -33,7 +33,6 @@
     <string name="button_plus">Плюс</string>
     <string name="from_file">Загрузить из файла</string>
     <string name="delete_photo">Удалить фото</string>
-    <string name="take_a_photo">Сделать снимок</string>
 
     <string-array name="options">
         <item>Classic Bluetooth</item>

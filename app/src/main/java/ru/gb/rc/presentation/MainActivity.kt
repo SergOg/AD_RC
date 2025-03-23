@@ -30,7 +30,6 @@ class MainActivity : AppCompatActivity() {
         val navView: NavigationView = binding.navView
         val navController = findNavController(R.id.nav_host_fragment_content_main)
 
-
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when(destination.id) {
                 R.id.nav_home -> supportActionBar?.title = getString(R.string.menu_home)
@@ -40,12 +39,12 @@ class MainActivity : AppCompatActivity() {
                 R.id.editDeviceFragment -> supportActionBar?.title = getString(R.string.edit_device)
                 R.id.pultDeviceFragment -> supportActionBar?.title = getString(R.string.pult_device)
                 R.id.settingsDeviceFragment -> supportActionBar?.title = getString(R.string.edit_settings)
+                R.id.photoDeviceFragment -> supportActionBar?.title = getString(R.string.take_photo)
 //                R.id.nav_settings -> supportActionBar?.title = getString(R.string.menu_settings)
-//                R.id.nav_settings -> supportActionBar?.title = getString(R.string.menu_settings)
 
 
 
-                else -> supportActionBar?.title = getString(R.string.take_photo)
+                else -> supportActionBar?.title = getString(R.string.cancel)
             }
         }
 

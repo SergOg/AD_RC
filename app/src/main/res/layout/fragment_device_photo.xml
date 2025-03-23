@@ -5,7 +5,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/photo_fragment"
     tools:context=".presentation.edit_photo.PhotoFragment">
 
     <androidx.camera.view.PreviewView
@@ -22,7 +21,7 @@
         android:layout_width="150dp"
         android:layout_height="50dp"
         android:layout_marginBottom="24dp"
-        android:text="@string/take_a_photo"
+        android:text="@string/take_photo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

@@ -12,7 +12,6 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import ru.gb.rc.data.DeviceDao
-import ru.gb.rc.presentation.edit_device.EditDeviceViewModel
 import ru.gb.rc.presentation.edit_device.EditDeviceViewState
 
 @HiltViewModel(assistedFactory = PhotoViewModel.Factory::class)
@@ -26,8 +25,8 @@ class PhotoViewModel @AssistedInject constructor(
         fun create(id: Int): PhotoViewModel
     }
 
-    private val _state = MutableLiveData<EditDeviceViewState>(EditDeviceViewState())
-    private val state: LiveData<EditDeviceViewState> = _state
+    private val _state = MutableLiveData<PhotoViewState>(PhotoViewState())
+    private val state: LiveData<PhotoViewState> = _state
 
     private val _closeScreenEvent = Channel<Unit>(capacity = Channel.UNLIMITED)
     val closeScreenEvent = _closeScreenEvent.receiveAsFlow()

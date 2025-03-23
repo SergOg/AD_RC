@@ -132,6 +132,12 @@ class DevicePultFragment : Fragment(), MenuProvider {
                 Toast.makeText(
                     activity, "Photo mode!", Toast.LENGTH_LONG
                 ).show()
+
+                val action =
+                    DevicePultFragmentDirections.actionPultDeviceFragmentToPhotoDeviceFragment(
+                        viewModel.id
+                    )
+                findNavController().navigate(action)
                 true
             }
 
