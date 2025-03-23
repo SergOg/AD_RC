@@ -48,7 +48,6 @@ class DevicePultViewModel @AssistedInject constructor(
             Log.d("DevicePultViewModelCommand", state.value?.powerButton!!)
             viewModelScope.launch { _toastScreenEvent.send("powerButton") }
         }
-        viewModelScope.launch { _toastScreenEvent.send("powerButton") }
     }
 
     fun init() {
