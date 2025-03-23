@@ -2,7 +2,6 @@ package ru.gb.rc
 
 import androidx.fragment.app.viewModels
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.Menu
@@ -69,20 +68,29 @@ class DevicePultFragment : Fragment(), MenuProvider {
         }
 
         viewModel.state.observe(viewLifecycleOwner) { state ->
-            if (state.powerButton.isEmpty()) {
-                binding.powerButton.visibility = View.INVISIBLE
-            } else {
-                binding.powerButton.visibility = View.VISIBLE
-            }
+            if (state.powerButton.isEmpty()) {binding.powerButton.visibility = View.INVISIBLE
+            } else {binding.powerButton.visibility = View.VISIBLE}
+//            Log.d("DevicePultFragmentId", viewModel.id.toString())
+//            Log.d("DevicePultFragmentState", state.powerButton.toString())
 
-            Log.d("DevicePultFragmentId", viewModel.id.toString())
-            Log.d("DevicePultFragmentState", state.powerButton.toString())
-
-            if (state.muteButton.isEmpty()) {
-                binding.muteButton.visibility = View.INVISIBLE
-            } else {
-                binding.muteButton.visibility = View.VISIBLE
-            }
+            if (state.muteButton.isEmpty()) {binding.muteButton.visibility = View.INVISIBLE
+            } else { binding.muteButton.visibility = View.VISIBLE}
+            if (state.oneButton.isEmpty()) {binding.oneButton.visibility = View.INVISIBLE
+            } else {binding.oneButton.visibility = View.VISIBLE}
+            if (state.twoButton.isEmpty()) {binding.twoButton.visibility = View.INVISIBLE
+            } else {binding.twoButton.visibility = View.VISIBLE}
+            if (state.threeButton.isEmpty()) {binding.threeButton.visibility = View.INVISIBLE
+            } else {binding.threeButton.visibility = View.VISIBLE}
+            if (state.fourButton.isEmpty()) {binding.fourButton.visibility = View.INVISIBLE
+            } else {binding.fourButton.visibility = View.VISIBLE}
+            if (state.upButton.isEmpty()) {binding.upButton.visibility = View.INVISIBLE
+            } else {binding.upButton.visibility = View.VISIBLE}
+            if (state.downButton.isEmpty()) {binding.downButton.visibility = View.INVISIBLE
+            } else {binding.downButton.visibility = View.VISIBLE}
+            if (state.minusButton.isEmpty()) {binding.minusButton.visibility = View.INVISIBLE
+            } else {binding.minusButton.visibility = View.VISIBLE}
+            if (state.plusButton.isEmpty()) {binding.plusButton.visibility = View.INVISIBLE
+            } else {binding.plusButton.visibility = View.VISIBLE}
         }
 
         viewLifecycleOwner.lifecycleScope.launch {

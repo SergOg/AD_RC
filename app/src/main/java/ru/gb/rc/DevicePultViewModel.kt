@@ -45,6 +45,7 @@ class DevicePultViewModel @AssistedInject constructor(
 
     fun powerButtonClicked() {
         if (state.value?.powerButton?.isNotEmpty() == true) {
+            Log.d("DevicePultViewModelCommand", state.value?.powerButton!!)
             viewModelScope.launch { _toastScreenEvent.send("powerButton") }
         }
         viewModelScope.launch { _toastScreenEvent.send("powerButton") }
