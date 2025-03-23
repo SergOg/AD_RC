@@ -1,7 +1,6 @@
 package ru.gb.rc.presentation
 
 import android.os.Bundle
-import android.view.Menu
 import com.google.android.material.navigation.NavigationView
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -34,7 +33,18 @@ class MainActivity : AppCompatActivity() {
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when(destination.id) {
-                R.id.pultDeviceFragment -> supportActionBar?.title = getString(R.string.text_device)
+                R.id.nav_home -> supportActionBar?.title = getString(R.string.menu_home)
+                R.id.nav_settings -> supportActionBar?.title = getString(R.string.menu_settings)
+                R.id.nav_support -> supportActionBar?.title = getString(R.string.menu_support)
+                R.id.nav_mode -> supportActionBar?.title = getString(R.string.menu_mode)
+                R.id.editDeviceFragment -> supportActionBar?.title = getString(R.string.edit_device)
+                R.id.pultDeviceFragment -> supportActionBar?.title = getString(R.string.pult_device)
+                R.id.settingsDeviceFragment -> supportActionBar?.title = getString(R.string.edit_settings)
+//                R.id.nav_settings -> supportActionBar?.title = getString(R.string.menu_settings)
+//                R.id.nav_settings -> supportActionBar?.title = getString(R.string.menu_settings)
+
+
+
                 else -> supportActionBar?.title = getString(R.string.take_photo)
             }
         }
