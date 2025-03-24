@@ -10,6 +10,7 @@ import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import ru.gb.rc.data.CommandId
@@ -42,6 +43,9 @@ class DevicePultViewModel @AssistedInject constructor(
     private val _toastScreenEvent = Channel<String>(capacity = Channel.UNLIMITED)
     val toastScreenEvent = _toastScreenEvent.receiveAsFlow()
 
+    private val _nameDevice = Channel<String>(capacity = Channel.UNLIMITED)
+    val nameDevice = _nameDevice.receiveAsFlow()
+
 //    init {
 //        init(id)
 //    }
@@ -53,6 +57,7 @@ class DevicePultViewModel @AssistedInject constructor(
             viewModelScope.launch { _toastScreenEvent.send("Sending command for powerButton: $a") }
         }
     }
+
     fun muteButtonClicked() {
         val a = state.value?.muteButton
         if (a?.isNotEmpty() == true) {
@@ -85,17 +90,17 @@ class DevicePultViewModel @AssistedInject constructor(
         }
     }
 
-    fun changeHeading():String{
-    var nameDevice : String = ""
+    fun changeHeading(){//: String {
+//        var nameDevice: String = ""
         viewModelScope.launch {
             val device = deviceDao.getOne(id)
             device?.let {
-                nameDevice = it.equipment
+                _nameDevice.send(it.equipment)
             }
             Log.d("DevicePultViewModelCommandId", id.toString())
-            Log.d("DevicePultViewModelCommand", nameDevice)
+//            Log.d("DevicePultViewModelCommand", _nameDevice.toString())
         }
-        Log.d("DevicePultViewModelCommand", nameDevice)
-        return nameDevice
+//        Log.d("DevicePultViewModelCommand", _nameDevice.toString())
+//        return nameDevice
     }
 }

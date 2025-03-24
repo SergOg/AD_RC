@@ -68,12 +68,20 @@ class DevicePultFragment : Fragment(), MenuProvider {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+val test = devicePultViewModel.changeHeading()
 // Устанавливаем заголовок через интерфейс
-        listener?.setTitle(
-//            devicePultViewModel.changeHeading()
-            getString(R.string.pult_device)
-        )
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            devicePultViewModel.nameDevice.collect {
+                listener?.setTitle(
+//                    devicePultViewModel.changeHeading().toString()
+                    test.toString()
+//                    getString(R.string.pult_device)
+                )
+                Toast.makeText(activity, it, Toast.LENGTH_LONG).show()
+            }
+        }
+
 
         requireActivity().addMenuProvider(this, viewLifecycleOwner)
 
