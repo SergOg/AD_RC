@@ -13,14 +13,17 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import ru.gb.rc.data.CommandId
+import ru.gb.rc.data.Device
 import ru.gb.rc.data.DeviceDao
 import ru.gb.rc.data.SettingsDevice
 import ru.gb.rc.data.SettingsDeviceDao
 import ru.gb.rc.domain.DeviceSettingsViewState
+import ru.gb.rc.presentation.edit_device.EditDeviceViewState
 
 @HiltViewModel(assistedFactory = DevicePultViewModel.Factory::class)
 class DevicePultViewModel @AssistedInject constructor(
     private val settingsDeviceDao: SettingsDeviceDao,
+    private val deviceDao: DeviceDao,
     @Assisted val id: Int
 ) : ViewModel() {
 
@@ -80,5 +83,19 @@ class DevicePultViewModel @AssistedInject constructor(
                 plusButton = list.find { it.commandId == CommandId.plusButton.name }?.content ?: "",
             )
         }
+    }
+
+    fun changeHeading():String{
+        var nameDevice : String = ""
+        viewModelScope.launch {
+            val device = deviceDao.getOne(id)
+            device?.let {
+                nameDevice = it.equipment
+            }
+            Log.d("DevicePultViewModelCommandId", id.toString())
+            Log.d("DevicePultViewModelCommand", nameDevice)
+
+        }
+        return nameDevice
     }
 }

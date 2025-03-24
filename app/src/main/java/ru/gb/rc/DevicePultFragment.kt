@@ -93,7 +93,6 @@ class DevicePultFragment : Fragment(), MenuProvider {
         viewLifecycleOwner.lifecycleScope.launch {
             devicePultViewModel.toastScreenEvent.collect {
                 Toast.makeText(activity, it, Toast.LENGTH_LONG).show()
-//                Log.d("DevicePultFragmentCommand", it)
             }
         }
     }

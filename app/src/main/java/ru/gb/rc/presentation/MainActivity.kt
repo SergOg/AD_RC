@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.nav_support -> supportActionBar?.title = getString(R.string.menu_support)
                 R.id.nav_mode -> supportActionBar?.title = getString(R.string.menu_mode)
                 R.id.editDeviceFragment -> supportActionBar?.title = getString(R.string.edit_device)
-                R.id.pultDeviceFragment -> supportActionBar?.title = getString(R.string.pult_device)
+//                R.id.pultDeviceFragment -> supportActionBar?.title = getString(R.string.pult_device)
                 R.id.settingsDeviceFragment -> supportActionBar?.title = getString(R.string.edit_settings)
                 R.id.photoDeviceFragment -> supportActionBar?.title = getString(R.string.take_photo)
 //                R.id.nav_settings -> supportActionBar?.title = getString(R.string.menu_settings)
@@ -55,12 +55,6 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
     }
-
-//    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        menuInflater.inflate(R.menu.home_menu, menu)
-//        return true
-//    }
 
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
