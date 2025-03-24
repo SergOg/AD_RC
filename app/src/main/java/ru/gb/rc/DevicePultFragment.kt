@@ -71,8 +71,8 @@ class DevicePultFragment : Fragment(), MenuProvider {
 
 // Устанавливаем заголовок через интерфейс
         listener?.setTitle(
-//            devicePultViewModel.aaa.toString()
-            getString(R.string.text_device)
+//            devicePultViewModel.changeHeading()
+            getString(R.string.pult_device)
         )
 
         requireActivity().addMenuProvider(this, viewLifecycleOwner)
