@@ -85,9 +85,9 @@ class DevicePultViewModel @AssistedInject constructor(
         }
     }
 
-    fun changeHeading():String{
-        var nameDevice : String = ""
-        viewModelScope.launch {
+//    fun changeHeading():String{
+private var nameDevice : String = ""
+        var aaa = viewModelScope.launch {
             val device = deviceDao.getOne(id)
             device?.let {
                 nameDevice = it.equipment
@@ -96,6 +96,6 @@ class DevicePultViewModel @AssistedInject constructor(
             Log.d("DevicePultViewModelCommand", nameDevice)
 
         }
-        return nameDevice
-    }
+//        return nameDevice
+//    }
 }

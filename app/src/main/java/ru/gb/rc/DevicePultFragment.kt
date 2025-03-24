@@ -1,5 +1,6 @@
 package ru.gb.rc
 
+import android.content.Context
 import androidx.fragment.app.viewModels
 import android.os.Bundle
 import android.util.Log
@@ -13,6 +14,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.MenuProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.lifecycle.withCreationCallback
@@ -21,6 +23,20 @@ import ru.gb.rc.databinding.FragmentDevicePultBinding
 
 @AndroidEntryPoint
 class DevicePultFragment : Fragment(), MenuProvider {
+
+    private var listener: OnFragmentInteractionListener? = null
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (context is OnFragmentInteractionListener) {
+            listener = context
+        } else {
+            throw RuntimeException("$context must implement OnFragmentInteractionListener")
+        }
+    }
+    override fun onDetach() {
+        super.onDetach()
+        listener = null
+    }
 
     private var _binding: FragmentDevicePultBinding? = null
     private val binding get() = _binding!!
@@ -52,6 +68,13 @@ class DevicePultFragment : Fragment(), MenuProvider {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+// Устанавливаем заголовок через интерфейс
+        listener?.setTitle(
+//            devicePultViewModel.aaa.toString()
+            getString(R.string.text_device)
+        )
+
         requireActivity().addMenuProvider(this, viewLifecycleOwner)
 
         with(binding) {
