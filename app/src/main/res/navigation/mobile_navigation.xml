@@ -39,7 +39,7 @@
 
     <fragment
         android:id="@+id/pultDeviceFragment"
-        android:name="ru.gb.rc.DevicePultFragment"
+        android:name="ru.gb.rc.presentation.pult_device.DevicePultFragment"
         tools:layout="@layout/fragment_device_pult">
         <action
             android:id="@+id/action_pultDeviceFragment_to_mainFragment"

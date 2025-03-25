@@ -1,4 +1,4 @@
-package ru.gb.rc
+package ru.gb.rc.presentation.pult_device
 
 data class DevicePultViewState(
     val powerButton: String = "",

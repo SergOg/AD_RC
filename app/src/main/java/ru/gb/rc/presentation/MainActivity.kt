@@ -10,7 +10,7 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import dagger.hilt.android.AndroidEntryPoint
-import ru.gb.rc.OnFragmentInteractionListener
+import ru.gb.rc.presentation.pult_device.OnFragmentInteractionListener
 import ru.gb.rc.R
 import ru.gb.rc.databinding.ActivityMainBinding
 

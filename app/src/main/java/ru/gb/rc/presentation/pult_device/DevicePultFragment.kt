@@ -1,4 +1,4 @@
-package ru.gb.rc
+package ru.gb.rc.presentation.pult_device
 
 import android.content.Context
 import androidx.fragment.app.viewModels
@@ -17,6 +17,7 @@ import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.lifecycle.withCreationCallback
 import kotlinx.coroutines.launch
+import ru.gb.rc.R
 import ru.gb.rc.databinding.FragmentDevicePultBinding
 
 @AndroidEntryPoint
