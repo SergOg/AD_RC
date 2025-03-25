@@ -99,8 +99,9 @@ class DevicePultFragment : Fragment(), MenuProvider {
             } else {binding.minusButton.visibility = View.VISIBLE}
             if (state.plusButton.isEmpty()) {binding.plusButton.visibility = View.INVISIBLE
             } else {binding.plusButton.visibility = View.VISIBLE}
-            if (state.namePult == "") {getString(R.string.pult_device)
-            } else {listener?.setTitle(state.namePult)}
+            listener?.setTitle(
+                if (state.namePult == "") getString(R.string.pult_device) else state.namePult
+            )
         }
 
         viewLifecycleOwner.lifecycleScope.launch {
