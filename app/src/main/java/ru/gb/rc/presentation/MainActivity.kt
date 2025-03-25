@@ -38,12 +38,9 @@ class MainActivity : AppCompatActivity(), OnFragmentInteractionListener {
                 R.id.nav_support -> supportActionBar?.title = getString(R.string.menu_support)
                 R.id.nav_mode -> supportActionBar?.title = getString(R.string.menu_mode)
                 R.id.editDeviceFragment -> supportActionBar?.title = getString(R.string.edit_device)
-                R.id.pultDeviceFragment -> supportActionBar?.title = getString(R.string.pult_device)
+//                R.id.pultDeviceFragment -> supportActionBar?.title = getString(R.string.pult_device)
                 R.id.settingsDeviceFragment -> supportActionBar?.title = getString(R.string.edit_settings)
                 R.id.photoDeviceFragment -> supportActionBar?.title = getString(R.string.take_photo)
-//                R.id.nav_settings -> supportActionBar?.title = getString(R.string.menu_settings)
-
-
                 else -> supportActionBar?.title = getString(R.string.cancel)
             }
         }

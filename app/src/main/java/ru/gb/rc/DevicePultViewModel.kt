@@ -66,12 +66,75 @@ class DevicePultViewModel @AssistedInject constructor(
         }
     }
 
+    fun oneButtonClicked() {
+        val a = state.value?.oneButton
+        if (a?.isNotEmpty() == true) {
+//            Log.d("DevicePultViewModelCommand", state.value?.oneButton!!)
+            viewModelScope.launch { _toastScreenEvent.send("Sending command for oneButton: $a") }
+        }
+    }
+
+    fun twoButtonClicked() {
+        val a = state.value?.twoButton
+        if (a?.isNotEmpty() == true) {
+//            Log.d("DevicePultViewModelCommand", state.value?.twoButton!!)
+            viewModelScope.launch { _toastScreenEvent.send("Sending command for twoButton: $a") }
+        }
+    }
+
+    fun threeButtonClicked() {
+        val a = state.value?.threeButton
+        if (a?.isNotEmpty() == true) {
+//            Log.d("DevicePultViewModelCommand", state.value?.threeButton!!)
+            viewModelScope.launch { _toastScreenEvent.send("Sending command for threeButton: $a") }
+        }
+    }
+
+    fun fourButtonClicked() {
+        val a = state.value?.fourButton
+        if (a?.isNotEmpty() == true) {
+//            Log.d("DevicePultViewModelCommand", state.value?.fourButton!!)
+            viewModelScope.launch { _toastScreenEvent.send("Sending command for fourButton: $a") }
+        }
+    }
+
+    fun upButtonClicked() {
+        val a = state.value?.upButton
+        if (a?.isNotEmpty() == true) {
+//            Log.d("DevicePultViewModelCommand", state.value?.upButton!!)
+            viewModelScope.launch { _toastScreenEvent.send("Sending command for upButton: $a") }
+        }
+    }
+
+    fun downButtonClicked() {
+        val a = state.value?.downButton
+        if (a?.isNotEmpty() == true) {
+//            Log.d("DevicePultViewModelCommand", state.value?.downButton!!)
+            viewModelScope.launch { _toastScreenEvent.send("Sending command for downButton: $a") }
+        }
+    }
+
+    fun minusButtonClicked() {
+        val a = state.value?.minusButton
+        if (a?.isNotEmpty() == true) {
+//            Log.d("DevicePultViewModelCommand", state.value?.minusButton!!)
+            viewModelScope.launch { _toastScreenEvent.send("Sending command for minusButton: $a") }
+        }
+    }
+
+    fun plusButtonClicked() {
+        val a = state.value?.plusButton
+        if (a?.isNotEmpty() == true) {
+//            Log.d("DevicePultViewModelCommand", state.value?.plusButton!!)
+            viewModelScope.launch { _toastScreenEvent.send("Sending command for plusButton: $a") }
+        }
+    }
+
     fun init() {
-//        Log.d("DevicePultViewModelId", id.toString())
         viewModelScope.launch {
             val list = settingsDeviceDao.getAllCommands(id)
+            val device = deviceDao.getOne(id)
             settingsDeviceList.addAll(list)
-//            Log.d("DevicePultViewModelSize", list.size.toString())
             _state.value = DevicePultViewState(
                 powerButton = list.find { it.commandId == CommandId.powerButton.name }?.content
                     ?: "",
@@ -86,21 +149,22 @@ class DevicePultViewModel @AssistedInject constructor(
                 minusButton = list.find { it.commandId == CommandId.minusButton.name }?.content
                     ?: "",
                 plusButton = list.find { it.commandId == CommandId.plusButton.name }?.content ?: "",
+                namePult = device?.let {it.equipment} ?: ""
             )
         }
     }
 
-    fun changeHeading(){//: String {
-//        var nameDevice: String = ""
-        viewModelScope.launch {
-            val device = deviceDao.getOne(id)
-            device?.let {
-                _nameDevice.send(it.equipment)
-            }
-            Log.d("DevicePultViewModelCommandId", id.toString())
-//            Log.d("DevicePultViewModelCommand", _nameDevice.toString())
-        }
-//        Log.d("DevicePultViewModelCommand", _nameDevice.toString())
-//        return nameDevice
-    }
+//    fun changeHeading(){//: String {
+////        var nameDevice: String = ""
+//        viewModelScope.launch {
+//            val device = deviceDao.getOne(id)
+//            device?.let {
+//                _nameDevice.send(it.equipment)
+//            }
+//            Log.d("DevicePultViewModelCommandId", id.toString())
+////            Log.d("DevicePultViewModelCommand", _nameDevice.toString())
+//        }
+////        Log.d("DevicePultViewModelCommand", _nameDevice.toString())
+////        return nameDevice
+//    }
 }

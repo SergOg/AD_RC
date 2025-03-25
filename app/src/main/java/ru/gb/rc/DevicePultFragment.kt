@@ -68,34 +68,24 @@ class DevicePultFragment : Fragment(), MenuProvider {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-val test = devicePultViewModel.changeHeading()
-// Устанавливаем заголовок через интерфейс
-
-        viewLifecycleOwner.lifecycleScope.launch {
-            devicePultViewModel.nameDevice.collect {
-                listener?.setTitle(
-//                    devicePultViewModel.changeHeading().toString()
-                    test.toString()
-//                    getString(R.string.pult_device)
-                )
-                Toast.makeText(activity, it, Toast.LENGTH_LONG).show()
-            }
-        }
-
-
         requireActivity().addMenuProvider(this, viewLifecycleOwner)
 
         with(binding) {
             powerButton.setOnClickListener {viewModel.powerButtonClicked()}
             muteButton.setOnClickListener {viewModel.muteButtonClicked()}
+            oneButton.setOnClickListener {viewModel.oneButtonClicked()}
+            twoButton.setOnClickListener {viewModel.twoButtonClicked()}
+            threeButton.setOnClickListener {viewModel.threeButtonClicked()}
+            fourButton.setOnClickListener {viewModel.fourButtonClicked()}
+            upButton.setOnClickListener {viewModel.upButtonClicked()}
+            downButton.setOnClickListener {viewModel.downButtonClicked()}
+            minusButton.setOnClickListener {viewModel.minusButtonClicked()}
+            plusButton.setOnClickListener {viewModel.plusButtonClicked()}
         }
 
         viewModel.state.observe(viewLifecycleOwner) { state ->
             if (state.powerButton.isEmpty()) {binding.powerButton.visibility = View.INVISIBLE
             } else {binding.powerButton.visibility = View.VISIBLE}
-//            Log.d("DevicePultFragmentId", viewModel.id.toString())
-//            Log.d("DevicePultFragmentState", state.powerButton)
-
             if (state.muteButton.isEmpty()) {binding.muteButton.visibility = View.INVISIBLE
             } else { binding.muteButton.visibility = View.VISIBLE}
             if (state.oneButton.isEmpty()) {binding.oneButton.visibility = View.INVISIBLE
@@ -114,6 +104,8 @@ val test = devicePultViewModel.changeHeading()
             } else {binding.minusButton.visibility = View.VISIBLE}
             if (state.plusButton.isEmpty()) {binding.plusButton.visibility = View.INVISIBLE
             } else {binding.plusButton.visibility = View.VISIBLE}
+            if (state.namePult == "") {getString(R.string.pult_device)
+            } else {listener?.setTitle(state.namePult)}
         }
 
         viewLifecycleOwner.lifecycleScope.launch {
