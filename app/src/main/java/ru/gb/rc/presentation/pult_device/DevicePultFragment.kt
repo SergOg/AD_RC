@@ -32,6 +32,7 @@ class DevicePultFragment : Fragment(), MenuProvider {
             throw RuntimeException("$context must implement OnFragmentInteractionListener")
         }
     }
+
     override fun onDetach() {
         super.onDetach()
         listener = null
@@ -66,39 +67,39 @@ class DevicePultFragment : Fragment(), MenuProvider {
         requireActivity().addMenuProvider(this, viewLifecycleOwner)
 
         with(binding) {
-            powerButton.setOnClickListener {viewModel.powerButtonClicked()}
-            muteButton.setOnClickListener {viewModel.muteButtonClicked()}
-            oneButton.setOnClickListener {viewModel.oneButtonClicked()}
-            twoButton.setOnClickListener {viewModel.twoButtonClicked()}
-            threeButton.setOnClickListener {viewModel.threeButtonClicked()}
-            fourButton.setOnClickListener {viewModel.fourButtonClicked()}
-            upButton.setOnClickListener {viewModel.upButtonClicked()}
-            downButton.setOnClickListener {viewModel.downButtonClicked()}
-            minusButton.setOnClickListener {viewModel.minusButtonClicked()}
-            plusButton.setOnClickListener {viewModel.plusButtonClicked()}
+            powerButton.setOnClickListener { viewModel.powerButtonClicked() }
+            muteButton.setOnClickListener { viewModel.muteButtonClicked() }
+            oneButton.setOnClickListener { viewModel.oneButtonClicked() }
+            twoButton.setOnClickListener { viewModel.twoButtonClicked() }
+            threeButton.setOnClickListener { viewModel.threeButtonClicked() }
+            fourButton.setOnClickListener { viewModel.fourButtonClicked() }
+            upButton.setOnClickListener { viewModel.upButtonClicked() }
+            downButton.setOnClickListener { viewModel.downButtonClicked() }
+            minusButton.setOnClickListener { viewModel.minusButtonClicked() }
+            plusButton.setOnClickListener { viewModel.plusButtonClicked() }
         }
 
         viewModel.state.observe(viewLifecycleOwner) { state ->
-            if (state.powerButton.isEmpty()) {binding.powerButton.visibility = View.INVISIBLE
-            } else {binding.powerButton.visibility = View.VISIBLE}
-            if (state.muteButton.isEmpty()) {binding.muteButton.visibility = View.INVISIBLE
-            } else { binding.muteButton.visibility = View.VISIBLE}
-            if (state.oneButton.isEmpty()) {binding.oneButton.visibility = View.INVISIBLE
-            } else {binding.oneButton.visibility = View.VISIBLE}
-            if (state.twoButton.isEmpty()) {binding.twoButton.visibility = View.INVISIBLE
-            } else {binding.twoButton.visibility = View.VISIBLE}
-            if (state.threeButton.isEmpty()) {binding.threeButton.visibility = View.INVISIBLE
-            } else {binding.threeButton.visibility = View.VISIBLE}
-            if (state.fourButton.isEmpty()) {binding.fourButton.visibility = View.INVISIBLE
-            } else {binding.fourButton.visibility = View.VISIBLE}
-            if (state.upButton.isEmpty()) {binding.upButton.visibility = View.INVISIBLE
-            } else {binding.upButton.visibility = View.VISIBLE}
-            if (state.downButton.isEmpty()) {binding.downButton.visibility = View.INVISIBLE
-            } else {binding.downButton.visibility = View.VISIBLE}
-            if (state.minusButton.isEmpty()) {binding.minusButton.visibility = View.INVISIBLE
-            } else {binding.minusButton.visibility = View.VISIBLE}
-            if (state.plusButton.isEmpty()) {binding.plusButton.visibility = View.INVISIBLE
-            } else {binding.plusButton.visibility = View.VISIBLE}
+            binding.powerButton.visibility =
+                if (state.powerButton.isEmpty()) View.INVISIBLE else View.VISIBLE
+            binding.muteButton.visibility =
+                if (state.muteButton.isEmpty()) View.INVISIBLE else View.VISIBLE
+            binding.oneButton.visibility =
+                if (state.oneButton.isEmpty()) View.INVISIBLE else View.VISIBLE
+            binding.twoButton.visibility =
+                if (state.twoButton.isEmpty()) View.INVISIBLE else View.VISIBLE
+            binding.threeButton.visibility =
+                if (state.threeButton.isEmpty()) View.INVISIBLE else View.VISIBLE
+            binding.fourButton.visibility =
+                if (state.fourButton.isEmpty()) View.INVISIBLE else View.VISIBLE
+            binding.upButton.visibility =
+                if (state.upButton.isEmpty()) View.INVISIBLE else View.VISIBLE
+            binding.downButton.visibility =
+                if (state.downButton.isEmpty()) View.INVISIBLE else View.VISIBLE
+            binding.minusButton.visibility =
+                if (state.minusButton.isEmpty()) View.INVISIBLE else View.VISIBLE
+            binding.plusButton.visibility =
+                if (state.plusButton.isEmpty()) View.INVISIBLE else View.VISIBLE
             listener?.setTitle(
                 if (state.namePult == "") getString(R.string.pult_device) else state.namePult
             )
