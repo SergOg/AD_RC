@@ -1,6 +1,5 @@
 package ru.gb.rc
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -10,16 +9,12 @@ import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import ru.gb.rc.data.CommandId
-import ru.gb.rc.data.Device
 import ru.gb.rc.data.DeviceDao
 import ru.gb.rc.data.SettingsDevice
 import ru.gb.rc.data.SettingsDeviceDao
-import ru.gb.rc.domain.DeviceSettingsViewState
-import ru.gb.rc.presentation.edit_device.EditDeviceViewState
 
 @HiltViewModel(assistedFactory = DevicePultViewModel.Factory::class)
 class DevicePultViewModel @AssistedInject constructor(
@@ -34,7 +29,7 @@ class DevicePultViewModel @AssistedInject constructor(
     }
 
     private val settingsDeviceList: MutableList<SettingsDevice> = mutableListOf()
-    private val _state = MutableLiveData<DevicePultViewState>(DevicePultViewState())
+    private val _state = MutableLiveData(DevicePultViewState())
     val state: LiveData<DevicePultViewState> = _state
 
     private val _closeScreenEvent = Channel<Unit>(capacity = Channel.UNLIMITED)
@@ -42,9 +37,6 @@ class DevicePultViewModel @AssistedInject constructor(
 
     private val _toastScreenEvent = Channel<String>(capacity = Channel.UNLIMITED)
     val toastScreenEvent = _toastScreenEvent.receiveAsFlow()
-
-    private val _nameDevice = Channel<String>(capacity = Channel.UNLIMITED)
-    val nameDevice = _nameDevice.receiveAsFlow()
 
 //    init {
 //        init(id)
@@ -149,22 +141,8 @@ class DevicePultViewModel @AssistedInject constructor(
                 minusButton = list.find { it.commandId == CommandId.minusButton.name }?.content
                     ?: "",
                 plusButton = list.find { it.commandId == CommandId.plusButton.name }?.content ?: "",
-                namePult = device?.let {it.equipment} ?: ""
+                namePult = device?.equipment ?: ""
             )
         }
     }
-
-//    fun changeHeading(){//: String {
-////        var nameDevice: String = ""
-//        viewModelScope.launch {
-//            val device = deviceDao.getOne(id)
-//            device?.let {
-//                _nameDevice.send(it.equipment)
-//            }
-//            Log.d("DevicePultViewModelCommandId", id.toString())
-////            Log.d("DevicePultViewModelCommand", _nameDevice.toString())
-//        }
-////        Log.d("DevicePultViewModelCommand", _nameDevice.toString())
-////        return nameDevice
-//    }
 }
