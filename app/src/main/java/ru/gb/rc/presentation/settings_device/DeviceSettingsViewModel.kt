@@ -1,4 +1,4 @@
-package ru.gb.rc.domain
+package ru.gb.rc.presentation.settings_device
 
 import android.util.Log
 import androidx.lifecycle.LiveData

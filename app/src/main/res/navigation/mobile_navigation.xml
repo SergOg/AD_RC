@@ -75,7 +75,7 @@
 
     <fragment
         android:id="@+id/settingsDeviceFragment"
-        android:name="ru.gb.rc.domain.DeviceSettingsFragment"
+        android:name="ru.gb.rc.presentation.settings_device.DeviceSettingsFragment"
         tools:layout="@layout/fragment_device_settings">
         <action
             android:id="@+id/action_settingsDeviceFragment_to_pultDeviceFragment"
