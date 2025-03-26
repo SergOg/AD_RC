@@ -4,16 +4,20 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
+import android.bluetooth.BluetoothManager
 import android.bluetooth.BluetoothSocket
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.widget.Toast
 import androidx.lifecycle.ViewModel
 import java.io.IOException
 import java.util.UUID
 
 class BluetoothViewModel(private val context: Context) : ViewModel() {
-    private var bluetoothAdapter: BluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
+
+    private val packageManager: PackageManager = context.packageManager
+    private var bluetoothAdapter: BluetoothAdapter? = null
     private var socket: BluetoothSocket? = null
 
     companion object {
@@ -22,13 +26,18 @@ class BluetoothViewModel(private val context: Context) : ViewModel() {
 
     @SuppressLint("MissingPermission")
     fun enableBluetooth() {
-        if (bluetoothAdapter == null) {
+
+        if (packageManager.hasSystemFeature(PackageManager.FEATURE_BLUETOOTH)) {
+            // Устройство поддерживает Bluetooth
+            val bluetoothManager = context.getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager
+            val bluetoothAdapter = bluetoothManager.adapter
+        } else {
+            // Устройства не поддерживает Bluetooth
             Toast.makeText(context, "Ваше устройство не поддерживает Bluetooth", Toast.LENGTH_SHORT)
                 .show()
-            return
         }
 
-        if (!bluetoothAdapter.isEnabled) {
+        if (!bluetoothAdapter?.isEnabled!!) {
             val enableBtIntent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
             (context as Activity).startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT)
         }
@@ -36,11 +45,10 @@ class BluetoothViewModel(private val context: Context) : ViewModel() {
 
     @SuppressLint("MissingPermission")
     fun discoverDevices() {
-        if (bluetoothAdapter.isDiscovering) {
-            bluetoothAdapter.cancelDiscovery()
+        if (bluetoothAdapter!!.isDiscovering) {
+            bluetoothAdapter!!.cancelDiscovery()
         }
-
-        bluetoothAdapter.startDiscovery()
+        bluetoothAdapter!!.startDiscovery()
     }
 
     @SuppressLint("MissingPermission")
@@ -48,7 +56,6 @@ class BluetoothViewModel(private val context: Context) : ViewModel() {
         try {
             val uuid = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB")
             socket = device.createRfcommSocketToServiceRecord(uuid)
-
             socket?.connect()
         } catch (e: IOException) {
             e.printStackTrace()
@@ -60,10 +67,18 @@ class BluetoothViewModel(private val context: Context) : ViewModel() {
             try {
                 val outputStream = socket!!.outputStream
                 outputStream.write(data.toByteArray())
+                outputStream.flush()
             } catch (e: IOException) {
                 e.printStackTrace()
             }
         }
     }
 
+    fun disconnect() {
+        try {
+            socket?.close()
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+    }
 }
