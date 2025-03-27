@@ -31,6 +31,20 @@ class BluetoothFragment : Fragment() {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val device = bluetoothViewModel.bluetoothAdapter?.getRemoteDevice("00:11:22:33:44:55")
+        if (device != null) {
+            bluetoothViewModel.connectToDevice(device)
+        }else{
+            bluetoothViewModel.enableBluetooth()
+            bluetoothViewModel.discoverDevices()
+        }
+        bluetoothViewModel.sendData("hello")
+        bluetoothViewModel.disconnect()
+    }
+
     override fun onDetach() {
         super.onDetach()
         bluetoothViewModel.disconnect()

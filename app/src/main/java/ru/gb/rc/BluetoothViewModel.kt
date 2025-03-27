@@ -18,7 +18,7 @@ import java.util.UUID
 class BluetoothViewModel(private val context: Context) : ViewModel() {
 
     private val packageManager: PackageManager = context.packageManager
-    private var bluetoothAdapter: BluetoothAdapter? = null
+    var bluetoothAdapter: BluetoothAdapter? = null
     private var socket: BluetoothSocket? = null
     private lateinit var outputStream: OutputStream
 
