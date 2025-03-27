@@ -53,8 +53,6 @@ class BluetoothViewModel(private val context: Context) : ViewModel() {
         bluetoothAdapter!!.startDiscovery()
     }
 
-        // Найти устройство по адресу
-    //        val device = bluetoothAdapter?.getRemoteDevice(deviceAddress)
     @SuppressLint("MissingPermission")
     fun connectToDevice(device: BluetoothDevice) {
         try {
