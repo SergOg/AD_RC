@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import ru.gb.rc.databinding.FragmentBluetoothBinding
-import ru.gb.rc.presentation.pult_device.DevicePultViewModel
 
 class BluetoothFragment : Fragment() {
 
@@ -41,7 +40,7 @@ class BluetoothFragment : Fragment() {
             bluetoothViewModel.enableBluetooth()
             bluetoothViewModel.discoverDevices()
         }
-        bluetoothViewModel.sendData("hello")
+        bluetoothViewModel.sendData("Command")
         bluetoothViewModel.disconnect()
     }
 
