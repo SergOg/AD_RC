@@ -148,21 +148,21 @@ class DevicePultFragment : Fragment(), MenuProvider {
             }
 
             R.id.pult_photo -> {
-                // Действие при выборе
+                // Действие при выборе фото
                 Toast.makeText(
                     activity, "Photo mode!", Toast.LENGTH_LONG
                 ).show()
 
-//                val action =
-//                    DevicePultFragmentDirections.actionPultDeviceFragmentToPhotoDeviceFragment(
-//                        viewModel.id
-//                    )
-//                findNavController().navigate(action)
+                val action =
+                    DevicePultFragmentDirections.actionPultDeviceFragmentToPhotoDeviceFragment(
+                        viewModel.id
+                    )
+                findNavController().navigate(action)
                 true
             }
 
             R.id.pult_file -> {
-                // Действие при выборе
+                // Действие при выборе файла
                 Toast.makeText(
                     activity, "File mode!", Toast.LENGTH_LONG
                 ).show()

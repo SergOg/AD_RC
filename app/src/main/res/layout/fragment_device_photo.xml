@@ -16,14 +16,26 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/take_photo_button"
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_cancel"
         android:layout_width="150dp"
-        android:layout_height="50dp"
-        android:layout_marginBottom="24dp"
+        android:layout_height="wrap_content"
+        android:text="@string/cancel"
+        app:cornerRadius="@dimen/fab_margin"
+        android:layout_margin="@dimen/fab_margin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/button_take_photo"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_take_photo"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
         android:text="@string/take_photo"
+        app:cornerRadius="@dimen/fab_margin"
+        android:layout_margin="@dimen/fab_margin"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toEndOf="@id/button_cancel" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

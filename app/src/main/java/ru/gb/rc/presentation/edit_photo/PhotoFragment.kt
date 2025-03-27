@@ -1,12 +1,10 @@
 package ru.gb.rc.presentation.edit_photo
 
 import android.Manifest
-import android.content.ContentValues
 import android.content.pm.PackageManager
 import android.os.Build
 import androidx.fragment.app.viewModels
 import android.os.Bundle
-import android.provider.MediaStore
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -15,12 +13,9 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageCapture
-import androidx.camera.core.ImageCaptureException
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
@@ -33,7 +28,7 @@ import java.util.concurrent.Executor
 import javax.inject.Inject
 
 private const val FILENAME_FORMAT = "yyy-MM-dd-HH-mm-ss"
-//@AndroidEntryPoint
+@AndroidEntryPoint
 class PhotoFragment : Fragment() {
 
     private var _binding: FragmentDevicePhotoBinding? = null
@@ -94,8 +89,14 @@ class PhotoFragment : Fragment() {
         executor = ContextCompat.getMainExecutor(requireContext())
         checkPermissions()
         with(binding) {
-            takePhotoButton.setOnClickListener {
-                takePhoto()
+            buttonTakePhoto.setOnClickListener {
+                viewModel.takePhotoBtn(requireContext())
+            }
+        }
+
+        binding.buttonCancel.setOnClickListener {
+            photoViewModel.closeScreenEvent.run {
+                findNavController().popBackStack()
             }
         }
 
@@ -106,51 +107,51 @@ class PhotoFragment : Fragment() {
         }
     }
 
-    private fun takePhoto() {
-        val imageCapture = imageCapture ?: return
-
-        val contentValues = ContentValues().apply {
-            put(MediaStore.MediaColumns.DISPLAY_NAME, name)
-            put(MediaStore.MediaColumns.MIME_TYPE, "image/jpeg")
-        }
-
-        val outputOptions = context?.let {
-            ImageCapture.OutputFileOptions.Builder(
-                it.contentResolver,
-                MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                contentValues
-            )
-                .build()
-        }
-
-        if (outputOptions != null) {
-            imageCapture.takePicture(
-                outputOptions,
-                executor,
-                object : ImageCapture.OnImageSavedCallback {
-                    override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
-                        Toast.makeText(
-                            context,
-                            "Photo saved on: ${outputFileResults.savedUri}",
-                            Toast.LENGTH_SHORT
-                        ).show()
-
-                        val uri = (outputFileResults.savedUri).toString()
-                        photoViewModel.onAddSrc(name, uri)
-                        activity?.finish()
-                    }
-
-                    override fun onError(exception: ImageCaptureException) {
-                        Toast.makeText(
-                            context,
-                            "Photo failed: ${exception.message}",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                        exception.printStackTrace()
-                    }
-                })
-        }
-    }
+//    private fun takePhoto() {
+//        val imageCapture = imageCapture ?: return
+//
+//        val contentValues = ContentValues().apply {
+//            put(MediaStore.MediaColumns.DISPLAY_NAME, name)
+//            put(MediaStore.MediaColumns.MIME_TYPE, "image/jpeg")
+//        }
+//
+//        val outputOptions = context?.let {
+//            ImageCapture.OutputFileOptions.Builder(
+//                it.contentResolver,
+//                MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+//                contentValues
+//            )
+//                .build()
+//        }
+//
+//        if (outputOptions != null) {
+//            imageCapture.takePicture(
+//                outputOptions,
+//                executor,
+//                object : ImageCapture.OnImageSavedCallback {
+//                    override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
+//                        Toast.makeText(
+//                            context,
+//                            "Photo saved on: ${outputFileResults.savedUri}",
+//                            Toast.LENGTH_SHORT
+//                        ).show()
+//
+//                        val uri = (outputFileResults.savedUri).toString()
+//                        photoViewModel.onAddSrc(name, uri)
+//                        activity?.finish()
+//                    }
+//
+//                    override fun onError(exception: ImageCaptureException) {
+//                        Toast.makeText(
+//                            context,
+//                            "Photo failed: ${exception.message}",
+//                            Toast.LENGTH_SHORT
+//                        ).show()
+//                        exception.printStackTrace()
+//                    }
+//                })
+//        }
+//    }
 
     private fun startCamera() {
         val cameraProviderFuture = ProcessCameraProvider.getInstance(requireContext())
