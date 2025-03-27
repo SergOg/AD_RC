@@ -30,16 +30,16 @@ class BluetoothViewModel(private val context: Context) : ViewModel() {
     fun enableBluetooth() {
 
         if (packageManager.hasSystemFeature(PackageManager.FEATURE_BLUETOOTH)) {
-            // Устройство поддерживает Bluetooth
+            // Устройство поддерживает Bluetooth Classic
             val bluetoothManager = context.getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager
             bluetoothAdapter = bluetoothManager.adapter
         } else {
-            // Устройства не поддерживает Bluetooth
+            // Устройства не поддерживает Bluetooth Classic
             Toast.makeText(context, "Ваше устройство не поддерживает Bluetooth", Toast.LENGTH_SHORT)
                 .show()
         }
 
-        if (!bluetoothAdapter?.isEnabled!!) {
+        if (bluetoothAdapter?.isEnabled == false) {
             val enableBtIntent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
             (context as Activity).startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT)
         }
