@@ -33,6 +33,8 @@
     <string name="button_plus">Плюс</string>
     <string name="from_file">Загрузить из файла</string>
     <string name="delete_photo">Удалить фото</string>
+    <string name="scan_devices">Scan Devices</string>
+    <string name="disconnect">Disconnect</string>
 
     <string-array name="options">
         <item>Bluetooth Classic</item>

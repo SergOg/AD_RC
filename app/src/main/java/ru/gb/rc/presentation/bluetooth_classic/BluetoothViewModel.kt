@@ -1,4 +1,4 @@
-package ru.gb.rc
+package ru.gb.rc.presentation.bluetooth_classic
 
 import android.annotation.SuppressLint
 import android.app.Activity
