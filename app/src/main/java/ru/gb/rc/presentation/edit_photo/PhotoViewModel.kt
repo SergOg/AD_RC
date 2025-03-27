@@ -35,15 +35,15 @@ class PhotoViewModel @AssistedInject constructor(
     @Assisted val id: Int
 ) : ViewModel() {
 
-    private var imageCapture: ImageCapture? = null
-    private lateinit var executor: Executor
-    private val name = SimpleDateFormat(FILENAME_FORMAT, Locale.US)
-        .format(System.currentTimeMillis())
-
     @AssistedFactory
     interface Factory {
         fun create(id: Int): PhotoViewModel
     }
+
+    private var imageCapture: ImageCapture? = null
+    private lateinit var executor: Executor
+    private val name = SimpleDateFormat(FILENAME_FORMAT, Locale.US)
+        .format(System.currentTimeMillis())
 
     private val _state = MutableLiveData<PhotoViewState>(PhotoViewState())
     private val state: LiveData<PhotoViewState> = _state

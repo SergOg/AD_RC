@@ -28,6 +28,7 @@ import java.util.concurrent.Executor
 import javax.inject.Inject
 
 private const val FILENAME_FORMAT = "yyy-MM-dd-HH-mm-ss"
+
 @AndroidEntryPoint
 class PhotoFragment : Fragment() {
 
