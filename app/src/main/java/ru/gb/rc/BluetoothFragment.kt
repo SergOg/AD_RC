@@ -33,5 +33,11 @@ class BluetoothFragment : Fragment() {
 
     override fun onDetach() {
         super.onDetach()
+        bluetoothViewModel.disconnect()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

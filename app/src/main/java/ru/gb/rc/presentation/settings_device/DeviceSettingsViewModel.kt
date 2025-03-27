@@ -29,7 +29,7 @@ class DeviceSettingsViewModel @AssistedInject constructor(
     }
 
     private val settingsDeviceList: MutableList<SettingsDevice> = mutableListOf()
-    private val _state = MutableLiveData<DeviceSettingsViewState>(DeviceSettingsViewState())
+    private val _state = MutableLiveData(DeviceSettingsViewState())
     val state: LiveData<DeviceSettingsViewState> = _state
 
     private val _closeScreenEvent = Channel<Unit>(capacity = Channel.UNLIMITED)
@@ -39,7 +39,7 @@ class DeviceSettingsViewModel @AssistedInject constructor(
         init(id)
     }
 
-    fun init(id: Int) {
+    private fun init(id: Int) {
         Log.d("DeviceSettingsViewModel", id.toString())
         viewModelScope.launch {
             val list = settingsDeviceDao.getAllCommands(id)

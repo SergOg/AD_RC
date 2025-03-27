@@ -35,7 +35,7 @@
     <string name="delete_photo">Удалить фото</string>
 
     <string-array name="options">
-        <item>Classic Bluetooth</item>
+        <item>Bluetooth Classic</item>
         <item>Bluetooth Low Energy</item>
         <item>Wi-fi</item>
         <item>Third-party Software</item>
