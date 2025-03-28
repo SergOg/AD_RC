@@ -17,8 +17,12 @@ import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.receiveAsFlow
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import ru.gb.rc.data.Attractions
+import ru.gb.rc.data.AttractionsDao
 import ru.gb.rc.data.CommandId
 import ru.gb.rc.data.DeviceDao
 import ru.gb.rc.presentation.edit_device.EditDeviceViewState
@@ -30,20 +34,28 @@ private const val FILENAME_FORMAT = "yyy-MM-dd-HH-mm-ss"
 
 //@HiltViewModel(assistedFactory = PhotoViewModel.Factory::class)
 class PhotoViewModel (//@AssistedInject constructor(
-    private val activity: Activity,
-    private val deviceDao: DeviceDao,
+//    private val activity: Activity,
+//    private val deviceDao: DeviceDao,
+    private val attractionsDao: AttractionsDao,
 //    @Assisted val id: Int
 ) : ViewModel() {
+
+    val allPhotos = this.attractionsDao.getAll()
+        .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5000L),
+            initialValue = emptyList()
+        )
 
 //    @AssistedFactory
 //    interface Factory {
 //        fun create(id: Int): PhotoViewModel
 //    }
 
-    private var imageCapture: ImageCapture? = null
-    private lateinit var executor: Executor
-    private val name = SimpleDateFormat(FILENAME_FORMAT, Locale.US)
-        .format(System.currentTimeMillis())
+//    private var imageCapture: ImageCapture? = null
+//    private lateinit var executor: Executor
+//    private val name = SimpleDateFormat(FILENAME_FORMAT, Locale.US)
+//        .format(System.currentTimeMillis())
 
     private val _state = MutableLiveData<PhotoViewState>(PhotoViewState())
     private val state: LiveData<PhotoViewState> = _state
@@ -144,4 +156,9 @@ class PhotoViewModel (//@AssistedInject constructor(
 //            }
 //        }
 //    }
+fun onAddBtn(date: String, uri: String) {
+    viewModelScope.launch {
+        attractionsDao.insert(Attractions(date = date, uri = uri))
+    }
+}
 }
