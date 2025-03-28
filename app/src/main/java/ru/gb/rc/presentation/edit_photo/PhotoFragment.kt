@@ -36,13 +36,13 @@ class PhotoFragment : Fragment() {
     private val binding get() = _binding!!
     private val photoViewModel: PhotoViewModel by viewModels()
 
-    private val viewModel by viewModels<PhotoViewModel>(
-        extrasProducer = {
-            defaultViewModelCreationExtras.withCreationCallback<PhotoViewModel.Factory> { factory ->
-                factory.create(id = arguments?.getInt("id") ?: 0)
-            }
-        }
-    )
+//    private val viewModel by viewModels<PhotoViewModel>(
+//        extrasProducer = {
+//            defaultViewModelCreationExtras.withCreationCallback<PhotoViewModel.Factory> { factory ->
+//                factory.create(id = arguments?.getInt("id") ?: 0)
+//            }
+//        }
+//    )
 
     companion object {
         fun newInstance() = PhotoFragment()
@@ -70,8 +70,8 @@ class PhotoFragment : Fragment() {
             }
         }
 
-    @Inject
-    lateinit var photoViewModelFactory: PhotoViewModel.Factory
+//    @Inject
+//    lateinit var photoViewModelFactory: PhotoViewModel.Factory
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -91,7 +91,7 @@ class PhotoFragment : Fragment() {
         checkPermissions()
         with(binding) {
             buttonTakePhoto.setOnClickListener {
-                viewModel.takePhotoBtn(requireContext())
+//                viewModel.takePhotoBtn(requireContext())
             }
         }
 

@@ -15,7 +15,10 @@ import ru.gb.rc.data.SettingsDeviceDao
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(private val deviceDao: DeviceDao, private val settingsDeviceDao: SettingsDeviceDao) : ViewModel() {
+class HomeViewModel @Inject constructor(
+    private val deviceDao: DeviceDao,
+    private val settingsDeviceDao: SettingsDeviceDao
+) : ViewModel() {
 
     val allDevices = this.deviceDao.getAll()
         .stateIn(

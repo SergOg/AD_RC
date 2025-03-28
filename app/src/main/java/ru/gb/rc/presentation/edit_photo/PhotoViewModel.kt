@@ -28,17 +28,17 @@ import java.util.concurrent.Executor
 
 private const val FILENAME_FORMAT = "yyy-MM-dd-HH-mm-ss"
 
-@HiltViewModel(assistedFactory = PhotoViewModel.Factory::class)
-class PhotoViewModel @AssistedInject constructor(
+//@HiltViewModel(assistedFactory = PhotoViewModel.Factory::class)
+class PhotoViewModel (//@AssistedInject constructor(
     private val activity: Activity,
     private val deviceDao: DeviceDao,
-    @Assisted val id: Int
+//    @Assisted val id: Int
 ) : ViewModel() {
 
-    @AssistedFactory
-    interface Factory {
-        fun create(id: Int): PhotoViewModel
-    }
+//    @AssistedFactory
+//    interface Factory {
+//        fun create(id: Int): PhotoViewModel
+//    }
 
     private var imageCapture: ImageCapture? = null
     private lateinit var executor: Executor
@@ -51,97 +51,97 @@ class PhotoViewModel @AssistedInject constructor(
     private val _closeScreenEvent = Channel<Unit>(capacity = Channel.UNLIMITED)
     val closeScreenEvent = _closeScreenEvent.receiveAsFlow()
 
-    init {
-        init(id)
-    }
+//    init {
+//        init(id)
+//    }
+//
+//    private fun init(id: Int) {
+//        Log.d("PhotoViewModel", id.toString())
+//        viewModelScope.launch {
+//            if (id == 0) {   // если id==0, обработка полученного устройства
+//                _state.value = PhotoViewState()
+//            } else {        // либо обновить текущий по его id
+//                val device = deviceDao.getOne(id)
+//                device?.let {
+//                    _state.value = PhotoViewState(
+//                        it.id,
+//                        it.location,
+//                        it.imgSrc,
+//                        it.protocol,
+//                        it.equipment
+//                    )
+//                }
+//            }
+//        }
+//    }
 
-    private fun init(id: Int) {
-        Log.d("PhotoViewModel", id.toString())
-        viewModelScope.launch {
-            if (id == 0) {   // если id==0, обработка полученного устройства
-                _state.value = PhotoViewState()
-            } else {        // либо обновить текущий по его id
-                val device = deviceDao.getOne(id)
-                device?.let {
-                    _state.value = PhotoViewState(
-                        it.id,
-                        it.location,
-                        it.imgSrc,
-                        it.protocol,
-                        it.equipment
-                    )
-                }
-            }
-        }
-    }
+//    fun takePhotoBtn(context: Context) {
+//        val imageCapture = imageCapture ?: return
+//
+//        val contentValues = ContentValues().apply {
+//            put(MediaStore.MediaColumns.DISPLAY_NAME, name)
+//            put(MediaStore.MediaColumns.MIME_TYPE, "image/jpeg")
+//        }
+//
+//        val outputOptions = context.let {
+//            ImageCapture.OutputFileOptions.Builder(
+//                it.contentResolver,
+//                MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+//                contentValues
+//            )
+//                .build()
+//        }
+//
+//        if (outputOptions != null) {
+//            imageCapture.takePicture(
+//                outputOptions,
+//                executor,
+//                object : ImageCapture.OnImageSavedCallback {
+//                    override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
+//                        Toast.makeText(
+//                            context,
+//                            "Photo saved on: ${outputFileResults.savedUri}",
+//                            Toast.LENGTH_SHORT
+//                        ).show()
+//                        val uri = (outputFileResults.savedUri).toString()
+//                        onAddSrc(name, uri)
+//                        activity.finish()
+//                    }
+//
+//                    override fun onError(exception: ImageCaptureException) {
+//                        Toast.makeText(
+//                            context,
+//                            "Photo failed: ${exception.message}",
+//                            Toast.LENGTH_SHORT
+//                        ).show()
+//                        exception.printStackTrace()
+//                    }
+//                })
+//        }
+//    }
 
-    fun takePhotoBtn(context: Context) {
-        val imageCapture = imageCapture ?: return
-
-        val contentValues = ContentValues().apply {
-            put(MediaStore.MediaColumns.DISPLAY_NAME, name)
-            put(MediaStore.MediaColumns.MIME_TYPE, "image/jpeg")
-        }
-
-        val outputOptions = context.let {
-            ImageCapture.OutputFileOptions.Builder(
-                it.contentResolver,
-                MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                contentValues
-            )
-                .build()
-        }
-
-        if (outputOptions != null) {
-            imageCapture.takePicture(
-                outputOptions,
-                executor,
-                object : ImageCapture.OnImageSavedCallback {
-                    override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
-                        Toast.makeText(
-                            context,
-                            "Photo saved on: ${outputFileResults.savedUri}",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                        val uri = (outputFileResults.savedUri).toString()
-                        onAddSrc(name, uri)
-                        activity.finish()
-                    }
-
-                    override fun onError(exception: ImageCaptureException) {
-                        Toast.makeText(
-                            context,
-                            "Photo failed: ${exception.message}",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                        exception.printStackTrace()
-                    }
-                })
-        }
-    }
-
-    fun onAddSrc(
-        date: String,
-        uri: String,
-    ) {
-        viewModelScope.launch {
-            state.value?.let {
-                deviceDao.updateColumn(
-                    id = id,
-                    imgSrc = uri,
-                )
-            }
-        }
-    }
-
-    fun onDelSrc() {
-        viewModelScope.launch {
-            state.value?.let {
-                deviceDao.updateColumn(
-                    id = id,
-                    imgSrc = "",
-                )
-            }
-        }
-    }
+//    fun onAddSrc(
+//        date: String,
+//        uri: String,
+//    ) {
+//        viewModelScope.launch {
+//            state.value?.let {
+//                deviceDao.updateColumn(
+//                    id = id,
+//                    imgSrc = uri,
+//                )
+//            }
+//        }
+//    }
+//
+//    fun onDelSrc() {
+//        viewModelScope.launch {
+//            state.value?.let {
+//                deviceDao.updateColumn(
+//                    id = id,
+//                    imgSrc = "",
+//                )
+//            }
+//        }
+//    }
 }
