@@ -33,11 +33,11 @@ import java.util.concurrent.Executor
 private const val FILENAME_FORMAT = "yyy-MM-dd-HH-mm-ss"
 
 //@HiltViewModel(assistedFactory = PhotoViewModel.Factory::class)
-class PhotoViewModel (//@AssistedInject constructor(
+class PhotoViewModel @AssistedInject constructor(
 //    private val activity: Activity,
-//    private val deviceDao: DeviceDao,
+    private val deviceDao: DeviceDao,
     private val attractionsDao: AttractionsDao,
-//    @Assisted val id: Int
+    @Assisted val id: Int
 ) : ViewModel() {
 
     val allPhotos = this.attractionsDao.getAll()
@@ -63,29 +63,29 @@ class PhotoViewModel (//@AssistedInject constructor(
     private val _closeScreenEvent = Channel<Unit>(capacity = Channel.UNLIMITED)
     val closeScreenEvent = _closeScreenEvent.receiveAsFlow()
 
-//    init {
-//        init(id)
-//    }
-//
-//    private fun init(id: Int) {
-//        Log.d("PhotoViewModel", id.toString())
-//        viewModelScope.launch {
-//            if (id == 0) {   // если id==0, обработка полученного устройства
-//                _state.value = PhotoViewState()
-//            } else {        // либо обновить текущий по его id
-//                val device = deviceDao.getOne(id)
-//                device?.let {
-//                    _state.value = PhotoViewState(
-//                        it.id,
-//                        it.location,
-//                        it.imgSrc,
-//                        it.protocol,
-//                        it.equipment
-//                    )
-//                }
-//            }
-//        }
-//    }
+    init {
+        init(id)
+    }
+
+    private fun init(id: Int) {
+        Log.d("PhotoViewModel", id.toString())
+        viewModelScope.launch {
+            if (id == 0) {   // если id==0, обработка полученного устройства
+                _state.value = PhotoViewState()
+            } else {        // либо обновить текущий по его id
+                val device = deviceDao.getOne(id)
+                device?.let {
+                    _state.value = PhotoViewState(
+                        it.id,
+                        it.location,
+                        it.imgSrc,
+                        it.protocol,
+                        it.equipment
+                    )
+                }
+            }
+        }
+    }
 
 //    fun takePhotoBtn(context: Context) {
 //        val imageCapture = imageCapture ?: return
@@ -132,33 +132,35 @@ class PhotoViewModel (//@AssistedInject constructor(
 //        }
 //    }
 
-//    fun onAddSrc(
-//        date: String,
-//        uri: String,
-//    ) {
-//        viewModelScope.launch {
-//            state.value?.let {
-//                deviceDao.updateColumn(
-//                    id = id,
-//                    imgSrc = uri,
-//                )
-//            }
-//        }
-//    }
-//
-//    fun onDelSrc() {
-//        viewModelScope.launch {
-//            state.value?.let {
-//                deviceDao.updateColumn(
-//                    id = id,
-//                    imgSrc = "",
-//                )
-//            }
-//        }
-//    }
-fun onAddBtn(date: String, uri: String) {
-    viewModelScope.launch {
-        attractionsDao.insert(Attractions(date = date, uri = uri))
+    private fun onAddSrc(
+        date: String,
+        uri: String,
+    ) {
+        viewModelScope.launch {
+            state.value?.let {
+                deviceDao.updateColumn(
+                    id = id,
+                    imgSrc = uri,
+                )
+            }
+        }
     }
-}
+
+    fun onDelSrc() {
+        viewModelScope.launch {
+            state.value?.let {
+                deviceDao.updateColumn(
+                    id = id,
+                    imgSrc = "",
+                )
+            }
+        }
+    }
+
+    fun onAddBtn(date: String, uri: String) {
+        viewModelScope.launch {
+//            attractionsDao.insert(Attractions(date = date, uri = uri))
+            onAddSrc(date, uri)
+        }
+    }
 }

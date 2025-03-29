@@ -28,6 +28,7 @@ import dagger.hilt.android.lifecycle.withCreationCallback
 import kotlinx.coroutines.launch
 import ru.gb.rc.App
 import ru.gb.rc.data.AttractionsDao
+import ru.gb.rc.data.DeviceDao
 import ru.gb.rc.databinding.FragmentDevicePhotoBinding
 import java.text.SimpleDateFormat
 import java.util.Locale
@@ -51,11 +52,13 @@ class PhotoFragment : Fragment() {
 //            }
 //        }
 //    )
+
 val viewModel: PhotoViewModel by viewModels {
     object : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             val attractionsDao = (activity?.application as AttractionsDao)
-            return PhotoViewModel(attractionsDao) as T
+            val deviceDao = (activity?.application as DeviceDao)
+            return PhotoViewModel(deviceDao, attractionsDao, id) as T
         }
     }
 }
@@ -112,14 +115,14 @@ val viewModel: PhotoViewModel by viewModels {
             }
         }
 
-//        binding.buttonCancel.setOnClickListener {
-//            photoViewModel.closeScreenEvent.run {
-//                findNavController().popBackStack()
-//            }
-//        }
-//
+        binding.buttonCancel.setOnClickListener {
+            viewModel.closeScreenEvent.run {
+                findNavController().popBackStack()
+            }
+        }
+
 //        viewLifecycleOwner.lifecycleScope.launch {
-//            photoViewModel.closeScreenEvent.collect {
+//            viewModel.closeScreenEvent.collect {
 //                findNavController().popBackStack()
 //            }
 //        }
