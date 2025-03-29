@@ -24,6 +24,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.lifecycle.withCreationCallback
+import ru.gb.rc.App
 import ru.gb.rc.data.DeviceDao
 import ru.gb.rc.databinding.FragmentDevicePhotoBinding
 import java.text.SimpleDateFormat
@@ -59,7 +60,7 @@ class PhotoFragment : Fragment() {
         object : ViewModelProvider.Factory {
             override fun <T : ViewModel> create(modelClass: Class<T>): T {
 //            val attractionsDao = (activity?.application as AttractionsDao)
-                val deviceDao = (activity?.application as DeviceDao)
+                val deviceDao = (activity?.application as App).db.deviceDao()
                 return PhotoViewModel(deviceDao, id) as T
             }
         }
@@ -159,7 +160,7 @@ class PhotoFragment : Fragment() {
                         val uri = (outputFileResults.savedUri).toString()
                         viewModel.onAddSrc(name, uri)
 //                        viewModel.onAddBtn(name, uri)
-                        activity?.finish()
+//                        activity?.finish()
                     }
 
                     override fun onError(exception: ImageCaptureException) {
