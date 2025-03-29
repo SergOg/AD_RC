@@ -161,6 +161,7 @@ class PhotoFragment : Fragment() {
                         viewModel.onAddSrc(name, uri)
 //                        viewModel.onAddBtn(name, uri)
 //                        activity?.finish()
+                        findNavController().popBackStack()
                     }
 
                     override fun onError(exception: ImageCaptureException) {
