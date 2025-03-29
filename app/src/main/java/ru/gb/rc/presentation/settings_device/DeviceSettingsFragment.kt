@@ -114,6 +114,7 @@ class DeviceSettingsFragment : Fragment() {
 
         binding.buttonCancelSettings.setOnClickListener {
             deviceSettingsViewModel.closeScreenEvent.run {
+//                findNavController().navigate(R.id.action_editDeviceFragment_to_mainFragment)
                 findNavController().popBackStack()
             }
         }

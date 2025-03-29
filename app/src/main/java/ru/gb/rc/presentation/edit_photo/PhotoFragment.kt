@@ -27,6 +27,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.lifecycle.withCreationCallback
 import kotlinx.coroutines.launch
 import ru.gb.rc.App
+import ru.gb.rc.R
 import ru.gb.rc.data.AttractionsDao
 import ru.gb.rc.data.DeviceDao
 import ru.gb.rc.databinding.FragmentDevicePhotoBinding
@@ -40,8 +41,8 @@ private const val FILENAME_FORMAT = "yyy-MM-dd-HH-mm-ss"
 //@AndroidEntryPoint
 class PhotoFragment : Fragment() {
 
-//    private var _binding: FragmentDevicePhotoBinding? = null
-//    private val binding get() = _binding!!
+    private var _binding: FragmentDevicePhotoBinding? = null
+    private val binding get() = _binding!!
 
 //    private val photoViewModel: PhotoViewModel by viewModels()
 
@@ -75,7 +76,7 @@ val viewModel: PhotoViewModel by viewModels {
 
     private var imageCapture: ImageCapture? = null
     private lateinit var executor: Executor
-    private lateinit var binding: FragmentDevicePhotoBinding
+//    private lateinit var binding: FragmentDevicePhotoBinding
 
     private val name = SimpleDateFormat(FILENAME_FORMAT, Locale.US)
         .format(System.currentTimeMillis())
@@ -101,7 +102,7 @@ val viewModel: PhotoViewModel by viewModels {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentDevicePhotoBinding.inflate(inflater)
+        _binding = FragmentDevicePhotoBinding.inflate(inflater)
         return binding.root
     }
 
@@ -116,9 +117,10 @@ val viewModel: PhotoViewModel by viewModels {
         }
 
         binding.buttonCancel.setOnClickListener {
-            viewModel.closeScreenEvent.run {
+//            viewModel.closeScreenEvent.run {
+//                findNavController().navigate(R.id.action_photoDeviceFragment_to_pultDeviceFragment)
                 findNavController().popBackStack()
-            }
+//            }
         }
 
 //        viewLifecycleOwner.lifecycleScope.launch {
