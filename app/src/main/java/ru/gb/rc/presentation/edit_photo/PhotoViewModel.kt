@@ -129,6 +129,7 @@ class PhotoViewModel @AssistedInject constructor(
                     imgSrc = uri,
                 )
             }
+            _closeScreenEvent.send(Unit)
         }
     }
 
@@ -140,6 +141,7 @@ class PhotoViewModel @AssistedInject constructor(
                     imgSrc = "",
                 )
             }
+            _closeScreenEvent.send(Unit)
         }
     }
 

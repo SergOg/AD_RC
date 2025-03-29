@@ -21,9 +21,11 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.lifecycle.withCreationCallback
+import kotlinx.coroutines.launch
 import ru.gb.rc.App
 import ru.gb.rc.data.DeviceDao
 import ru.gb.rc.databinding.FragmentDevicePhotoBinding
@@ -116,16 +118,16 @@ class PhotoFragment : Fragment() {
         }
 
         binding.buttonCancel.setOnClickListener {
-//            photoViewModel.closeScreenEvent.run {
+            viewModel.closeScreenEvent.run {
             findNavController().popBackStack()
-//            }
+            }
         }
 
-//        viewLifecycleOwner.lifecycleScope.launch {
-//            viewModel.closeScreenEvent.collect {
-//                findNavController().popBackStack()
-//            }
-//        }
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.closeScreenEvent.collect {
+                findNavController().popBackStack()
+            }
+        }
     }
 
     private fun takePhotoBtn() {
