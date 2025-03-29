@@ -21,24 +21,18 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.lifecycle.withCreationCallback
-import kotlinx.coroutines.launch
-import ru.gb.rc.App
-import ru.gb.rc.R
-import ru.gb.rc.data.AttractionsDao
 import ru.gb.rc.data.DeviceDao
 import ru.gb.rc.databinding.FragmentDevicePhotoBinding
 import java.text.SimpleDateFormat
 import java.util.Locale
 import java.util.concurrent.Executor
-import javax.inject.Inject
 
 private const val FILENAME_FORMAT = "yyy-MM-dd-HH-mm-ss"
 
-//@AndroidEntryPoint
+@AndroidEntryPoint
 class PhotoFragment : Fragment() {
 
     private var _binding: FragmentDevicePhotoBinding? = null
@@ -54,15 +48,22 @@ class PhotoFragment : Fragment() {
 //        }
 //    )
 
-val viewModel: PhotoViewModel by viewModels {
-    object : ViewModelProvider.Factory {
-        override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            val attractionsDao = (activity?.application as AttractionsDao)
-            val deviceDao = (activity?.application as DeviceDao)
-            return PhotoViewModel(deviceDao, attractionsDao, id) as T
+    val viewModel: PhotoViewModel by viewModels<PhotoViewModel>(
+        extrasProducer = {
+            defaultViewModelCreationExtras.withCreationCallback<PhotoViewModel.Factory> { factory ->
+                factory.create(id = arguments?.getInt("id") ?: 0)
+            }
+        }
+    )
+    {
+        object : ViewModelProvider.Factory {
+            override fun <T : ViewModel> create(modelClass: Class<T>): T {
+//            val attractionsDao = (activity?.application as AttractionsDao)
+                val deviceDao = (activity?.application as DeviceDao)
+                return PhotoViewModel(deviceDao, id) as T
+            }
         }
     }
-}
 
     companion object {
         fun newInstance() = PhotoFragment()
@@ -91,9 +92,6 @@ val viewModel: PhotoViewModel by viewModels {
             }
         }
 
-//    @Inject
-//    lateinit var photoViewModelFactory: PhotoViewModel.Factory
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -117,9 +115,8 @@ val viewModel: PhotoViewModel by viewModels {
         }
 
         binding.buttonCancel.setOnClickListener {
-//            viewModel.closeScreenEvent.run {
-//                findNavController().navigate(R.id.action_photoDeviceFragment_to_pultDeviceFragment)
-                findNavController().popBackStack()
+//            photoViewModel.closeScreenEvent.run {
+            findNavController().popBackStack()
 //            }
         }
 
@@ -160,8 +157,8 @@ val viewModel: PhotoViewModel by viewModels {
                         ).show()
 
                         val uri = (outputFileResults.savedUri).toString()
-//                        viewModel.onAddSrc(name, uri)
-                        viewModel.onAddBtn(name, uri)
+                        viewModel.onAddSrc(name, uri)
+//                        viewModel.onAddBtn(name, uri)
                         activity?.finish()
                     }
 
@@ -209,8 +206,8 @@ val viewModel: PhotoViewModel by viewModels {
         }
     }
 
-//    override fun onDestroyView() {
-//        super.onDestroyView()
-//        binding = null
-//    }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }

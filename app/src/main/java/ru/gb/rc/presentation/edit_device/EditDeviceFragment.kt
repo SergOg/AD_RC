@@ -11,7 +11,6 @@ import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.lifecycle.withCreationCallback
 import kotlinx.coroutines.launch
-import ru.gb.rc.R
 import ru.gb.rc.databinding.FragmentEditDeviceBinding
 
 @AndroidEntryPoint

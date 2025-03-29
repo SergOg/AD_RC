@@ -1,13 +1,6 @@
 package ru.gb.rc.presentation.edit_photo
 
-import android.app.Activity
-import android.content.ContentValues
-import android.content.Context
-import android.provider.MediaStore
 import android.util.Log
-import android.widget.Toast
-import androidx.camera.core.ImageCapture
-import androidx.camera.core.ImageCaptureException
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -17,40 +10,31 @@ import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.receiveAsFlow
-import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
-import ru.gb.rc.data.Attractions
-import ru.gb.rc.data.AttractionsDao
-import ru.gb.rc.data.CommandId
 import ru.gb.rc.data.DeviceDao
-import ru.gb.rc.presentation.edit_device.EditDeviceViewState
-import java.text.SimpleDateFormat
-import java.util.Locale
-import java.util.concurrent.Executor
 
 private const val FILENAME_FORMAT = "yyy-MM-dd-HH-mm-ss"
 
-//@HiltViewModel(assistedFactory = PhotoViewModel.Factory::class)
+@HiltViewModel(assistedFactory = PhotoViewModel.Factory::class)
 class PhotoViewModel @AssistedInject constructor(
 //    private val activity: Activity,
     private val deviceDao: DeviceDao,
-    private val attractionsDao: AttractionsDao,
+//    private val attractionsDao: AttractionsDao,
     @Assisted val id: Int
 ) : ViewModel() {
 
-    val allPhotos = this.attractionsDao.getAll()
-        .stateIn(
-            scope = viewModelScope,
-            started = SharingStarted.WhileSubscribed(5000L),
-            initialValue = emptyList()
-        )
+//    val allPhotos = this.attractionsDao.getAll()
+//        .stateIn(
+//            scope = viewModelScope,
+//            started = SharingStarted.WhileSubscribed(5000L),
+//            initialValue = emptyList()
+//        )
 
-//    @AssistedFactory
-//    interface Factory {
-//        fun create(id: Int): PhotoViewModel
-//    }
+    @AssistedFactory
+    interface Factory {
+        fun create(id: Int): PhotoViewModel
+    }
 
 //    private var imageCapture: ImageCapture? = null
 //    private lateinit var executor: Executor
@@ -132,7 +116,7 @@ class PhotoViewModel @AssistedInject constructor(
 //        }
 //    }
 
-    private fun onAddSrc(
+    fun onAddSrc(
         date: String,
         uri: String,
     ) {
