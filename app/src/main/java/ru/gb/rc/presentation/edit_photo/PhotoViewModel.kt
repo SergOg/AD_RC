@@ -122,6 +122,8 @@ class PhotoViewModel @AssistedInject constructor(
     ) {
         viewModelScope.launch {
             state.value?.let {
+                Log.d("PhotoViewModelId", id.toString())
+                Log.d("PhotoViewModelId", uri)
                 deviceDao.updateColumn(
                     id = id,
                     imgSrc = uri,
