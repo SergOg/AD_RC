@@ -58,15 +58,15 @@ class PhotoFragment : Fragment() {
             }
         }
     )
-    {
-        object : ViewModelProvider.Factory {
-            override fun <T : ViewModel> create(modelClass: Class<T>): T {
-//            val attractionsDao = (activity?.application as AttractionsDao)
-                val deviceDao = (activity?.application as App).db.deviceDao()
-                return PhotoViewModel(deviceDao, id) as T
-            }
-        }
-    }
+//    {
+//        object : ViewModelProvider.Factory {
+//            override fun <T : ViewModel> create(modelClass: Class<T>): T {
+////            val attractionsDao = (activity?.application as AttractionsDao)
+//                val deviceDao = (activity?.application as App).db.deviceDao()
+//                return PhotoViewModel(deviceDao, id) as T
+//            }
+//        }
+//    }
 
     companion object {
         fun newInstance() = PhotoFragment()
