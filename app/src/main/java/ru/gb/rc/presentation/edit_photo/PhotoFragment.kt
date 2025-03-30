@@ -19,15 +19,11 @@ import androidx.camera.core.ImageCaptureException
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.lifecycle.withCreationCallback
 import kotlinx.coroutines.launch
-import ru.gb.rc.App
-import ru.gb.rc.data.DeviceDao
 import ru.gb.rc.databinding.FragmentDevicePhotoBinding
 import java.text.SimpleDateFormat
 import java.util.Locale
