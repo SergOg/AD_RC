@@ -42,29 +42,31 @@ class DevicePultViewModel @AssistedInject constructor(
 //        init(id)
 //    }
 
-fun init() {
-    viewModelScope.launch {
-        val list = settingsDeviceDao.getAllCommands(id)
-        val device = deviceDao.getOne(id)
-        settingsDeviceList.addAll(list)
-        _state.value = DevicePultViewState(
-            powerButton = list.find { it.commandId == CommandId.powerButton.name }?.content
-                ?: "",
-            muteButton = list.find { it.commandId == CommandId.muteButton.name }?.content ?: "",
-            oneButton = list.find { it.commandId == CommandId.oneButton.name }?.content ?: "",
-            twoButton = list.find { it.commandId == CommandId.twoButton.name }?.content ?: "",
-            threeButton = list.find { it.commandId == CommandId.threeButton.name }?.content
-                ?: "",
-            fourButton = list.find { it.commandId == CommandId.fourButton.name }?.content ?: "",
-            upButton = list.find { it.commandId == CommandId.upButton.name }?.content ?: "",
-            downButton = list.find { it.commandId == CommandId.downButton.name }?.content ?: "",
-            minusButton = list.find { it.commandId == CommandId.minusButton.name }?.content
-                ?: "",
-            plusButton = list.find { it.commandId == CommandId.plusButton.name }?.content ?: "",
-            namePult = device?.equipment ?: ""
-        )
+    fun init() {
+        viewModelScope.launch {
+            val list = settingsDeviceDao.getAllCommands(id)
+            val device = deviceDao.getOne(id)
+            settingsDeviceList.addAll(list)
+            _state.value = DevicePultViewState(
+                powerButton = list.find { it.commandId == CommandId.powerButton.name }?.content
+                    ?: "",
+                muteButton = list.find { it.commandId == CommandId.muteButton.name }?.content ?: "",
+                oneButton = list.find { it.commandId == CommandId.oneButton.name }?.content ?: "",
+                twoButton = list.find { it.commandId == CommandId.twoButton.name }?.content ?: "",
+                threeButton = list.find { it.commandId == CommandId.threeButton.name }?.content
+                    ?: "",
+                fourButton = list.find { it.commandId == CommandId.fourButton.name }?.content ?: "",
+                upButton = list.find { it.commandId == CommandId.upButton.name }?.content ?: "",
+                downButton = list.find { it.commandId == CommandId.downButton.name }?.content ?: "",
+                minusButton = list.find { it.commandId == CommandId.minusButton.name }?.content
+                    ?: "",
+                plusButton = list.find { it.commandId == CommandId.plusButton.name }?.content ?: "",
+                namePult = device?.equipment ?: ""
+            )
+        }
+
     }
-}
+
     fun powerButtonClicked() {
         val a = state.value?.powerButton
         if (a?.isNotEmpty() == true) {

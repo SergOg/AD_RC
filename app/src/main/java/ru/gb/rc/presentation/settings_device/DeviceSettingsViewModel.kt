@@ -16,10 +16,12 @@ import ru.gb.rc.data.CommandId
 import ru.gb.rc.data.NewSettingsDevice
 import ru.gb.rc.data.SettingsDevice
 import ru.gb.rc.data.SettingsDeviceDao
+import ru.gb.rc.domain.GetCommandsUseCase
 
 @HiltViewModel(assistedFactory = DeviceSettingsViewModel.Factory::class)
 class DeviceSettingsViewModel @AssistedInject constructor(
     private val settingsDeviceDao: SettingsDeviceDao,
+//    private val getCommandsUseCase: GetCommandsUseCase,
     @Assisted val id: Int
 ) : ViewModel() {
 
@@ -43,6 +45,7 @@ class DeviceSettingsViewModel @AssistedInject constructor(
         Log.d("DeviceSettingsViewModel", id.toString())
         viewModelScope.launch {
             val list = settingsDeviceDao.getAllCommands(id)
+//            val list = getCommandsUseCase(id)
             settingsDeviceList.addAll(list)
             _state.value = DeviceSettingsViewState(
                 powerButton = list.find { it.commandId == CommandId.powerButton.name }?.content
