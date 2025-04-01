@@ -9,4 +9,5 @@ interface SettingsDeviceRepository {
     suspend fun update(device: SettingsDevice)
     suspend fun deleteByCommandId(deviceId: Int, commandId: CommandId): Int
     suspend fun insert(device: NewSettingsDevice)
+    suspend fun deleteById(deviceId: Int): Int
 }

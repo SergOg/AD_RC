@@ -1,7 +1,8 @@
 package ru.gb.rc.domain
 
-import ru.gb.rc.data.repositories.SettingsDeviceRepository
+import ru.gb.rc.data.repositories.impl.SettingsDeviceRepositoryImpl
+import javax.inject.Inject
 
-class GetCommandsUseCase(private val repository: SettingsDeviceRepository) {
+class GetCommandsUseCase @Inject constructor(private val repository: SettingsDeviceRepositoryImpl) {
     suspend operator fun invoke(id: Int) = repository.getAllCommands(id)
 }
