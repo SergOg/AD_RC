@@ -1,5 +1,6 @@
 package ru.gb.rc.presentation.edit_photo
 
+import android.content.Context
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -9,6 +10,7 @@ import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
@@ -18,7 +20,8 @@ private const val FILENAME_FORMAT = "yyy-MM-dd-HH-mm-ss"
 
 @HiltViewModel(assistedFactory = PhotoViewModel.Factory::class)
 class PhotoViewModel @AssistedInject constructor(
-//    private val activity: Activity,
+    @ApplicationContext
+    private val context: Context,
     private val deviceDao: DeviceDao,
 //    private val attractionsDao: AttractionsDao,
     @Assisted val id: Int

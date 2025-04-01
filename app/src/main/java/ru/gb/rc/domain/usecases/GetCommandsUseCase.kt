@@ -1,4 +1,4 @@
-package ru.gb.rc.domain
+package ru.gb.rc.domain.usecases
 
 import ru.gb.rc.data.repositories.impl.SettingsDeviceRepositoryImpl
 import javax.inject.Inject

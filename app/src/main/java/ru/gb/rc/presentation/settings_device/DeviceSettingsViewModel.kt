@@ -16,12 +16,15 @@ import ru.gb.rc.data.CommandId
 import ru.gb.rc.data.NewSettingsDevice
 import ru.gb.rc.data.SettingsDevice
 import ru.gb.rc.data.SettingsDeviceDao
-import ru.gb.rc.domain.GetCommandsUseCase
+import ru.gb.rc.domain.entities.SettingsDeviceEntity
+import ru.gb.rc.domain.usecases.GetCommandsUseCase
+import ru.gb.rc.domain.usecases.UpdateSettingsDeviceUseCase
 
 @HiltViewModel(assistedFactory = DeviceSettingsViewModel.Factory::class)
 class DeviceSettingsViewModel @AssistedInject constructor(
     private val settingsDeviceDao: SettingsDeviceDao,
     private val getCommandsUseCase: GetCommandsUseCase,
+    private val updateSettingsDeviceUseCase: UpdateSettingsDeviceUseCase,
     @Assisted val id: Int
 ) : ViewModel() {
 
@@ -30,7 +33,7 @@ class DeviceSettingsViewModel @AssistedInject constructor(
         fun create(id: Int): DeviceSettingsViewModel
     }
 
-    private val settingsDeviceList: MutableList<SettingsDevice> = mutableListOf()
+    private val settingsDeviceList: MutableList<SettingsDeviceEntity> = mutableListOf()
     private val _state = MutableLiveData(DeviceSettingsViewState())
     val state: LiveData<DeviceSettingsViewState> = _state
 
@@ -97,10 +100,12 @@ class DeviceSettingsViewModel @AssistedInject constructor(
     private suspend fun actionButtonSave(anyButton: String, anyCommandButton: CommandId) {
         val anyButtonSettings = settingsDeviceList.find { it.commandId == anyCommandButton.name }
         if (anyButtonSettings != null && anyButton.isNotEmpty()) {
-            settingsDeviceDao.update(anyButtonSettings.copy(content = anyButton))
+            updateSettingsDeviceUseCase(anyButtonSettings.copy(content = anyButton))
+//            settingsDeviceDao.update(anyButtonSettings.copy(content = anyButton))
         }
         if (anyButtonSettings != null && anyButton.isEmpty()) {
-            settingsDeviceDao.deleteByCommandId(id, anyCommandButton)
+//            settingsDeviceDao.deleteByCommandId(id, anyCommandButton)
+
         }
         if (anyButtonSettings == null && anyButton.isNotEmpty()) {
             settingsDeviceDao.insert(
