@@ -25,6 +25,7 @@ class SettingsDeviceRepositoryImpl @Inject constructor(private val settingsDevic
         settingsDeviceDao.deleteByCommandId(deviceId, commandId)
 
     override suspend fun deleteById(deviceId: Int) = settingsDeviceDao.deleteById(deviceId)
+
     override suspend fun insert(
         deviceId: Int,
         commandId: String,

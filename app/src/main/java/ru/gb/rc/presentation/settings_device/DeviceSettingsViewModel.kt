@@ -10,6 +10,7 @@ import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import ru.gb.rc.data.CommandId
@@ -17,7 +18,9 @@ import ru.gb.rc.data.NewSettingsDevice
 import ru.gb.rc.data.SettingsDevice
 import ru.gb.rc.data.SettingsDeviceDao
 import ru.gb.rc.domain.entities.SettingsDeviceEntity
+import ru.gb.rc.domain.usecases.DeleteByCommandIdUseCase
 import ru.gb.rc.domain.usecases.GetCommandsUseCase
+import ru.gb.rc.domain.usecases.InsertSettingsDeviceUseCase
 import ru.gb.rc.domain.usecases.UpdateSettingsDeviceUseCase
 
 @HiltViewModel(assistedFactory = DeviceSettingsViewModel.Factory::class)
@@ -25,6 +28,8 @@ class DeviceSettingsViewModel @AssistedInject constructor(
     private val settingsDeviceDao: SettingsDeviceDao,
     private val getCommandsUseCase: GetCommandsUseCase,
     private val updateSettingsDeviceUseCase: UpdateSettingsDeviceUseCase,
+    private val deleteByCommandIdUseCase: DeleteByCommandIdUseCase,
+    private val insertSettingsDeviceUseCase: InsertSettingsDeviceUseCase,
     @Assisted val id: Int
 ) : ViewModel() {
 
@@ -105,15 +110,16 @@ class DeviceSettingsViewModel @AssistedInject constructor(
         }
         if (anyButtonSettings != null && anyButton.isEmpty()) {
 //            settingsDeviceDao.deleteByCommandId(id, anyCommandButton)
-
+            deleteByCommandIdUseCase(id, anyCommandButton)
         }
         if (anyButtonSettings == null && anyButton.isNotEmpty()) {
-            settingsDeviceDao.insert(
-                NewSettingsDevice(
-                    deviceId = id,
+//            settingsDeviceDao.insert(
+            insertSettingsDeviceUseCase(
+//                NewSettingsDevice(
+                    id = id,
                     commandId = anyCommandButton.toString(),
                     content = anyButton,
-                )
+//                )
             )
         }
     }
