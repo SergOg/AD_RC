@@ -1,6 +1,5 @@
 package ru.gb.rc.presentation.edit_photo
 
-import android.content.Context
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -10,39 +9,21 @@ import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import ru.gb.rc.data.DeviceDao
 
-private const val FILENAME_FORMAT = "yyy-MM-dd-HH-mm-ss"
-
 @HiltViewModel(assistedFactory = PhotoViewModel.Factory::class)
 class PhotoViewModel @AssistedInject constructor(
-    @ApplicationContext
-    private val context: Context,
     private val deviceDao: DeviceDao,
-//    private val attractionsDao: AttractionsDao,
     @Assisted val id: Int
 ) : ViewModel() {
-
-//    val allPhotos = this.attractionsDao.getAll()
-//        .stateIn(
-//            scope = viewModelScope,
-//            started = SharingStarted.WhileSubscribed(5000L),
-//            initialValue = emptyList()
-//        )
 
     @AssistedFactory
     interface Factory {
         fun create(id: Int): PhotoViewModel
     }
-
-//    private var imageCapture: ImageCapture? = null
-//    private lateinit var executor: Executor
-//    private val name = SimpleDateFormat(FILENAME_FORMAT, Locale.US)
-//        .format(System.currentTimeMillis())
 
     private val _state = MutableLiveData<PhotoViewState>(PhotoViewState())
     private val state: LiveData<PhotoViewState> = _state
@@ -74,59 +55,12 @@ class PhotoViewModel @AssistedInject constructor(
         }
     }
 
-//    fun takePhotoBtn(context: Context) {
-//        val imageCapture = imageCapture ?: return
-//
-//        val contentValues = ContentValues().apply {
-//            put(MediaStore.MediaColumns.DISPLAY_NAME, name)
-//            put(MediaStore.MediaColumns.MIME_TYPE, "image/jpeg")
-//        }
-//
-//        val outputOptions = context.let {
-//            ImageCapture.OutputFileOptions.Builder(
-//                it.contentResolver,
-//                MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-//                contentValues
-//            )
-//                .build()
-//        }
-//
-//        if (outputOptions != null) {
-//            imageCapture.takePicture(
-//                outputOptions,
-//                executor,
-//                object : ImageCapture.OnImageSavedCallback {
-//                    override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
-//                        Toast.makeText(
-//                            context,
-//                            "Photo saved on: ${outputFileResults.savedUri}",
-//                            Toast.LENGTH_SHORT
-//                        ).show()
-//                        val uri = (outputFileResults.savedUri).toString()
-//                        onAddSrc(name, uri)
-//                        activity.finish()
-//                    }
-//
-//                    override fun onError(exception: ImageCaptureException) {
-//                        Toast.makeText(
-//                            context,
-//                            "Photo failed: ${exception.message}",
-//                            Toast.LENGTH_SHORT
-//                        ).show()
-//                        exception.printStackTrace()
-//                    }
-//                })
-//        }
-//    }
-
     fun onAddSrc(
-        date: String,
+        name: String,
         uri: String,
     ) {
         viewModelScope.launch {
             state.value?.let {
-                Log.d("PhotoViewModelId", id.toString())
-                Log.d("PhotoViewModelId", uri)
                 deviceDao.updateColumn(
                     id = id,
                     imgSrc = uri,
@@ -136,22 +70,9 @@ class PhotoViewModel @AssistedInject constructor(
         }
     }
 
-    fun onDelSrc() {
-        viewModelScope.launch {
-            state.value?.let {
-                deviceDao.updateColumn(
-                    id = id,
-                    imgSrc = "",
-                )
-            }
-            _closeScreenEvent.send(Unit)
-        }
-    }
-
-    fun onAddBtn(date: String, uri: String) {
-        viewModelScope.launch {
-//            attractionsDao.insert(Attractions(date = date, uri = uri))
-            onAddSrc(date, uri)
-        }
-    }
+//    fun onAddBtn(name: String, uri: String) {
+//        viewModelScope.launch {
+//            onAddSrc(name, uri)
+//        }
+//    }
 }

@@ -14,6 +14,7 @@ import android.widget.Toast
 import androidx.core.view.MenuProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.lifecycle.withCreationCallback
 import kotlinx.coroutines.launch
@@ -103,6 +104,18 @@ class DevicePultFragment : Fragment(), MenuProvider {
             listener?.setTitle(
                 if (state.namePult == "") getString(R.string.pult_device) else state.namePult
             )
+            binding.verticalView?.let {
+                Glide.with(this@DevicePultFragment)
+                    .load(state.picPult)
+                    .centerCrop()
+                    .into(it)
+            }
+            binding.horizontalView?.let {
+                Glide.with(this@DevicePultFragment)
+                    .load(state.picPult)
+                    .centerCrop()
+                    .into(it)
+            }
         }
 
         viewLifecycleOwner.lifecycleScope.launch {
@@ -135,10 +148,7 @@ class DevicePultFragment : Fragment(), MenuProvider {
         return when (menuItem.itemId) {
             R.id.pult_settings -> {
                 // Действие при выборе настроек
-                Toast.makeText(
-                    activity, "Settings mode!", Toast.LENGTH_LONG
-                ).show()
-
+                message("Settings mode!")
                 val action =
                     DevicePultFragmentDirections.actionPultDeviceFragmentToSettingsDeviceFragment(
                         viewModel.id
@@ -149,10 +159,7 @@ class DevicePultFragment : Fragment(), MenuProvider {
 
             R.id.pult_photo -> {
                 // Действие при выборе фото
-                Toast.makeText(
-                    activity, "Photo mode!", Toast.LENGTH_LONG
-                ).show()
-
+                message("Photo mode!")
                 val action =
                     DevicePultFragmentDirections.actionPultDeviceFragmentToPhotoDeviceFragment(
                         viewModel.id
@@ -163,13 +170,24 @@ class DevicePultFragment : Fragment(), MenuProvider {
 
             R.id.pult_file -> {
                 // Действие при выборе файла
-                Toast.makeText(
-                    activity, "File mode!", Toast.LENGTH_LONG
-                ).show()
+                message("File mode!")
+                true
+            }
+
+            R.id.pult_delete -> {
+                // Действие при выборе файла
+                message("File delete!")
+                viewModel.onDelSrc()
+                binding.verticalView?.let { Glide.with(it).clear(binding.verticalView!!) }
+                binding.horizontalView?.let { Glide.with(it).clear(binding.horizontalView!!) }
                 true
             }
 
             else -> false
         }
+    }
+
+    private fun message(msg: String) {
+        Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
     }
 }

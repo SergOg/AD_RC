@@ -1,5 +1,9 @@
 package ru.gb.rc.presentation.pult_device
 
+import android.content.ContentUris
+import android.content.Context
+import android.net.Uri
+import android.provider.MediaStore
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -8,6 +12,7 @@ import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
@@ -18,6 +23,8 @@ import ru.gb.rc.data.SettingsDeviceDao
 
 @HiltViewModel(assistedFactory = DevicePultViewModel.Factory::class)
 class DevicePultViewModel @AssistedInject constructor(
+    @ApplicationContext
+    private val context: Context,
     private val settingsDeviceDao: SettingsDeviceDao,
     private val deviceDao: DeviceDao,
     @Assisted val id: Int
@@ -61,10 +68,45 @@ class DevicePultViewModel @AssistedInject constructor(
                 minusButton = list.find { it.commandId == CommandId.minusButton.name }?.content
                     ?: "",
                 plusButton = list.find { it.commandId == CommandId.plusButton.name }?.content ?: "",
-                namePult = device?.equipment ?: ""
+                namePult = device?.equipment ?: "",
+                picPult = device?.imgSrc ?: "",
             )
         }
+    }
 
+    fun onDelSrc() {
+        viewModelScope.launch {
+            state.value?.let {
+                deviceDao.updateColumn(
+                    id = id,
+                    imgSrc = "",
+                )
+            }
+//            _closeScreenEvent.send(Unit)
+            val device = deviceDao.getOne(id)
+            val picPult = device?.imgSrc ?: ""
+            if (picPult != "") {
+                val pic = Uri.parse(picPult)
+                deleteFileByUri(context, pic)
+            }
+        }
+    }
+
+    fun deleteFileByUri(context: Context, fileUri: Uri) {
+        val contentResolver = context.contentResolver
+        // Получаем ID файла
+        val id = ContentUris.parseId(fileUri)
+        // Удаляем файл через MediaStore
+        if (id != null && id > 0) {
+            val selection = "${MediaStore.Images.ImageColumns._ID}=?"
+            val selectionArgs = arrayOf(id.toString())
+
+            contentResolver.delete(
+                MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                selection,
+                selectionArgs
+            )
+        }
     }
 
     fun powerButtonClicked() {

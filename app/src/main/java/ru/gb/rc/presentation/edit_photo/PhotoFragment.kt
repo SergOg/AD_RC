@@ -26,26 +26,17 @@ import dagger.hilt.android.lifecycle.withCreationCallback
 import kotlinx.coroutines.launch
 import ru.gb.rc.databinding.FragmentDevicePhotoBinding
 import java.text.SimpleDateFormat
+import java.util.Date
 import java.util.Locale
 import java.util.concurrent.Executor
 
-private const val FILENAME_FORMAT = "yyy-MM-dd-HH-mm-ss"
+private const val FILENAME_FORMAT = "yyy-MM-dd_HH-mm-ss"
 
 @AndroidEntryPoint
 class PhotoFragment : Fragment() {
 
     private var _binding: FragmentDevicePhotoBinding? = null
     private val binding get() = _binding!!
-
-//    private val photoViewModel: PhotoViewModel by viewModels()
-
-//    private val viewModel by viewModels<PhotoViewModel>(
-//        extrasProducer = {
-//            defaultViewModelCreationExtras.withCreationCallback<PhotoViewModel.Factory> { factory ->
-//                factory.create(id = arguments?.getInt("id") ?: 0)
-//            }
-//        }
-//    )
 
     val viewModel: PhotoViewModel by viewModels<PhotoViewModel>(
         extrasProducer = {
@@ -54,15 +45,6 @@ class PhotoFragment : Fragment() {
             }
         }
     )
-//    {
-//        object : ViewModelProvider.Factory {
-//            override fun <T : ViewModel> create(modelClass: Class<T>): T {
-////            val attractionsDao = (activity?.application as AttractionsDao)
-//                val deviceDao = (activity?.application as App).db.deviceDao()
-//                return PhotoViewModel(deviceDao, id) as T
-//            }
-//        }
-//    }
 
     companion object {
         fun newInstance() = PhotoFragment()
@@ -76,10 +58,11 @@ class PhotoFragment : Fragment() {
 
     private var imageCapture: ImageCapture? = null
     private lateinit var executor: Executor
-//    private lateinit var binding: FragmentDevicePhotoBinding
 
-    private val name = SimpleDateFormat(FILENAME_FORMAT, Locale.US)
-        .format(System.currentTimeMillis())
+    val name: String =
+        SimpleDateFormat(FILENAME_FORMAT, Locale.getDefault()).format(Date()) + ".jpg"
+//    private val name = SimpleDateFormat(FILENAME_FORMAT, Locale.US)
+//        .format(System.currentTimeMillis())
 
     private val launcher =
         registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { map ->
@@ -109,13 +92,13 @@ class PhotoFragment : Fragment() {
         checkPermissions()
         with(binding) {
             buttonTakePhoto.setOnClickListener {
-                takePhotoBtn()//(requireContext())
+                takePhotoBtn()
             }
         }
 
         binding.buttonCancel.setOnClickListener {
             viewModel.closeScreenEvent.run {
-            findNavController().popBackStack()
+                findNavController().popBackStack()
             }
         }
 
@@ -128,7 +111,6 @@ class PhotoFragment : Fragment() {
 
     private fun takePhotoBtn() {
         val imageCapture = imageCapture ?: return
-
         val contentValues = ContentValues().apply {
             put(MediaStore.MediaColumns.DISPLAY_NAME, name)
             put(MediaStore.MediaColumns.MIME_TYPE, "image/jpeg")
@@ -139,8 +121,7 @@ class PhotoFragment : Fragment() {
                 it.contentResolver,
                 MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
                 contentValues
-            )
-                .build()
+            ).build()
         }
 
         if (outputOptions != null) {
@@ -149,25 +130,14 @@ class PhotoFragment : Fragment() {
                 executor,
                 object : ImageCapture.OnImageSavedCallback {
                     override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
-                        Toast.makeText(
-                            context,
-                            "Photo saved on: ${outputFileResults.savedUri}",
-                            Toast.LENGTH_SHORT
-                        ).show()
-
+                        message("Photo saved on: ${outputFileResults.savedUri}")
                         val uri = (outputFileResults.savedUri).toString()
                         viewModel.onAddSrc(name, uri)
-//                        viewModel.onAddBtn(name, uri)
-//                        activity?.finish()
                         findNavController().popBackStack()
                     }
 
                     override fun onError(exception: ImageCaptureException) {
-                        Toast.makeText(
-                            context,
-                            "Photo failed: ${exception.message}",
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        message("Photo failed: ${exception.message}")
                         exception.printStackTrace()
                     }
                 })
@@ -209,5 +179,9 @@ class PhotoFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun message(msg: String) {
+        Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
     }
 }

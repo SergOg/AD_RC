@@ -12,4 +12,5 @@ data class DevicePultViewState(
     val minusButton: String = "",
     val plusButton: String = "",
     val namePult: String = "",
+    val picPult: String = "",
 )

@@ -40,7 +40,7 @@ class HomeFragment : Fragment(), MenuProvider {
         val builder = AlertDialog.Builder(requireActivity())
         builder.setTitle("Компонент будет удален!")
             .setMessage("Согласны удалить?")
-            .setIcon(R.drawable.neon_robot)
+            .setIcon(R.drawable.ic_launcher_foreground)
             .setCancelable(true)
             .setPositiveButton("Да") { _, _ ->
                 Toast.makeText(

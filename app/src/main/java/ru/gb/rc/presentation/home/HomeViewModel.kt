@@ -10,7 +10,6 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import ru.gb.rc.data.Device
 import ru.gb.rc.data.DeviceDao
-import ru.gb.rc.data.NewDevice
 import ru.gb.rc.data.SettingsDeviceDao
 import javax.inject.Inject
 

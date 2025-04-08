@@ -1,8 +1,11 @@
 package ru.gb.rc.presentation.home
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import ru.gb.rc.R
 import ru.gb.rc.data.Device
 import ru.gb.rc.data.DeviceWithSettings
 import ru.gb.rc.databinding.DeviceCardViewBinding
@@ -28,6 +31,19 @@ class DeviceAdapter(
         holder.binding.location.text = item.device.location
         holder.binding.equipment.text = item.device.equipment
         holder.binding.protocol.text = item.device.protocol
+//        val uri = Uri.parse(item.device.imgSrc)
+        if (item.device.imgSrc != "") {
+            item.device.imgSrc.let { uri ->
+                Glide.with(holder.itemView.context)
+                    .load(uri)
+                    .centerCrop()
+                    .into(holder.binding.pic)
+            }
+        } else {
+            Glide.with(holder.itemView.context)
+                .load(R.drawable.ic_launcher_foreground)
+                .into(holder.binding.pic)
+        }
         holder.binding.pic.setOnLongClickListener {     //Удаление по долгому нажатию на картинку
             onDeleteClicked(item.device)
             true
@@ -40,6 +56,7 @@ class DeviceAdapter(
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun setData(values: List<DeviceWithSettings>) {
         this.values = values.toMutableList()
         notifyDataSetChanged()

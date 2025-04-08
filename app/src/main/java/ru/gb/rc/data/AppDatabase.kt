@@ -5,11 +5,9 @@ import androidx.room.RoomDatabase
 
 @Database(
     entities = [Device::class,
-        SettingsDevice::class,
-        Attractions::class], version = 2
+        SettingsDevice::class], version = 1
 )
 abstract class AppDatabase : RoomDatabase() {
     abstract fun deviceDao(): DeviceDao
     abstract fun settingsDeviceDao(): SettingsDeviceDao
-    abstract fun attractionsDao(): AttractionsDao
 }
